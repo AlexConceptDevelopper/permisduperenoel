@@ -4,11 +4,9 @@
 FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
 
-# Copie des fichiers du projet backend
 COPY pom.xml .
 COPY src ./src
 
-# Build direct avec mvn (sans utiliser le wrapper)
 RUN mvn clean package -DskipTests
 
 # ==========================================
@@ -17,8 +15,11 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 
-# Installation de toutes les dépendances système requises pour Playwright (Chromium & Webkit)
+# Installation des dépendances système indispensables pour Chromium/Playwright
 RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    libglib2.0-0 \
     libnss3 \
     libnspr4 \
     libatk1.0-0 \
@@ -48,8 +49,6 @@ RUN apt-get update && apt-get install -y \
 # Copie du jar généré depuis l'étape de build
 COPY --from=build /app/target/*.jar app.jar
 
-# Exposition du port
 EXPOSE 8080
 
-# Lancement de l'application
 ENTRYPOINT ["java", "-jar", "app.jar"]
