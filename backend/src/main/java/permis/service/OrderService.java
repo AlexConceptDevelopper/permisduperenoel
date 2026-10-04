@@ -19,6 +19,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
+    private final PdfService pdfService; // 👈 Ajout du service PDF
 
     @Value("${stripe.api.key}")
     private String stripeApiKey;
@@ -26,9 +27,10 @@ public class OrderService {
     @Value("${app.frontend.url}")
     private String frontendUrl;
 
-    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper) {
+    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, PdfService pdfService) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
+        this.pdfService = pdfService;
     }
 
     @PostConstruct
@@ -38,12 +40,10 @@ public class OrderService {
 
     @Transactional
     public StripeResponse createOrderAndStripeSession(CreateOrderRequest request) {
-        // 1. Sauvegarde de la commande en base (statut PENDING)
         Order order = orderMapper.toEntity(request);
         Order savedOrder = orderRepository.save(order);
 
         try {
-            // 2. Création des paramètres de la session Stripe Checkout
             SessionCreateParams params = SessionCreateParams.builder()
                     .setMode(SessionCreateParams.Mode.PAYMENT)
                     .setCustomerEmail(savedOrder.getCustomerEmail())
@@ -53,13 +53,11 @@ public class OrderService {
                                     .setPriceData(
                                             SessionCreateParams.LineItem.PriceData.builder()
                                                     .setCurrency("eur")
-                                                    .setUnitAmount(199L) // 1,99 € en centimes
+                                                    .setUnitAmount(199L)
                                                     .setProductData(
                                                             SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                                                    .setName(
-                                                                            "Pack Magique de Noël (Permis + Passeport + Diplôme)")
-                                                                    .setDescription(
-                                                                            "Documents personnalisés pour l'enfant")
+                                                                    .setName("Pack Magique de Noël (Permis + Passeport + Diplôme)")
+                                                                    .setDescription("Documents personnalisés pour l'enfant")
                                                                     .build())
                                                     .build())
                                     .build())
@@ -68,10 +66,7 @@ public class OrderService {
                     .putMetadata("orderId", savedOrder.getId().toString())
                     .build();
 
-            // 3. Appel de l'API Stripe
             Session session = Session.create(params);
-
-            // 4. Enregistrement du vrai Session ID Stripe en base
             savedOrder.setStripeSessionId(session.getId());
             orderRepository.save(savedOrder);
 
@@ -83,6 +78,34 @@ public class OrderService {
 
         } catch (StripeException e) {
             throw new RuntimeException("Erreur Stripe : " + e.getMessage(), e);
+        }
+    }
+
+    // 👇 Nouvelle méthode métier propre pour le téléchargement et le nettoyage RGPD
+    @Transactional
+    public byte[] generatePdfForSession(String sessionId) {
+        Order order = orderRepository.findByStripeSessionId(sessionId)
+                .orElseThrow(() -> new RuntimeException("COMMANDE_INTROUVABLE"));
+
+        // Vérification de sécurité du paiement
+        if (!"PAID".equals(order.getStatus())) {
+            throw new SecurityException("PAIEMENT_NON_VALIDE");
+        }
+
+        try {
+            // Génération du PDF via le PdfService
+            byte[] pdfBytes = pdfService.generateChristmasPackPdf(order);
+
+            // Nettoyage RGPD : suppression des données sensibles de l'enfant après téléchargement
+            if (order.getDocumentData() != null) {
+                order.setDocumentData(null);
+                orderRepository.save(order);
+            }
+
+            return pdfBytes;
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erreur lors de la génération du PDF", e);
         }
     }
 }

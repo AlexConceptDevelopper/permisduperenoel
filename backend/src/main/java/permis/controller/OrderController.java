@@ -1,29 +1,23 @@
 package permis.controller;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import permis.dto.CreateOrderRequest;
 import permis.dto.StripeResponse;
-import permis.model.Order;
-import permis.repository.global.OrderRepository;
 import permis.service.OrderService;
-import permis.service.PdfService;
 
 @RestController
 @RequestMapping("/orders")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "${app.frontend.url}")
 public class OrderController {
 
     private final OrderService orderService;
-    private final OrderRepository orderRepository;
-    private final PdfService pdfService;
 
-    public OrderController(OrderService orderService, OrderRepository orderRepository, PdfService pdfService) {
+    public OrderController(OrderService orderService) {
         this.orderService = orderService;
-        this.orderRepository = orderRepository;
-        this.pdfService = pdfService;
     }
 
     @PostMapping("/checkout")
@@ -35,10 +29,7 @@ public class OrderController {
     @GetMapping("/download-pdf")
     public ResponseEntity<byte[]> downloadPdf(@RequestParam String sessionId) {
         try {
-            Order order = orderRepository.findByStripeSessionId(sessionId)
-                    .orElseThrow(() -> new RuntimeException("Commande introuvable pour cette session"));
-
-            byte[] pdfBytes = pdfService.generateChristmasPackPdf(order);
+            byte[] pdfBytes = orderService.generatePdfForSession(sessionId);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
@@ -48,9 +39,15 @@ public class OrderController {
                     .headers(headers)
                     .body(pdfBytes);
 
+        } catch (SecurityException e) {
+            // Si le paiement n'est pas validé -> 403 Forbidden
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } catch (RuntimeException e) {
+            if ("COMMANDE_INTROUVABLE".equals(e.getMessage())) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+            return ResponseEntity.internalServerError().build();
         } catch (Exception e) {
-            // Affiche la vraie erreur en rouge dans la console Spring Boot !
-            e.printStackTrace(); 
             return ResponseEntity.internalServerError().build();
         }
     }

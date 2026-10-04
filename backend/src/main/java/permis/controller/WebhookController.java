@@ -66,7 +66,6 @@ public class WebhookController {
                 if (order != null && "PENDING".equals(order.getStatus())) {
                     order.setStatus("PAID");
                     orderRepository.save(order);
-                    System.out.println("Commande #" + orderId + " passée à PAID avec succès !");
                 }
             }
         }

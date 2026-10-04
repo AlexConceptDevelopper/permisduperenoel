@@ -6,11 +6,21 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+pnpm-lock.yaml -- if using npm/yarn primarily, or keep it if pnpm
 
+# Dependencies
 node_modules
+.pnpm-store/
+
+# Output / Production builds
 dist
 dist-ssr
 *.local
+
+# Environment variables / Secrets (TRÈS IMPORTANT)
+.env
+.env.*
+!.env.example
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +32,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# OS generated files
+Thumbs.db
+ehthumbs.dp
+Desktop.ini
