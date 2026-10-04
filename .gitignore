@@ -1,0 +1,33 @@
+# --- BACKEND (Java / Maven) ---
+backend/target/
+backend/.mvn/
+*.class
+*.log
+
+# --- FRONTEND (Node / Vite / React) ---
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.pnpm-debug.log*
+
+# --- PLAYWRIGHT ---
+test-results/
+playwright-report/
+playwright/.cache/
+frontend/test-results/
+frontend/playwright-report/
+
+# --- IDE & EDITEURS ---
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.code-workspace
+
+# --- SYSTEME & ENVIRONNEMENT ---
+.DS_Store
+Thumbs.db
+backend/.env
+frontend/.env
+frontend/.env.local
