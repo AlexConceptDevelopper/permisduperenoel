@@ -17,7 +17,7 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 
-# Installation des dépendances système requises pour Playwright / Chromium
+# Installation de toutes les dépendances système requises pour Playwright (Chromium & Webkit)
 RUN apt-get update && apt-get install -y \
     libnss3 \
     libnspr4 \
@@ -38,6 +38,11 @@ RUN apt-get update && apt-get install -y \
     libpango-1.0-0 \
     libcairo2 \
     libasound2t64 \
+    libxcursor1 \
+    libgtk-3-0 \
+    libpangocairo-1.0-0 \
+    libcairo-gobject2 \
+    libgdk-pixbuf-2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copie du jar généré depuis l'étape de build
