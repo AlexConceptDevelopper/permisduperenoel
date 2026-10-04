@@ -1,9 +1,23 @@
-# Étape 2 : Runtime léger (JRE) pour la production avec les dépendances Playwright/Chromium
-FROM eclipse-temurin:21-jre
-
+# ==========================================
+# Étape 1 : Build du Backend Spring Boot avec Maven
+# ==========================================
+FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
 
-# Installation des dépendances système requises par Playwright pour lancer Chromium
+# Copie des fichiers du projet backend
+COPY pom.xml .
+COPY src ./src
+
+# Build direct avec mvn (sans utiliser le wrapper)
+RUN mvn clean package -DskipTests
+
+# ==========================================
+# Étape 2 : Runtime léger (JRE) pour la production
+# ==========================================
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+
+# Installation des dépendances système requises pour Playwright / Chromium
 RUN apt-get update && apt-get install -y \
     libnss3 \
     libnspr4 \
@@ -29,6 +43,8 @@ RUN apt-get update && apt-get install -y \
 # Copie du jar généré depuis l'étape de build
 COPY --from=build /app/target/*.jar app.jar
 
+# Exposition du port
 EXPOSE 8080
 
+# Lancement de l'application
 ENTRYPOINT ["java", "-jar", "app.jar"]
