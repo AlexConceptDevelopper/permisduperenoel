@@ -8,6 +8,7 @@ import MentionsLegales from './pages/legal/MentionsLegales';
 import Cgv from './pages/legal/Cgv';
 import Confidentialite from './pages/legal/Confidentialite';
 import Contact from './pages/legal/Contact';
+import { FAQ } from './pages/FAQ';
 
 export default function App() {
   return (
@@ -22,6 +23,9 @@ export default function App() {
         {/* Route d'annulation après paiement Stripe */}
         <Route path="/cancel" element={<Cancel />} />
 
+        {/* Route pour la FAQ */}
+        <Route path="/faq" element={<FAQ />} />
+        
         {/* Routes légales du footer */}
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/cgv" element={<Cgv />} />
