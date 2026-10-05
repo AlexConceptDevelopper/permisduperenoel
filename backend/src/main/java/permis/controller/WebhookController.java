@@ -9,20 +9,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import permis.model.Order;
-import permis.repository.global.OrderRepository;
+import permis.service.OrderService; // 👈 On a uniquement besoin du OrderService
 
 @RestController
 @RequestMapping("/webhook")
 public class WebhookController {
 
-    private final OrderRepository orderRepository;
+    private final OrderService orderService;
 
     @Value("${stripe.webhook.secret}")
-    private String endpointSecret; // La clé secrète du webhook (whsec_...)
+    private String endpointSecret;
 
-    public WebhookController(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+    public WebhookController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @PostMapping
@@ -36,13 +35,11 @@ public class WebhookController {
 
         Event event;
         try {
-            // Vérification de la signature cryptographique pour s'assurer que ça vient bien de Stripe
             event = Webhook.constructEvent(payload, sigHeader, endpointSecret);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Webhook Error: " + e.getMessage());
         }
 
-        // On écute l'événement de fin de paiement réussi
         if ("checkout.session.completed".equals(event.getType())) {
             EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
             StripeObject stripeObject;
@@ -50,23 +47,17 @@ public class WebhookController {
             if (dataObjectDeserializer.getObject().isPresent()) {
                 stripeObject = dataObjectDeserializer.getObject().get();
             } else {
-                // Désérialisation de secours si besoin
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Deserialization error");
             }
 
             Session session = (Session) stripeObject;
             
-            // On récupère l'ID de commande qu'on avait stocké dans les metadata
-            String orderIdStr = session.getMetadata().get("orderId");
-
-            if (orderIdStr != null) {
-                Long orderId = Long.parseLong(orderIdStr);
-                Order order = orderRepository.findById(orderId).orElse(null);
-
-                if (order != null && "PENDING".equals(order.getStatus())) {
-                    order.setStatus("PAID");
-                    orderRepository.save(order);
-                }
+            // Appel propre du service métier pour tout gérer (Statut PAID + PDF + Email + RGPD)
+            try {
+                orderService.processSuccessfulPayment(session.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+                // On retourne quand même 200 à Stripe pour éviter qu'il ne s'acharne à retenter le webhook en boucle
             }
         }
 

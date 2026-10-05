@@ -19,7 +19,8 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
-    private final PdfService pdfService; // 👈 Ajout du service PDF
+    private final PdfService pdfService;
+    private final EmailService emailService;
 
     @Value("${stripe.api.key}")
     private String stripeApiKey;
@@ -27,10 +28,12 @@ public class OrderService {
     @Value("${app.frontend.url}")
     private String frontendUrl;
 
-    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, PdfService pdfService) {
+    // 👈 2. Ajout dans le constructeur
+    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, PdfService pdfService, EmailService emailService) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
         this.pdfService = pdfService;
+        this.emailService = emailService;
     }
 
     @PostConstruct
@@ -81,22 +84,54 @@ public class OrderService {
         }
     }
 
-    // 👇 Nouvelle méthode métier propre pour le téléchargement et le nettoyage RGPD
+    // 👇 3. Nouvelle méthode métier propre appelée par le webhook
+    @Transactional
+    public void processSuccessfulPayment(String sessionId) {
+        Order order = orderRepository.findByStripeSessionId(sessionId)
+                .orElseThrow(() -> new RuntimeException("COMMANDE_INTROUVABLE"));
+
+        // On ne traite que si la commande est encore PENDING pour éviter les doublons
+        if ("PENDING".equals(order.getStatus())) {
+            order.setStatus("PAID");
+            orderRepository.save(order);
+
+            try {
+                // Récupération sécurisée du prénom de l'enfant depuis DocumentData
+                String childName = (order.getDocumentData() != null && order.getDocumentData().getChildName() != null)
+                        ? order.getDocumentData().getChildName()
+                        : "l'enfant";
+
+                // Génération du PDF
+                byte[] pdfBytes = pdfService.generateChristmasPackPdf(order);
+
+                // Envoi de l'e-mail via Brevo
+                emailService.sendPermitEmail(order.getCustomerEmail(), childName, pdfBytes);
+
+                // Nettoyage RGPD : suppression des données sensibles de l'enfant après l'envoi
+                if (order.getDocumentData() != null) {
+                    order.setDocumentData(null);
+                    orderRepository.save(order);
+                }
+
+            } catch (Exception e) {
+                // On log l'erreur d'envoi/génération mais on laisse la commande à PAID
+                throw new RuntimeException("Erreur lors du traitement post-paiement (PDF/Email) : " + e.getMessage(), e);
+            }
+        }
+    }
+
     @Transactional
     public byte[] generatePdfForSession(String sessionId) {
         Order order = orderRepository.findByStripeSessionId(sessionId)
                 .orElseThrow(() -> new RuntimeException("COMMANDE_INTROUVABLE"));
 
-        // Vérification de sécurité du paiement
         if (!"PAID".equals(order.getStatus())) {
             throw new SecurityException("PAIEMENT_NON_VALIDE");
         }
 
         try {
-            // Génération du PDF via le PdfService
             byte[] pdfBytes = pdfService.generateChristmasPackPdf(order);
 
-            // Nettoyage RGPD : suppression des données sensibles de l'enfant après téléchargement
             if (order.getDocumentData() != null) {
                 order.setDocumentData(null);
                 orderRepository.save(order);
