@@ -29,7 +29,8 @@ public class OrderService {
     private String frontendUrl;
 
     // 👈 2. Ajout dans le constructeur
-    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, PdfService pdfService, EmailService emailService) {
+    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, PdfService pdfService,
+            EmailService emailService) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
         this.pdfService = pdfService;
@@ -59,8 +60,10 @@ public class OrderService {
                                                     .setUnitAmount(199L)
                                                     .setProductData(
                                                             SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                                                    .setName("Pack Magique de Noël (Permis + Passeport + Diplôme)")
-                                                                    .setDescription("Documents personnalisés pour l'enfant")
+                                                                    .setName(
+                                                                            "Pack Magique de Noël (Permis + Passeport + Diplôme)")
+                                                                    .setDescription(
+                                                                            "Documents personnalisés pour l'enfant")
                                                                     .build())
                                                     .build())
                                     .build())
@@ -115,7 +118,8 @@ public class OrderService {
 
             } catch (Exception e) {
                 // On log l'erreur d'envoi/génération mais on laisse la commande à PAID
-                throw new RuntimeException("Erreur lors du traitement post-paiement (PDF/Email) : " + e.getMessage(), e);
+                throw new RuntimeException("Erreur lors du traitement post-paiement (PDF/Email) : " + e.getMessage(),
+                        e);
             }
         }
     }
@@ -124,6 +128,20 @@ public class OrderService {
     public byte[] generatePdfForSession(String sessionId) {
         Order order = orderRepository.findByStripeSessionId(sessionId)
                 .orElseThrow(() -> new RuntimeException("COMMANDE_INTROUVABLE"));
+
+        // Si le webhook a un léger train de retard, on vérifie directement auprès de
+        // Stripe
+        if ("PENDING".equals(order.getStatus())) {
+            try {
+                Session session = Session.retrieve(sessionId);
+                if ("paid".equals(session.getPaymentStatus())) {
+                    processSuccessfulPayment(sessionId);
+                    order = orderRepository.findByStripeSessionId(sessionId).get();
+                }
+            } catch (Exception e) {
+                // On laisse passer vers l'exception si Stripe ne répond pas
+            }
+        }
 
         if (!"PAID".equals(order.getStatus())) {
             throw new SecurityException("PAIEMENT_NON_VALIDE");
