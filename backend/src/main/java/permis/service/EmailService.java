@@ -38,9 +38,9 @@ public class EmailService {
                     <body style="font-family: Arial, sans-serif; background-color: #0f172a; color: #f8fafc; padding: 30px; border-radius: 12px;">
                         <div style="max-width: 600px; margin: 0 auto; background-color: #1e1b4b; padding: 30px; border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 16px; text-align: center;">
 
-                            <!-- LOGO EN TOUT HAUT -->
-                            <div style="margin-bottom: 20px;">
-                                <img src="%s/Logo.png" alt="Permis du Père Noël" style="width: 70px; height: 70px; object-fit: contain;" />
+                            <!-- LOGO / FAVICON EN EN-TÊTE -->
+                            <div style="margin-bottom: 15px;">
+                                <img src="%s/favicon-transparent.png" alt="Logo" style="width: 50px; height: 50px; object-fit: contain;" />
                             </div>
 
                             <h1 style="color: #fbbf24; margin-top: 0;">Ho ho ho %s ! 🎄</h1>
