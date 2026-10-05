@@ -25,7 +25,14 @@ export const Navbar: React.FC = () => {
         
         {/* Logo & Slogan */}
         <div className="flex items-center gap-3">
-          <span className="text-2xl animate-bounce">🎅</span>
+          <div className="relative">
+            <div className="absolute -inset-1 bg-amber-400/30 rounded-xl blur-xs"></div>
+            <img 
+              src="/Logo.png" 
+              alt="Logo Permis du Père Noël" 
+              className="relative w-10 h-10 object-contain rounded-xl border border-amber-400/40 shadow-inner"
+            />
+          </div>
           <div>
             <div className="flex items-center gap-2">
               <span className="font-black text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-400 text-sm md:text-base tracking-wider">
