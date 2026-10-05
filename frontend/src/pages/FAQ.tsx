@@ -41,7 +41,7 @@ export const FAQ: React.FC = () => {
     <div className="min-h-screen bg-indigo-950 text-slate-100 flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
       <Navbar />
 
-      <main className="py-16 px-6 max-w-4xl mx-auto relative z-10 flex-grow">
+      <main className="py-16 px-6 max-w-4xl mx-auto relative z-10 grow">
         {/* En-tête de section */}
         <div className="text-center mb-12">
           <span className="text-xs uppercase tracking-widest text-amber-300 font-bold bg-amber-500/10 border border-amber-400/30 px-3 py-1.5 rounded-full inline-block">
