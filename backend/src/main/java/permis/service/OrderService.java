@@ -111,10 +111,10 @@ public class OrderService {
                 emailService.sendPermitEmail(order.getCustomerEmail(), childName, pdfBytes);
 
                 // Nettoyage RGPD : suppression des données sensibles de l'enfant après l'envoi
-                if (order.getDocumentData() != null) {
-                    order.setDocumentData(null);
-                    orderRepository.save(order);
-                }
+                // if (order.getDocumentData() != null) {
+                //     order.setDocumentData(null);
+                //     orderRepository.save(order);
+                // }
 
             } catch (Exception e) {
                 // On log l'erreur d'envoi/génération mais on laisse la commande à PAID
