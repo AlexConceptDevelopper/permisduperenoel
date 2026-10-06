@@ -49,10 +49,18 @@ public class PdfService {
         String serial = escapeXml((data != null && data.getSerialNumber() != null) ? data.getSerialNumber()
                 : "PN-2026-9482-" + name.toUpperCase());
 
-        // Note ici : %%23 au lieu de %23 pour que Java ne panique pas avec le .formatted()
-        String avatarSrc = (data != null && data.getAvatarUrl() != null && !data.getAvatarUrl().isEmpty())
+        // Gestion propre de l'avatar (soit l'image, soit un bloc HTML de secours)
+        String avatarUrl = (data != null && data.getAvatarUrl() != null && !data.getAvatarUrl().isEmpty())
                 ? data.getAvatarUrl()
-                : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%%2364748b'><text x='50%%' y='50%%' dominant-baseline='middle' text-anchor='middle' font-size='12'>Photo</text></svg>";
+                : "";
+        
+        String avatarContentPermit = avatarUrl.isEmpty() 
+            ? "<div style=\"color: #cbd5e1; font-size: 11px; font-weight: bold; text-align: center; font-family: sans-serif;\">📸<br>Photo</div>"
+            : "<img src=\"" + avatarUrl + "\" class=\"avatar-img\" />";
+
+        String avatarContentPassport = avatarUrl.isEmpty() 
+            ? "<div style=\"color: #cbd5e1; font-size: 11px; font-weight: bold; text-align: center; font-family: sans-serif;\">📸<br>Photo</div>"
+            : "<img src=\"" + avatarUrl + "\" class=\"avatar-img\" />";
 
         String htmlContent = """
                 <!DOCTYPE html>
@@ -191,7 +199,7 @@ public class PdfService {
                         </div>
                         <div class="content-row">
                             <div style="text-align: center;">
-                                <div class="avatar-box"><img src="%s" class="avatar-img" /></div>
+                                <div class="avatar-box">%s</div>
                                 <div style="font-size: 8px; font-weight: bold; color: #fde047; margin-top: 6px;">⭐ Sage (%s/10)</div>
                             </div>
                             <div class="info-col">
@@ -245,7 +253,7 @@ public class PdfService {
                         </div>
                         <div class="content-row">
                             <div style="text-align: center;">
-                                <div class="avatar-box"><img src="%s" class="avatar-img" /></div>
+                                <div class="avatar-box">%s</div>
                                 <div style="font-size: 8px; font-weight: bold; color: #fde047; margin-top: 6px;">📦 Rangement: %s/10</div>
                             </div>
                             <div class="info-col">
@@ -278,7 +286,7 @@ public class PdfService {
                             </div>
                         </div>
                         <div class="footer" style="color: #fde047;">
-                            <span>❄️️ PÔLE NORD • %s</span>
+                            <span>❄️ PÔLE NORD • %s</span>
                             <span>🌍 MONDE ENTIER</span>
                         </div>
                     </div></div>
@@ -341,16 +349,17 @@ public class PdfService {
                 </html>
                 """
                 .formatted(
-                        serial, avatarSrc, sage, name, age, city, sommeil, mention,
+                        serial, avatarContentPermit, sage, name, age, city, sommeil, mention,
                         versoMsg, sage, serial,
-                        serial, avatarSrc, sage, name, age, city, mention,
+                        serial, avatarContentPassport, sage, name, age, city, mention,
                         versoMsg, serial,
                         serial, name, age, city, mention, sage,
                         versoMsg, serial);
 
         synchronized (this) {
             try (Page page = browser.newPage()) {
-                page.setContent(htmlContent);
+                // On attend que les ressources/images réseau soient bien chargées
+                page.setContent(htmlContent, new Page.SetContentOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.NETWORKIDLE));
 
                 Page.PdfOptions pdfOptions = new Page.PdfOptions();
                 pdfOptions.setPrintBackground(true);
