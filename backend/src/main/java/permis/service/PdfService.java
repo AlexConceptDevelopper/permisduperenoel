@@ -9,6 +9,13 @@ import org.springframework.stereotype.Service;
 import permis.model.DocumentData;
 import permis.model.Order;
 
+import java.io.InputStream;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
+
 @Service
 public class PdfService {
 
@@ -49,11 +56,13 @@ public class PdfService {
         String serial = escapeXml((data != null && data.getSerialNumber() != null) ? data.getSerialNumber()
                 : "PN-2026-9482-" + name.toUpperCase());
 
-        // Gestion propre de l'avatar (soit l'image, soit un bloc HTML de secours)
-        String avatarUrl = (data != null && data.getAvatarUrl() != null && !data.getAvatarUrl().isEmpty())
+        // Récupération et conversion automatique de l'avatar en Base64 pour le PDF
+        String rawAvatarUrl = (data != null && data.getAvatarUrl() != null && !data.getAvatarUrl().isEmpty())
                 ? data.getAvatarUrl()
                 : "";
         
+        String avatarUrl = resolveImageToBase64(rawAvatarUrl);
+
         String avatarContentPermit = avatarUrl.isEmpty() 
             ? "<div style=\"color: #cbd5e1; font-size: 11px; font-weight: bold; text-align: center; font-family: sans-serif;\">📸<br>Photo</div>"
             : "<img src=\"" + avatarUrl + "\" class=\"avatar-img\" />";
@@ -280,7 +289,7 @@ public class PdfService {
                         <div style="display: flex; flex-direction: column; gap: 20px;">
                             <div class="box-desc-blue">« %s »</div>
                             <div style="display: flex; gap: 12px; text-align: center;">
-                                <div style="flex: 1; background-color: #0f172a; border: 1px solid #d4af37; border-radius: 8px; padding: 12px; font-size: 10px; color: #fde047; font-weight: bold;">☁️ Espace Aérien</div>
+                                <div style="flex: 1; background-color: #0f172a; border: 1px solid #d4af37; border-radius: 8px; padding: 12px; font-size: 10px; color: #fde047; font-weight: bold;">☁️️ Espace Aérien</div>
                                 <div style="flex: 1; background-color: #0f172a; border: 1px solid #d4af37; border-radius: 8px; padding: 12px; font-size: 10px; color: #fde047; font-weight: bold;">🦌 Escorte Rennes</div>
                                 <div style="flex: 1; background-color: #0f172a; border: 1px solid #d4af37; border-radius: 8px; padding: 12px; font-size: 10px; color: #fde047; font-weight: bold;">🎁 Douane Hotte</div>
                             </div>
@@ -358,7 +367,6 @@ public class PdfService {
 
         synchronized (this) {
             try (Page page = browser.newPage()) {
-                // On attend que les ressources/images réseau soient bien chargées
                 page.setContent(htmlContent, new Page.SetContentOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.NETWORKIDLE));
 
                 Page.PdfOptions pdfOptions = new Page.PdfOptions();
@@ -372,6 +380,52 @@ public class PdfService {
 
                 return page.pdf(pdfOptions);
             }
+        }
+    }
+
+    /**
+     * Convertit l'image (URL web, chemin relatif ou absolu) en Data-URI Base64
+     * pour que Playwright l'affiche instantanément sans problème réseau/sécurité.
+     */
+    private String resolveImageToBase64(String urlStr) {
+        if (urlStr == null || urlStr.isEmpty()) {
+            return "";
+        }
+        if (urlStr.startsWith("data:image")) {
+            return urlStr;
+        }
+        try {
+            byte[] imageBytes;
+            
+            // Si c'est un chemin relatif type /uploads/..., on le mappe directement sur le disque local
+            String localPath = urlStr;
+            if (urlStr.contains("/uploads/")) {
+                localPath = "./uploads/" + urlStr.substring(urlStr.indexOf("/uploads/") + 9);
+            }
+
+            Path path = Paths.get(localPath);
+            if (Files.exists(path)) {
+                imageBytes = Files.readAllBytes(path);
+            } else if (urlStr.startsWith("http://") || urlStr.startsWith("https://")) {
+                try (InputStream in = URI.create(urlStr).toURL().openStream()) {
+                    imageBytes = in.readAllBytes();
+                }
+            } else {
+                return "";
+            }
+
+            String mimeType = "image/jpeg";
+            String lower = urlStr.toLowerCase();
+            if (lower.endsWith(".png")) {
+                mimeType = "image/png";
+            } else if (lower.endsWith(".webp")) {
+                mimeType = "image/webp";
+            }
+
+            return "data:" + mimeType + ";base64," + Base64.getEncoder().encodeToString(imageBytes);
+        } catch (Exception e) {
+            System.err.println("Erreur conversion image en Base64 pour le PDF : " + e.getMessage());
+            return "";
         }
     }
 
