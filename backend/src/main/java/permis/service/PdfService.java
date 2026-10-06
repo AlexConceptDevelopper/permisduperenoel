@@ -384,33 +384,37 @@ public class PdfService {
     }
 
     /**
-     * Convertit l'image (URL web, chemin relatif ou absolu) en Data-URI Base64
-     * pour que Playwright l'affiche instantanément sans problème réseau/sécurité.
+     * Gère l'avatar qu'il soit déjà en Base64 (provenant de la base/frontend) ou en URL.
      */
     private String resolveImageToBase64(String urlStr) {
         if (urlStr == null || urlStr.isEmpty()) {
             return "";
         }
+        // Si l'image est déjà stockée en Base64 dans la base, on la retourne directement !
         if (urlStr.startsWith("data:image")) {
             return urlStr;
         }
         try {
-            byte[] imageBytes;
+            byte[] imageBytes = null;
             
-            // Si c'est un chemin relatif type /uploads/..., on le mappe directement sur le disque local
-            String localPath = urlStr;
-            if (urlStr.contains("/uploads/")) {
-                localPath = "./uploads/" + urlStr.substring(urlStr.indexOf("/uploads/") + 9);
-            }
-
-            Path path = Paths.get(localPath);
-            if (Files.exists(path)) {
-                imageBytes = Files.readAllBytes(path);
-            } else if (urlStr.startsWith("http://") || urlStr.startsWith("https://")) {
+            // Si c'est une URL http(s), on la télécharge
+            if (urlStr.startsWith("http://") || urlStr.startsWith("https://")) {
                 try (InputStream in = URI.create(urlStr).toURL().openStream()) {
                     imageBytes = in.readAllBytes();
                 }
             } else {
+                // Sinon on tente un chemin local par sécurité
+                String localPath = urlStr;
+                if (urlStr.contains("/uploads/")) {
+                    localPath = "./uploads/" + urlStr.substring(urlStr.indexOf("/uploads/") + 9);
+                }
+                Path path = Paths.get(localPath);
+                if (Files.exists(path)) {
+                    imageBytes = Files.readAllBytes(path);
+                }
+            }
+
+            if (imageBytes == null) {
                 return "";
             }
 
@@ -424,7 +428,7 @@ public class PdfService {
 
             return "data:" + mimeType + ";base64," + Base64.getEncoder().encodeToString(imageBytes);
         } catch (Exception e) {
-            System.err.println("Erreur conversion image en Base64 pour le PDF : " + e.getMessage());
+            System.err.println("Erreur conversion image pour le PDF : " + e.getMessage());
             return "";
         }
     }

@@ -150,10 +150,10 @@ public class OrderService {
         try {
             byte[] pdfBytes = pdfService.generateChristmasPackPdf(order);
 
-            if (order.getDocumentData() != null) {
-                order.setDocumentData(null);
-                orderRepository.save(order);
-            }
+            // if (order.getDocumentData() != null) {
+            //     order.setDocumentData(null);
+            //     orderRepository.save(order);
+            // }
 
             return pdfBytes;
 
