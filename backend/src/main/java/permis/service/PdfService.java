@@ -19,7 +19,9 @@ public class PdfService {
     public void init() {
         this.playwright = Playwright.create();
         this.browser = playwright.chromium()
-                .launch(new com.microsoft.playwright.BrowserType.LaunchOptions().setHeadless(true));
+                .launch(new com.microsoft.playwright.BrowserType.LaunchOptions()
+                        .setHeadless(true)
+                        .setArgs(java.util.List.of("--font-render-hinting=medium", "--enable-font-antialiasing")));
     }
 
     @PreDestroy
@@ -47,11 +49,11 @@ public class PdfService {
         String serial = escapeXml((data != null && data.getSerialNumber() != null) ? data.getSerialNumber()
                 : "PN-2026-9482-" + name.toUpperCase());
 
+        // Note ici : %%23 au lieu de %23 pour que Java ne panique pas avec le .formatted()
         String avatarSrc = (data != null && data.getAvatarUrl() != null && !data.getAvatarUrl().isEmpty())
                 ? data.getAvatarUrl()
-                : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%2364748b'><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='12'>Photo</text></svg>";
+                : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%%2364748b'><text x='50%%' y='50%%' dominant-baseline='middle' text-anchor='middle' font-size='12'>Photo</text></svg>";
 
-                
         String htmlContent = """
                 <!DOCTYPE html>
                 <html>
@@ -61,7 +63,13 @@ public class PdfService {
                     @page portrait-page { size: A4 portrait; margin: 0; }
                     @page landscape-page { size: A4 landscape; margin: 0; }
 
-                    body { font-family: 'Helvetica', Arial, sans-serif; background-color: #ffffff; margin: 0; padding: 0; color: #ffffff; }
+                    body { 
+                        font-family: 'Helvetica', Arial, 'Noto Color Emoji', sans-serif; 
+                        background-color: #ffffff; 
+                        margin: 0; 
+                        padding: 0; 
+                        color: #ffffff; 
+                    }
 
                     /* Pages Portrait (Permis & Passeports) */
                     .page-portrait {
@@ -136,11 +144,11 @@ public class PdfService {
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;
-                        font-family: 'Georgia', serif;
+                        font-family: 'Georgia', 'Noto Color Emoji', serif;
                     }
 
                     .header-flex { position: absolute; top: 30px; left: 30px; right: 30px; display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #d4af37; padding-bottom: 10px; }
-                    .badge { border: 1px solid #d4af37; padding: 4px 10px; font-size: 10px; font-weight: bold; font-family: monospace; border-radius: 6px; }
+                    .badge { border: 1px solid #d4af37; padding: 4px 10px; font-size: 10px; font-weight: bold; font-family: monospace, 'Noto Color Emoji'; border-radius: 6px; }
 
                     .content-row { display: flex; gap: 20px; align-items: center; margin-top: 15px; }
                     .avatar-box { width: 85px; height: 105px; border: 2px solid #d4af37; border-radius: 10px; background-color: #0f172a; overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -150,7 +158,7 @@ public class PdfService {
                     .label { font-size: 9px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; color: #fde047; }
                     .value { font-size: 13px; font-weight: bold; }
 
-                    .footer { position: absolute; bottom: 20px; left: 30px; right: 30px; display: flex; justify-content: space-between; font-size: 9px; font-family: monospace; font-weight: bold; }
+                    .footer { position: absolute; bottom: 20px; left: 30px; right: 30px; display: flex; justify-content: space-between; font-size: 9px; font-family: monospace, 'Noto Color Emoji'; font-weight: bold; }
 
                     .box-desc { background-color: #450a0a; border: 1px solid #d4af37; border-radius: 8px; padding: 12px; font-style: italic; font-size: 12px; font-weight: bold; text-align: center; }
                     .box-desc-blue { background-color: #0f172a; border: 1px solid #d4af37; border-radius: 8px; padding: 12px; font-style: italic; font-size: 12px; font-weight: bold; text-align: center; }
@@ -270,7 +278,7 @@ public class PdfService {
                             </div>
                         </div>
                         <div class="footer" style="color: #fde047;">
-                            <span>❄️ PÔLE NORD • %s</span>
+                            <span>❄️️ PÔLE NORD • %s</span>
                             <span>🌍 MONDE ENTIER</span>
                         </div>
                     </div></div>
@@ -279,32 +287,32 @@ public class PdfService {
                     <div class="page-landscape"><div class="card-diploma-landscape">
                         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4af37; padding-bottom: 12px;">
                             <div style="text-align: left;">
-                                <div style="font-size: 10px; font-family: sans-serif; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #92400e;">Grande Chancellerie du Pôle Nord</div>
+                                <div style="font-size: 10px; font-family: sans-serif, 'Noto Color Emoji'; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #92400e;">Grande Chancellerie du Pôle Nord</div>
                                 <div style="font-size: 24px; font-weight: bold; text-transform: uppercase; color: #451a03; margin-top: 4px;">📜 Diplôme de l'Enfant Sage</div>
                             </div>
                             <div class="badge" style="color: #92400e; border-color: #92400e; font-size: 12px; padding: 6px 14px;">%s</div>
                         </div>
 
                         <div style="margin: 15px 0;">
-                            <p style="font-size: 14px; font-style: italic; color: #78350f; font-weight: bold; margin-bottom: 10px; font-family: sans-serif;">Ce certificat officiel est solennellement décerné à :</p>
+                            <p style="font-size: 14px; font-style: italic; color: #78350f; font-weight: bold; margin-bottom: 10px; font-family: sans-serif, 'Noto Color Emoji';">Ce certificat officiel est solennellement décerné à :</p>
                             <p style="font-size: 32px; font-weight: bold; color: #b91c1c; margin: 10px 0;">
-                                ⭐ %s <span style="font-size: 16px; font-family: sans-serif; font-weight: normal; color: #78350f;">(%s ans - 📍 %s)</span>
+                                ⭐ %s <span style="font-size: 16px; font-family: sans-serif, 'Noto Color Emoji'; font-weight: normal; color: #78350f;">(%s ans - 📍 %s)</span>
                             </p>
                             <div class="diploma-box-cream">« %s »</div>
-                            <p style="font-size: 13px; font-family: sans-serif; font-weight: bold; color: #92400e;">
-                                ✨ Indice de rangement validé par les lutins : <span style="font-size: 16px; color: #b91c1c; font-weight: black;">%s / 10</span> ✨
+                            <p style="font-size: 13px; font-family: sans-serif, 'Noto Color Emoji'; font-weight: bold; color: #92400e;">
+                                ✨ Indice de rangement validé par les lutins : <span style="font-size: 16px; color: #b91c1c; font-weight: 900;">%s / 10</span> ✨
                             </p>
                         </div>
 
                         <div style="display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #d4af37; padding-top: 15px;">
                             <div style="text-align: left;">
-                                <div style="font-size: 9px; font-family: sans-serif; text-transform: uppercase; font-weight: bold; color: #92400e;">Le Père Noël</div>
-                                <div style="font-size: 20px; font-weight: bold; color: #b91c1c; font-family: cursive;">Santa Claus</div>
+                                <div style="font-size: 9px; font-family: sans-serif, 'Noto Color Emoji'; text-transform: uppercase; font-weight: bold; color: #92400e;">Le Père Noël</div>
+                                <div style="font-size: 20px; font-weight: bold; color: #b91c1c; font-family: cursive, 'Noto Color Emoji';">Santa Claus</div>
                             </div>
                             <div style="width: 45px; height: 45px; background-color: #b91c1c; border: 3px solid #d4af37; border-radius: 50%%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">👑</div>
                             <div style="text-align: right;">
-                                <div style="font-size: 9px; font-family: sans-serif; text-transform: uppercase; font-weight: bold; color: #92400e;">Chef des Lutins</div>
-                                <div style="font-size: 11px; font-family: sans-serif; font-weight: bold; color: #78350f;">25 Décembre 2026</div>
+                                <div style="font-size: 9px; font-family: sans-serif, 'Noto Color Emoji'; text-transform: uppercase; font-weight: bold; color: #92400e;">Chef des Lutins</div>
+                                <div style="font-size: 11px; font-family: sans-serif, 'Noto Color Emoji'; font-weight: bold; color: #78350f;">25 Décembre 2026</div>
                             </div>
                         </div>
                     </div></div>
@@ -312,18 +320,18 @@ public class PdfService {
                     <!-- PAGE 6 : DIPLÔME VERSO (Paysage Grand Format) -->
                     <div class="page-landscape"><div class="card-diploma-landscape" style="justify-content: space-between;">
                         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4af37; padding-bottom: 12px;">
-                            <div style="font-size: 14px; font-family: sans-serif; font-weight: bold; text-transform: uppercase; color: #92400e; letter-spacing: 1px;">📜 Note d'Honneur et Proclamation du Conseil</div>
-                            <div style="font-size: 11px; font-family: monospace; font-weight: bold; color: #92400e;">VERSO</div>
+                            <div style="font-size: 14px; font-family: sans-serif, 'Noto Color Emoji'; font-weight: bold; text-transform: uppercase; color: #92400e; letter-spacing: 1px;">📜 Note d'Honneur et Proclamation du Conseil</div>
+                            <div style="font-size: 11px; font-family: monospace, 'Noto Color Emoji'; font-weight: bold; color: #92400e;">VERSO</div>
                         </div>
 
                         <div style="margin: auto 0; padding: 20px 0;">
                             <div class="diploma-box-cream" style="font-size: 18px; padding: 35px;">« %s »</div>
-                            <p style="font-size: 13px; font-family: sans-serif; color: #78350f; font-weight: bold; margin-top: 25px;">
+                            <p style="font-size: 13px; font-family: sans-serif, 'Noto Color Emoji'; color: #78350f; font-weight: bold; margin-top: 25px;">
                                 ✨ Inscrit(e) à vie sur le Grand Registre d'Or des Enfants Sages du Pôle Nord. ✨
                             </p>
                         </div>
 
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #d4af37; padding-top: 15px; font-size: 11px; font-family: monospace; font-weight: bold; color: #92400e;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #d4af37; padding-top: 15px; font-size: 11px; font-family: monospace, 'Noto Color Emoji'; font-weight: bold; color: #92400e;">
                             <span>🛡️ SCEAU OFFICIEL • %s</span>
                             <span>🎄 ATELIER CENTRAL DU PÔLE NORD</span>
                         </div>

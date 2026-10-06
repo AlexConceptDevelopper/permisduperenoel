@@ -15,7 +15,7 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 
-# Installation des dépendances système indispensables pour Chromium/Playwright
+# Installation des dépendances système indispensables pour Chromium/Playwright + polices + fontconfig
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
@@ -44,6 +44,8 @@ RUN apt-get update && apt-get install -y \
     libpangocairo-1.0-0 \
     libcairo-gobject2 \
     libgdk-pixbuf-2.0-0 \
+    fonts-noto-color-emoji \
+    fontconfig \
     && rm -rf /var/lib/apt/lists/*
 
 # Copie du jar généré depuis l'étape de build
