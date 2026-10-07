@@ -473,7 +473,7 @@ export function Home() {
                     🖨️ Prêt à imprimer
                   </p>
                   <p className="text-[9px] text-amber-100/70">
-                    Format A4 optimisé
+                    Format A4 pour le diplôme
                   </p>
                 </div>
               </div>
