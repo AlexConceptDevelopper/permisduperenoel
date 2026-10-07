@@ -1,26 +1,27 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { Navbar } from '../../components/Navbar'; 
+import { Footer } from '../../components/Footer'; 
 
 const modules = import.meta.glob<{ metadata: any; default: React.ComponentType }>('../../articles/*.tsx', { eager: true });
 const articles = Object.values(modules).map((mod) => mod.metadata);
 
 export default function BlogIndex() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 py-16 px-4 sm:px-6 relative overflow-hidden">
-      {/* Petits effets lumineux de fond */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between relative overflow-hidden">
+      <Helmet>
+        <title>Le Blog de Noël - Conseils et Astuces | La Fabrique Magique</title>
+        <meta 
+          name="description" 
+          content="Découvrez tous nos articles, conseils et astuces pour faire patienter les enfants, préparer les fêtes et vivre un Noël magique et inoubliable." 
+        />
+      </Helmet>
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <Helmet>
-          <title>Le Blog de Noël - Conseils et Astuces | La Fabrique Magique</title>
-          <meta 
-            name="description" 
-            content="Découvrez tous nos articles, conseils et astuces pour faire patienter les enfants, préparer les fêtes et vivre un Noël magique et inoubliable." 
-          />
-        </Helmet>
+      {/* Navbar intégrée en haut */}
+      <Navbar />
 
-        {/* En-tête */}
+      {/* Contenu de la page Blog */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 relative z-10 w-full flex-grow">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-400/30 px-4 py-1.5 rounded-full text-xs font-semibold text-amber-300 mb-4 shadow-inner">
             <span>✨</span> Le coin des lutins & des parents
@@ -51,7 +52,7 @@ export default function BlogIndex() {
                 </div>
               )}
 
-              <div className="p-6 flex flex-col grow">
+              <div className="p-6 flex flex-col flex-grow">
                 <span className="text-xs font-semibold text-amber-400 mb-2 block">{art.date}</span>
                 
                 <h2 className="text-xl font-bold text-slate-100 mb-3 group-hover:text-amber-300 transition-colors line-clamp-2">
@@ -60,7 +61,7 @@ export default function BlogIndex() {
                   </Link>
                 </h2>
 
-                <p className="text-slate-300 text-sm mb-6 line-clamp-3 grow leading-relaxed">
+                <p className="text-slate-300 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">
                   {art.description}
                 </p>
 
@@ -75,6 +76,9 @@ export default function BlogIndex() {
           ))}
         </div>
       </div>
+
+      {/* Footer intégré en bas */}
+      <Footer />
     </div>
   );
 }
