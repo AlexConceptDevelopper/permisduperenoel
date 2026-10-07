@@ -26,7 +26,7 @@ export default function Contact() {
               Un problème avec ton téléchargement, une question sur la livraison magique de ton pack de Noël ? Les lutins du support te répondent sous 24h.
             </p>
             <div className="inline-block bg-amber-500/10 border border-amber-500/30 rounded-xl px-6 py-4 text-amber-300 font-mono text-base tracking-wide shadow-inner">
-              contact@permis-de-noel.fr
+              contact@permisduperenoel.fr
             </div>
           </section>
 

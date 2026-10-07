@@ -31,7 +31,7 @@ export default function Confidentialite() {
           <section className="bg-indigo-900/40 border border-amber-400/20 rounded-2xl p-6 shadow-xl backdrop-blur-md space-y-3">
             <h2 className="text-lg font-semibold text-amber-300">2. Purge automatique des données (RGPD)</h2>
             <p>
-              Parce que nous attachons une importance capitale à la protection des données des mineurs, <strong className="text-amber-200">toutes les informations personnelles de l'enfant sont automatiquement purgées et supprimées</strong> de notre base de données dès que le PDF est téléchargé. Seule une trace comptable anonymisée de la transaction est conservée.
+              Parce que nous attachons une importance capitale à la protection des données des mineurs, <strong className="text-amber-200">toutes les informations personnelles de l'enfant sont automatiquement purgées et supprimées sous 24 heures</strong> de notre base de données dès que le PDF est téléchargé. Seule une trace comptable anonymisée de la transaction est conservée.
             </p>
           </section>
 
@@ -47,7 +47,7 @@ export default function Confidentialite() {
           <section className="bg-indigo-900/40 border border-amber-400/20 rounded-2xl p-6 shadow-xl backdrop-blur-md space-y-3">
             <h2 className="text-lg font-semibold text-amber-300">4. Vos droits (RGPD)</h2>
             <p>
-              Conformément à la réglementation, vous disposez d'un droit d'accès et de suppression de vos données. Pour toute demande, vous pouvez nous contacter à l'adresse : contact@permis-de-noel.fr.
+              Conformément à la réglementation, vous disposez d'un droit d'accès et de suppression de vos données. Pour toute demande, vous pouvez nous contacter à l'adresse : contact@permisduperenoel.fr.
             </p>
           </section>
 

@@ -33,8 +33,8 @@ export default function MentionsLegales() {
               <p><strong className="text-amber-200">Directeur de la publication :</strong> Alexandre Cubizolle</p>
               <p>
                 <strong className="text-amber-200">Contact :</strong>{" "}
-                <a href="mailto:contact@permis-de-noel.fr" className="text-amber-400 underline hover:text-amber-300">
-                  contact@permis-de-noel.fr
+                <a href="mailto:contact@permisduperenoel.fr" className="text-amber-400 underline hover:text-amber-300">
+                  contact@permisduperenoel.fr
                 </a>
               </p>
             </div>
