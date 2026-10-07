@@ -21,7 +21,7 @@ export default function BlogIndex() {
       <Navbar />
 
       {/* Contenu de la page Blog */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 relative z-10 w-full flex-grow">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 relative z-10 w-full grow">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-400/30 px-4 py-1.5 rounded-full text-xs font-semibold text-amber-300 mb-4 shadow-inner">
             <span>✨</span> Le coin des lutins & des parents
@@ -52,7 +52,7 @@ export default function BlogIndex() {
                 </div>
               )}
 
-              <div className="p-6 flex flex-col flex-grow">
+              <div className="p-6 flex flex-col grow">
                 <span className="text-xs font-semibold text-amber-400 mb-2 block">{art.date}</span>
                 
                 <h2 className="text-xl font-bold text-slate-100 mb-3 group-hover:text-amber-300 transition-colors line-clamp-2">
@@ -61,7 +61,7 @@ export default function BlogIndex() {
                   </Link>
                 </h2>
 
-                <p className="text-slate-300 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">
+                <p className="text-slate-300 text-sm mb-6 line-clamp-3 grow leading-relaxed">
                   {art.description}
                 </p>
 
