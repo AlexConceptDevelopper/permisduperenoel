@@ -49,7 +49,7 @@ export const Navbar: React.FC = () => {
           </div>
         </Link>
 
-        {/* Éléments de réassurance à droite */}
+        {/* Éléments de réassurance et navigation à droite */}
         <div className="flex items-center gap-3">
           {/* Badge de réassurance éthique / sécurisé */}
           <div className="hidden sm:flex items-center gap-1.5 bg-amber-500/10 border border-amber-400/30 px-3 py-1 rounded-full text-[11px] text-amber-200 font-medium">
@@ -58,6 +58,14 @@ export const Navbar: React.FC = () => {
               100% Sécurisé & Secret du Pôle Nord
             </span>
           </div>
+
+          {/* Lien Blog */}
+          <Link
+            to="/blog"
+            className="text-xs font-semibold text-amber-200/80 hover:text-amber-300 transition-colors bg-indigo-900/50 border border-amber-400/20 px-3 py-1.5 rounded-xl flex items-center gap-1"
+          >
+            <span>📖</span> Blog
+          </Link>
 
           {/* Lien Aide */}
           <Link

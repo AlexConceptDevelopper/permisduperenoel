@@ -49,7 +49,7 @@ export function Success() {
 
           {/* Notification pour l'e-mail */}
           <p className="text-xs text-amber-300/90 font-medium bg-amber-500/10 border border-amber-400/20 py-2 px-3 rounded-xl">
-            📧 Une copie de votre pack a également été envoyée par e-mail pour
+            📧 Une copie de votre pack a également va vous être envoyée par e-mail au téléchargement du pack pour 
             que vous puissiez le retrouver facilement.
           </p>
         </div>

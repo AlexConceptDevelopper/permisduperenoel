@@ -11,6 +11,8 @@ import Cgv from './pages/legal/Cgv';
 import Confidentialite from './pages/legal/Confidentialite';
 import Contact from './pages/legal/Contact';
 import { FAQ } from './pages/FAQ';
+import ArticleView from './pages/ArticleView';
+import BlogIndex from './pages/blog/BlogIndex';
 
 export default function App() {
   return (
@@ -34,6 +36,11 @@ export default function App() {
           <Route path="/cgv" element={<Cgv />} />
           <Route path="/confidentialite" element={<Confidentialite />} />
           <Route path="/contact" element={<Contact />} />
+
+          {/* Routes pour le blog */}
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/:slug" element={<ArticleView />} />
+
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
