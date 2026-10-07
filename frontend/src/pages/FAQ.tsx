@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Navbar } from '../components/Navbar';
-import { Footer } from '../components/Footer'; // Adapte le chemin si ton Footer est ailleurs
+import React, { useState } from "react";
+import { Navbar } from "../components/Navbar";
+import { Footer } from "../components/Footer"; // Adapte le chemin si ton Footer est ailleurs
+import { Helmet } from "react-helmet-async";
 
 interface FaqItem {
   question: string;
@@ -9,25 +10,30 @@ interface FaqItem {
 
 const faqData: FaqItem[] = [
   {
-    question: "Comment et quand le \"Permis du Père Noël\" est-il envoyé ?",
-    answer: "La livraison est magique et instantanée ! Dès que tu as validé la commande, le permis officiel de ton enfant est généré au format numérique haute qualité et t'est envoyé directement par e-mail en quelques minutes. Tu peux ainsi l'imprimer tranquillement chez toi ou le glisser sous le sapin."
+    question: 'Comment et quand le "Permis du Père Noël" est-il envoyé ?',
+    answer:
+      "La livraison est magique et instantanée ! Dès que tu as validé la commande, le permis officiel de ton enfant est généré au format numérique haute qualité et t'est envoyé directement par e-mail en quelques minutes. Tu peux ainsi l'imprimer tranquillement chez toi ou le glisser sous le sapin.",
   },
   {
     question: "À quoi ressemble le permis et que contient-il ?",
-    answer: "C'est un document officiel certifié par le Pôle Nord. Il comporte le prénom de l'enfant, sa photo (si ajoutée), sa classe de comportement (avec un super score pour les efforts de l'année !) et la signature officielle du Père Noël, le tout aux couleurs de notre thématique Deep Night Blue et Or."
+    answer:
+      "C'est un document officiel certifié par le Pôle Nord. Il comporte le prénom de l'enfant, sa photo (si ajoutée), sa classe de comportement (avec un super score pour les efforts de l'année !) et la signature officielle du Père Noël, le tout aux couleurs de notre thématique Deep Night Blue et Or.",
   },
   {
     question: "Est-ce que le paiement est 100% sécurisé ?",
-    answer: "Absolument. Toutes les transactions bancaires sont entièrement cryptées et sécurisées via nos partenaires de paiement de confiance. Aucune donnée sensible de carte bancaire n'est stockée sur nos serveurs."
+    answer:
+      "Absolument. Toutes les transactions bancaires sont entièrement cryptées et sécurisées via nos partenaires de paiement de confiance. Aucune donnée sensible de carte bancaire n'est stockée sur nos serveurs.",
   },
   {
     question: "Que fait-on des données de mes enfants ?",
-    answer: "La confidentialité est notre priorité absolue (secret du Pôle Nord garanti). Les informations saisies (prénom, photo) servent uniquement à générer le permis de ton enfant et ne sont ni revendues, ni utilisées à des fins commerciales."
+    answer:
+      "La confidentialité est notre priorité absolue (secret du Pôle Nord garanti). Les informations saisies (prénom, photo) servent uniquement à générer le permis de ton enfant et ne sont ni revendues, ni utilisées à des fins commerciales.",
   },
   {
     question: "Puis-je commander le permis un 24 décembre au soir ?",
-    answer: "Oui ! C'est l'avantage du format numérique instantané. Même à la dernière minute, les lutins de la Fabrique Magique travaillent d'arrache-pied 24h/24 pour que les retardataires trouvent leur permis à temps sous le sapin."
-  }
+    answer:
+      "Oui ! C'est l'avantage du format numérique instantané. Même à la dernière minute, les lutins de la Fabrique Magique travaillent d'arrache-pied 24h/24 pour que les retardataires trouvent leur permis à temps sous le sapin.",
+  },
 ];
 
 export const FAQ: React.FC = () => {
@@ -39,6 +45,22 @@ export const FAQ: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-indigo-950 text-slate-100 flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
+      <Helmet>
+        <title>Foire Aux Questions - Le Permis du Père Noël</title>
+        <meta
+          name="description"
+          content="Toutes les réponses à vos questions sur la livraison instantanée par e-mail, la sécurité des paiements et la personnalisation du permis de votre enfant."
+        />
+        <meta
+          property="og:title"
+          content="FAQ - Tout savoir sur le Permis du Père Noël"
+        />
+        <meta
+          property="og:description"
+          content="Comment ça marche ? Est-ce sécurisé ? Réponses de nos lutins en chef."
+        />
+      </Helmet>
+
       <Navbar />
 
       <main className="py-16 px-6 max-w-4xl mx-auto relative z-10 grow">
@@ -51,7 +73,8 @@ export const FAQ: React.FC = () => {
             Foire Aux Questions
           </h1>
           <p className="text-sm text-indigo-200/90 font-medium">
-            Les réponses à toutes vos interrogations pour préparer un Noël inoubliable.
+            Les réponses à toutes vos interrogations pour préparer un Noël
+            inoubliable.
           </p>
         </div>
 
@@ -60,7 +83,7 @@ export const FAQ: React.FC = () => {
           {faqData.map((item, index) => {
             const isOpen = openIndex === index;
             return (
-              <div 
+              <div
                 key={index}
                 className="bg-indigo-900/60 backdrop-blur-md border border-amber-400/20 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:border-amber-400/40"
               >
@@ -71,7 +94,9 @@ export const FAQ: React.FC = () => {
                   <span className="font-bold text-amber-100 text-sm md:text-base flex items-center gap-2">
                     <span className="text-amber-400">🎄</span> {item.question}
                   </span>
-                  <span className={`transform transition-transform duration-300 text-amber-400 font-bold text-lg ${isOpen ? 'rotate-180' : ''}`}>
+                  <span
+                    className={`transform transition-transform duration-300 text-amber-400 font-bold text-lg ${isOpen ? "rotate-180" : ""}`}
+                  >
                     ▼
                   </span>
                 </button>

@@ -7,6 +7,7 @@ import { Footer } from "../components/Footer";
 import { PermitPreview } from "../components/PermitPreview";
 import { PassportPreview } from "../components/PassportPreview";
 import { DiplomaPreview } from "../components/DiplomaPreview";
+import { Helmet } from "react-helmet-async";
 
 export function Home() {
   const [customerEmail, setCustomerEmail] = useState("");
@@ -33,7 +34,7 @@ export function Home() {
     e.preventDefault();
     if (!customerEmail) {
       setErrorMessage(
-        "Veuillez entrer une adresse e-mail valide pour recevoir vos documents."
+        "Veuillez entrer une adresse e-mail valide pour recevoir vos documents.",
       );
       return;
     }
@@ -57,7 +58,7 @@ export function Home() {
     } catch (error) {
       console.error(error);
       setErrorMessage(
-        "Une erreur est survenue lors de la communication avec le Pôle Nord. Réessayez !"
+        "Une erreur est survenue lors de la communication avec le Pôle Nord. Réessayez !",
       );
       setIsLoading(false);
     }
@@ -108,14 +109,53 @@ export function Home() {
 
   return (
     <div className="min-h-screen bg-linear-to-b from-indigo-950 via-slate-900 to-blue-950 text-amber-50 flex flex-col justify-between relative overflow-x-hidden font-sans">
+      <Helmet>
+        <title>
+          Le Permis du Père Noël 2026 - Pack Magique 3-en-1 (Permis, Passeport,
+          Diplôme)
+        </title>
+        <meta
+          name="description"
+          content="Commandez en 2 minutes le pack officiel du Pôle Nord : Permis de traîneau, Passeport des lutins et Diplôme d'enfant sage personnalisé pour seulement 1,99 €."
+        />
+        <meta
+          name="keywords"
+          content="permis du père noël, diplôme enfant sage, lettre père noël, cadeau noël numérique, pôle nord"
+        />
+
+        {/* Open Graph / Réseaux Sociaux */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Le Permis du Père Noël - Pack Magique 3-en-1"
+        />
+        <meta
+          property="og:description"
+          content="Faites briller les yeux de votre enfant avec des documents officiels personnalisés du Pôle Nord en format PDF instantané !"
+        />
+        <meta property="og:url" content="https://permisduperenoel.fr/" />
+
+        {/* Balises Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Le Permis du Père Noël 2026" />
+        <meta
+          name="twitter:description"
+          content="Créez un souvenir inoubliable sous le sapin pour 1,99 € !"
+        />
+      </Helmet>
+
       <Navbar />
 
       <main className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center px-4 py-8 relative z-10 my-auto">
-        
         {/* BANNIÈRE NOUVEAUTÉ : Grand Diplôme Paysage */}
         <div className="w-full max-w-3xl mb-6 bg-linear-to-r from-amber-500/20 via-yellow-500/30 to-amber-500/20 border border-amber-400/50 rounded-2xl p-3 text-center shadow-lg backdrop-blur-md animate-pulse">
           <p className="text-xs md:text-sm font-bold text-amber-200 flex items-center justify-center gap-2">
-            <span>📜✨</span> NOUVEAU : Votre Diplôme de l'Enfant Sage est désormais disponible en <span className="text-white underline">Format Paysage A4 Grand Luxe</span> !
+            <span>📜✨</span> NOUVEAU : Votre Diplôme de l'Enfant Sage est
+            désormais disponible en{" "}
+            <span className="text-white underline">
+              Format Paysage A4 Grand Luxe
+            </span>{" "}
+            !
           </p>
         </div>
 
@@ -128,8 +168,8 @@ export function Home() {
           </h1>
           <p className="text-amber-100/80 text-xs md:text-sm font-medium max-w-lg mx-auto">
             Personnalisez une seule fois les infos pour générer le Permis, le
-            Passeport et le magnifique Diplôme Paysage de votre enfant pour seulement
-            1,99 €.
+            Passeport et le magnifique Diplôme Paysage de votre enfant pour
+            seulement 1,99 €.
           </p>
         </header>
 
@@ -137,23 +177,33 @@ export function Home() {
         <div className="w-full max-w-5xl mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-indigo-900/40 border border-amber-400/30 rounded-2xl p-4 shadow-md">
             <div className="text-xl mb-1">🎅</div>
-            <h3 className="text-xs font-bold text-amber-300 uppercase">La tradition du Pôle Nord</h3>
+            <h3 className="text-xs font-bold text-amber-300 uppercase">
+              La tradition du Pôle Nord
+            </h3>
             <p className="text-[11px] text-amber-100/70 mt-1">
-              Glissez le diplôme sous le sapin le 25 au matin pour émerveiller votre enfant en lui prouvant qu'il est inscrit sur le Grand Registre d'Or !
+              Glissez le diplôme sous le sapin le 25 au matin pour émerveiller
+              votre enfant en lui prouvant qu'il est inscrit sur le Grand
+              Registre d'Or !
             </p>
           </div>
           <div className="bg-indigo-900/40 border border-amber-400/30 rounded-2xl p-4 shadow-md">
             <div className="text-xl mb-1">🎁</div>
-            <h3 className="text-xs font-bold text-amber-300 uppercase">Prêt à afficher</h3>
+            <h3 className="text-xs font-bold text-amber-300 uppercase">
+              Prêt à afficher
+            </h3>
             <p className="text-[11px] text-amber-100/70 mt-1">
-              Le nouveau format paysage A4 est idéal à encadrer dans la chambre pour garder un souvenir impérissable de cette année magique.
+              Le nouveau format paysage A4 est idéal à encadrer dans la chambre
+              pour garder un souvenir impérissable de cette année magique.
             </p>
           </div>
           <div className="bg-indigo-900/40 border border-amber-400/30 rounded-2xl p-4 shadow-md">
             <div className="text-xl mb-1">⭐</div>
-            <h3 className="text-xs font-bold text-amber-300 uppercase">Contrôle des Lutins</h3>
+            <h3 className="text-xs font-bold text-amber-300 uppercase">
+              Contrôle des Lutins
+            </h3>
             <p className="text-[11px] text-amber-100/70 mt-1">
-              Rangement des jouets, vitesse de coucher... Les scores validés par les lutins garantissent un passage prioritaire du traîneau !
+              Rangement des jouets, vitesse de coucher... Les scores validés par
+              les lutins garantissent un passage prioritaire du traîneau !
             </p>
           </div>
         </div>
