@@ -13,6 +13,7 @@ import Contact from './pages/legal/Contact';
 import { FAQ } from './pages/FAQ';
 import ArticleView from './pages/ArticleView';
 import BlogIndex from './pages/blog/BlogIndex';
+import ChristmasGame from './components/ChristmasGame';
 
 export default function App() {
   return (
@@ -40,6 +41,9 @@ export default function App() {
           {/* Routes pour le blog */}
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/:slug" element={<ArticleView />} />
+
+          {/* Route pour le jeu de Noël */}
+          <Route path="/jeu" element={<ChristmasGame />} />
 
         </Routes>
       </BrowserRouter>

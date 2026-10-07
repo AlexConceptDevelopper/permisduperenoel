@@ -67,6 +67,14 @@ export const Navbar: React.FC = () => {
             <span>📖</span> Blog
           </Link>
 
+          {/* Lien Mini-Jeu */}
+          <Link
+            to="/jeu"
+            className="text-xs font-semibold text-amber-200/80 hover:text-amber-300 transition-colors bg-indigo-900/50 border border-amber-400/20 px-3 py-1.5 rounded-xl flex items-center gap-1"
+          >
+            <span>🎮</span> Jeu
+          </Link>
+
           {/* Lien Aide */}
           <Link
             to="/faq"
