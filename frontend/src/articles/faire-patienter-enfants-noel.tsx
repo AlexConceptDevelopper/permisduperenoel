@@ -1,55 +1,74 @@
-export const metadata = {
-  slug: "comment-faire-patienter-enfants-noel",
-  title: "Comment faire patienter les enfants avant Noël ? Nos astuces magiques",
-  description: "Le mois de décembre est long pour les petits. Découvrez nos conseils pour canaliser l'impatience et faire monter la magie jusqu'au 25 décembre.",
-  date: "7 octobre 2026",
-  image: "/images/blog/impatiente-noel.jpg" 
-};
+import { useParams, Navigate, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { Navbar } from '../components/Navbar'; // Ajuste le chemin si besoin
+import { Footer } from '../components/Footer'; // Ajuste le chemin si besoin
 
-export default function ArticleContent() {
+const modules = import.meta.glob<{ metadata: any; default: React.ComponentType }>('../articles/*.tsx', { eager: true });
+
+export default function ArticleView() {
+  const { slug } = useParams();
+
+  const matchedModule = Object.values(modules).find((mod) => mod.metadata.slug === slug);
+
+  if (!matchedModule) {
+    return <Navigate to="/blog" replace />;
+  }
+
+  const { metadata, default: ContentComponent } = matchedModule;
+
   return (
-    <>
-      <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-        Pour les enfants, le mois de décembre ressemble à une éternité. Entre les vitrines illuminées, 
-        la lettre au Père Noël et les préparatifs, l'impatience monte de jour en jour. Les journées 
-        semblent parfois interminables à l'approche du 25 décembre. Voici quelques astuces magiques 
-        pour canaliser cette énergie et transformer l'attente en un merveilleux compte à rebours.
-      </p>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between relative overflow-hidden">
+      {/* Petits effets lumineux de fond */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">1. Installez un rituel quotidien du soir</h2>
-      <p className="text-gray-700 mb-4 leading-relaxed">
-        Rien ne vaut un moment rituel pour rythmer les journées des plus jeunes. Chaque soir, au moment 
-        du coucher, prenez un instant pour ouvrir la case du calendrier de l'Avent, lire une histoire 
-        de Noël ou discuter des bonnes actions de la journée. Cela structure le temps et aide l'enfant 
-        à réaliser que le grand jour approche doucement.
-      </p>
+      <Helmet>
+        <title>{metadata.title} - La Fabrique Magique</title>
+        <meta name="description" content={metadata.description} />
+        <meta property="og:title" content={metadata.title} />
+        <meta property="og:description" content={metadata.description} />
+        {metadata.image && <meta property="og:image" content={metadata.image} />}
+      </Helmet>
 
-      <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">2. Maintenez le mystère avec des indices du Pôle Nord</h2>
-      <p className="text-gray-700 mb-4 leading-relaxed">
-        Pour faire patienter les plus sceptiques ou renforcer la magie chez les plus petits, faites vivre 
-        les préparatifs du Pôle Nord à la maison. Par exemple, recevoir un <a href="/" className="text-indigo-600 font-semibold hover:underline">permis de traîneau officiel du Père Noël</a> ou un diplôme d'enfant sage en cours de mois est une preuve irréfutable que les lutins veillent déjà au grain ! C'est un excellent moyen de les encourager à rester sages jusqu'au bout.
-      </p>
+      {/* Navbar en haut */}
+      <Navbar />
 
-      <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">3. Impliquez-les dans les préparatifs de la maison</h2>
-      <p className="text-gray-700 mb-4 leading-relaxed">
-        Rien n'occupe mieux un enfant que de se sentir utile. Confiez-lui la mise en place de la décoration 
-        du sapin, la fabrication de sablés de Noël ou la confection d'un petit mot pour les rennes. 
-        En se sentant acteurs de la fête, l'attente devient un jeu de construction plutôt qu'une longue souffrance.
-      </p>
+      {/* Contenu de l'article */}
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-12 relative z-10 w-full flex-grow">
+        {/* Fil d'Ariane / Retour au blog */}
+        <div className="mb-8">
+          <Link 
+            to="/blog" 
+            className="inline-flex items-center text-xs font-semibold text-amber-400 hover:text-amber-300 transition-colors bg-indigo-950/60 border border-amber-400/20 px-3 py-1.5 rounded-xl"
+          >
+            &larr; Retour au Blog Magique
+          </Link>
+        </div>
 
-      {/* Encadré d'appel à l'action (CTA) vers ton app */}
-      <div className="bg-indigo-50 border-2 border-indigo-200 rounded-2xl p-6 my-8 text-center">
-        <h3 className="text-xl font-bold text-indigo-900 mb-2">✨ Envie d'ajouter une surprise magique ?</h3>
-        <p className="text-indigo-700 text-sm mb-4">
-          Faites briller leurs yeux avant l'heure en créant leur propre permis officiel du Père Noël personnalisé en quelques clics.
-        </p>
-        <a 
-          href="/" 
-          className="inline-block bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-6 py-3 rounded-xl shadow-md transition-all"
-        >
-          Créer un permis magique &rarr;
-        </a>
-      </div>
-    </>
+        <article className="bg-indigo-950/40 backdrop-blur-md rounded-3xl p-6 sm:p-10 border border-amber-400/20 shadow-2xl">
+          <div className="flex items-center gap-2 text-xs font-semibold text-amber-400 mb-3">
+            <span>✨</span> {metadata.date}
+          </div>
+
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-100 mb-6 tracking-tight leading-tight">
+            {metadata.title}
+          </h1>
+
+          {metadata.image && (
+            <div className="rounded-2xl overflow-hidden mb-8 border border-amber-400/20 shadow-lg h-64 sm:h-96">
+              <img src={metadata.image} alt={metadata.title} className="w-full h-full object-cover" />
+            </div>
+          )}
+
+          {/* Corps de l'article avec un style lisible */}
+          <div className="text-slate-300 space-y-4 leading-relaxed text-base sm:text-lg">
+            <ContentComponent />
+          </div>
+        </article>
+      </main>
+
+      {/* Footer en bas */}
+      <Footer />
+    </div>
   );
 }
