@@ -42,14 +42,14 @@ export default function BlogIndex() {
               className="bg-indigo-950/60 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden border border-amber-400/20 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:border-amber-400/50 hover:shadow-2xl group"
             >
               {art.image && (
-                <div className="relative h-48 overflow-hidden">
+                <Link to={`/blog/${art.slug}`} className="relative h-48 overflow-hidden block">
                   <img 
                     src={art.image} 
                     alt={art.title} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-indigo-950 via-transparent to-transparent opacity-80"></div>
-                </div>
+                </Link>
               )}
 
               <div className="p-6 flex flex-col grow">
