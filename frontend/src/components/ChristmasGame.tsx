@@ -10,7 +10,7 @@ interface Gift {
   emoji: string;
 }
 
-const GIFT_EMOJIS = ['🎁', '⭐', '🎄', '🍪', '🦌', '🔔'];
+const GIFT_EMOJIS = ['🎁', '⭐', '🎄', '🍪', '🦌', '🔔', '✨', '🧸'];
 
 export default function ChristmasGame() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -19,7 +19,7 @@ export default function ChristmasGame() {
   const [gifts, setGifts] = useState<Gift[]>([]);
   const [highScore, setHighScore] = useState(0);
 
-  // Gestion du compte à rebours
+  // Chrono précis d'exactement 1 seconde par tic
   useEffect(() => {
     let timer: number;
     if (isPlaying && timeLeft > 0) {
@@ -28,6 +28,7 @@ export default function ChristmasGame() {
       }, 1000);
     } else if (timeLeft === 0 && isPlaying) {
       setIsPlaying(false);
+      setGifts([]);
       if (score > highScore) {
         setHighScore(score);
       }
@@ -35,19 +36,19 @@ export default function ChristmasGame() {
     return () => clearInterval(timer);
   }, [isPlaying, timeLeft, score, highScore]);
 
-  // Apparition aléatoire des cadeaux pendant que l'on joue
+  // Apparition des cadeaux (toutes les 600ms pour que ça bouge bien)
   useEffect(() => {
     let spawner: number;
     if (isPlaying) {
       spawner = window.setInterval(() => {
         const newGift: Gift = {
-          id: Date.now(),
-          x: Math.floor(Math.random() * 80) + 10,
-          y: Math.floor(Math.random() * 70) + 15,
+          id: Date.now() + Math.random(),
+          x: Math.floor(Math.random() * 75) + 10, // Évite les bords extrêmes
+          y: Math.floor(Math.random() * 65) + 20,
           emoji: GIFT_EMOJIS[Math.floor(Math.random() * GIFT_EMOJIS.length)],
         };
-        setGifts((prev) => [...prev.slice(-5), newGift]);
-      }, 800);
+        setGifts((prev) => [...prev.slice(-4), newGift]); // Max 5 cadeaux en même temps à l'écran
+      }, 600);
     } else {
       setGifts([]);
     }
@@ -57,6 +58,7 @@ export default function ChristmasGame() {
   const startGame = () => {
     setScore(0);
     setTimeLeft(15);
+    setGifts([]);
     setIsPlaying(true);
   };
 
@@ -74,7 +76,7 @@ export default function ChristmasGame() {
 
       <Helmet>
         <title>Le Mini-Jeu des Lutins - La Fabrique Magique</title>
-        <meta name="description" content="Attrape le maximum de cadeaux avant la fin du temps imparti et aide les lutins du Père Noël !" />
+        <meta name="description" content="Attrape le maximum de cadeaux avant la fin du temps imparti !" />
       </Helmet>
 
       <Navbar />
@@ -98,10 +100,10 @@ export default function ChristmasGame() {
           {/* Header du jeu (Score / Chrono) */}
           {isPlaying && (
             <div className="absolute top-4 left-6 right-6 flex justify-between items-center text-sm sm:text-base font-bold text-amber-300 z-20 pointer-events-none">
-              <span className="bg-indigo-900/80 px-4 py-1.5 rounded-xl border border-amber-400/20">
+              <span className="bg-indigo-900/80 px-4 py-1.5 rounded-xl border border-amber-400/20 shadow-md">
                 ⭐ Score : {score}
               </span>
-              <span className="bg-indigo-900/80 px-4 py-1.5 rounded-xl border border-amber-400/20">
+              <span className="bg-indigo-900/80 px-4 py-1.5 rounded-xl border border-amber-400/20 shadow-md">
                 ⏳ Temps : {timeLeft}s
               </span>
             </div>
@@ -111,7 +113,7 @@ export default function ChristmasGame() {
           {!isPlaying && (
             <div className="text-center z-20">
               {timeLeft === 0 ? (
-                <div className="mb-6">
+                <div className="mb-6 animate-fade-in">
                   <h3 className="text-2xl font-bold text-amber-300 mb-1">🎉 Fin de la partie !</h3>
                   <p className="text-slate-200 text-lg">Tu as attrapé <strong className="text-amber-400">{score}</strong> trésors !</p>
                   {highScore > 0 && <p className="text-xs text-slate-400 mt-1">Meilleur score : {highScore}</p>}
@@ -138,7 +140,7 @@ export default function ChristmasGame() {
                 key={gift.id}
                 onClick={() => handleCatchGift(gift.id)}
                 style={{ top: `${gift.y}%`, left: `${gift.x}%` }}
-                className="absolute text-4xl sm:text-5xl transition-transform hover:scale-125 active:scale-95 cursor-pointer select-none"
+                className="absolute text-4xl sm:text-5xl transition-transform hover:scale-125 active:scale-95 cursor-pointer select-none drop-shadow-lg"
               >
                 {gift.emoji}
               </button>
