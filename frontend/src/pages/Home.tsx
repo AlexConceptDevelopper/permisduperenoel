@@ -431,7 +431,7 @@ export function Home() {
                 </button>
               </div>
 
-              <div className="w-full relative flex flex-col justify-center items-center p-4 sm:p-6 bg-linear-to-b from-slate-950/80 to-indigo-950/90 border-2 border-amber-400/50 rounded-2xl shadow-[inset_0_2px_15px_rgba(0,0,0,0.8)] overflow-hidden min-h-[320px] sm:min-h-90">
+              <div className="w-full relative flex flex-col justify-center items-center p-4 sm:p-6 bg-linear-to-b from-slate-950/80 to-indigo-950/90 border-2 border-amber-400/50 rounded-2xl shadow-[inset_0_2px_15px_rgba(0,0,0,0.8)] overflow-hidden min-h-80 sm:min-h-90">
                 <div className="relative z-10 w-full flex justify-center transform scale-90 sm:scale-100 md:scale-110 transition-transform duration-300 my-2">
                   {activePreview === "permit" && (
                     <PermitPreview data={formData} />
