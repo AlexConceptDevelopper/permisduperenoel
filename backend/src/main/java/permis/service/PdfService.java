@@ -56,20 +56,25 @@ public class PdfService {
         String serial = escapeXml((data != null && data.getSerialNumber() != null) ? data.getSerialNumber()
                 : "PN-2026-9482-" + name.toUpperCase());
 
-        String rawSantaLetter = (data != null && data.getSantaLetter() != null && !data.getSantaLetter().isEmpty())
+        // Reconstruction de la lettre riche et personnalisée si santaLetter est absente ou courte
+        String rawSantaLetter = (data != null && data.getSantaLetter() != null && data.getSantaLetter().trim().length() > 30)
                 ? data.getSantaLetter()
-                : "Mon cher " + name + ",\n\nLes lutins m'ont rapporté tes formidables exploits cette année à " + city + " ! "
-                + "Tu as fait de super progrès et je suis très fier de toi. Prépare-toi pour une nuit magique sous le sapin !";
+                : "Mon cher " + name + ",\n\n"
+                + "Les lutins m'ont rapporté une merveilleuse nouvelle depuis " + city + " ! "
+                + "Cette année, tu as accompli un véritable exploit : \"" + mention + "\". Toute l'équipe du Pôle Nord en reste admirative !\n\n"
+                + "Sache que ton nom est désormais inscrit en lettres d'or sur notre Grand Registre des Enfants Sages.\n\n"
+                + "Passe de joyeuses fêtes, continue d'émerveiller tes proches et prépare-toi pour la nuit magique de Noël !";
 
-        // Nettoyage des doublons de signature si présents dans le texte brut
+        // Nettoyage des doublons de signature si présents dans le texte
         rawSantaLetter = rawSantaLetter
                 .replaceAll("(?i)Avec toute mon affection,?\\s*Le Père Noël\\s*🎅?", "")
                 .replaceAll("(?i)Le Père Noël\\s*🎅?", "")
+                .replaceAll("(?i)Santa Claus\\s*🎅?", "")
                 .trim();
 
         String santaLetter = escapeXml(rawSantaLetter);
 
-        // Récupération et conversion automatique de l'avatar en Base64 pour le PDF
+        // Récupération de l'avatar de l'enfant
         String rawAvatarUrl = (data != null && data.getAvatarUrl() != null && !data.getAvatarUrl().isEmpty())
                 ? data.getAvatarUrl()
                 : "";
@@ -84,11 +89,14 @@ public class PdfService {
             ? "<div style=\"color: #cbd5e1; font-size: 11px; font-weight: bold; text-align: center; font-family: sans-serif;\">📸<br>Photo</div>"
             : "<img src=\"" + avatarUrl + "\" class=\"avatar-img\" />";
 
-        // Récupération optionnelle du Logo et du Favicon en Base64 pour les intégrer proprement dans le PDF Playwright
-        String logoBase64 = resolveLocalAssetToBase64("./public/Logo.png");
-        String stampBase64 = resolveLocalAssetToBase64("./public/favicon-transparent.png");
+        // Chargement robuste des assets pour Railway (Classpath Spring + Fallback)
+        String logoBase64 = resolveLocalAssetToBase64("Logo.png");
+        if (logoBase64.isEmpty()) logoBase64 = resolveLocalAssetToBase64("logo.png");
 
-        String logoImgTag = logoBase64.isEmpty() ? "" : "<img src=\"" + logoBase64 + "\" style=\"max-height: 75px; margin-bottom: 12px;\" />";
+        String stampBase64 = resolveLocalAssetToBase64("favicon-transparent.png");
+        if (stampBase64.isEmpty()) stampBase64 = resolveLocalAssetToBase64("favicon.png");
+
+        String logoImgTag = logoBase64.isEmpty() ? "" : "<img src=\"" + logoBase64 + "\" style=\"max-height: 75px; margin-bottom: 10px;\" />";
         String stampImgTag = stampBase64.isEmpty() ? "" : "<img src=\"" + stampBase64 + "\" style=\"width: 38px; height: 38px; object-fit: contain;\" />";
 
         String htmlContent = """
@@ -108,7 +116,6 @@ public class PdfService {
                         color: #ffffff; 
                     }
 
-                    /* Pages Portrait (Permis, Passeports & Lettre) */
                     .page-portrait {
                         width: 210mm;
                         height: 297mm;
@@ -123,7 +130,6 @@ public class PdfService {
                         justify-content: center;
                     }
 
-                    /* Pages Paysage (Diplômes grand format A4) */
                     .page-landscape {
                         width: 297mm;
                         height: 210mm;
@@ -138,7 +144,6 @@ public class PdfService {
                         justify-content: center;
                     }
 
-                    /* --- CARTES PORTRAIT AVEC DÉGRADÉS --- */
                     .card-permit {
                         background: linear-gradient(135deg, #781214 0%%, #450a0a 100%%);
                         border: 3px solid #d4af37;
@@ -166,13 +171,13 @@ public class PdfService {
                         justify-content: center;
                     }
 
-                    /* --- LETTRE DU PÈRE NOËL (A4 Portrait Crème / Prestige) --- */
+                    /* --- LETTRE DU PÈRE NOËL (A4 Portrait Crème Prestige) --- */
                     .card-letter-portrait {
                         background: linear-gradient(135deg, #fffbeb 0%%, #fef3c7 50%%, #fde68a 100%%);
                         color: #451a03;
                         border: 5px solid #d4af37;
                         border-radius: 25px;
-                        padding: 40px 50px;
+                        padding: 40px 45px;
                         width: 175mm;
                         height: 255mm;
                         box-sizing: border-box;
@@ -184,14 +189,15 @@ public class PdfService {
                     }
                     .letter-content {
                         font-size: 14px;
-                        line-height: 1.8;
+                        line-height: 1.85;
                         color: #78350f;
                         white-space: pre-line;
-                        margin: 10px 0;
+                        margin: 20px 0;
                         text-align: left;
+                        word-spacing: normal;
+                        letter-spacing: normal;
                     }
 
-                    /* --- DIPLÔME PAYSAGE (Grand format avec dégradé crème/ambre) --- */
                     .card-diploma-landscape {
                         background: linear-gradient(135deg, #fffbeb 0%%, #fef3c7 50%%, #fde68a 100%%);
                         color: #451a03;
@@ -399,12 +405,12 @@ public class PdfService {
                         </div>
                     </div></div>
 
-                    <!-- PAGE 7 : LETTRE DU PÈRE NOËL (Portrait Prestige avec Logo & Sceau) -->
+                    <!-- PAGE 7 : LETTRE DU PÈRE NOËL (Portrait Prestige avec En-tête & Sceau) -->
                     <div class="page-portrait"><div class="card-letter-portrait">
                         <div style="text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 15px; margin-bottom: 15px;">
                             %s
-                            <div style="font-size: 10px; font-family: sans-serif; color: #92400e; text-transform: uppercase; letter-spacing: 2px;">Atelier Central du Pôle Nord</div>
-                            <div style="font-size: 20px; font-weight: bold; color: #b91c1c; text-transform: uppercase; margin-top: 4px;">Lettre Officielle du Père Noël</div>
+                            <div style="font-size: 11px; font-family: sans-serif; color: #92400e; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;">Atelier Central du Pôle Nord</div>
+                            <div style="font-size: 22px; font-weight: bold; color: #b91c1c; text-transform: uppercase; margin-top: 4px; letter-spacing: 1px;">Lettre Officielle du Père Noël</div>
                         </div>
 
                         <div class="letter-content">
@@ -413,8 +419,8 @@ public class PdfService {
 
                         <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px dashed #d4af37; padding-top: 20px; margin-top: 15px;">
                             <div>
-                                <div style="font-size: 13px; font-weight: bold; color: #78350f;">Avec toute mon affection,</div>
-                                <div style="font-family: 'Brush Script MT', cursive, serif; font-size: 32px; color: #b91c1c; margin-top: 2px;">Santa Claus</div>
+                                <div style="font-size: 14px; font-weight: bold; color: #78350f;">Avec toute mon affection,</div>
+                                <div style="font-family: 'Brush Script MT', cursive, serif; font-size: 34px; color: #b91c1c; margin-top: 2px;">Santa Claus</div>
                             </div>
                             <div style="display: flex; align-items: center; gap: 8px; text-align: right;">
                                 %s
@@ -504,7 +510,11 @@ public class PdfService {
 
     private String resolveLocalAssetToBase64(String fileName) {
         try {
-            java.io.InputStream is = getClass().getResourceAsStream("/static/" + fileName);
+            String pathStr = fileName.startsWith("/") ? fileName : "/static/" + fileName;
+            InputStream is = getClass().getResourceAsStream(pathStr);
+            if (is == null) {
+                is = getClass().getClassLoader().getResourceAsStream("static/" + fileName);
+            }
             if (is != null) {
                 byte[] bytes = is.readAllBytes();
                 String mimeType = fileName.toLowerCase().endsWith(".png") ? "image/png" : "image/jpeg";
