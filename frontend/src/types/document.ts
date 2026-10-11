@@ -8,6 +8,7 @@ export interface DocumentData {
   bedtimeSpeed: 'Rapide' | 'Moyen' | 'Discutable';
   serialNumber: string;
   backMessage: string;
+  santaLetter?: string;
 }
 
 export interface CreateOrderRequest {

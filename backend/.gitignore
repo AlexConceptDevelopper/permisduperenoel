@@ -6,6 +6,7 @@ target/
 
 # Local Dev Properties (TRÈS IMPORTANT pour ne pas le pousser)
 src/main/resources/application-dev.properties
+src/main/resources/application.properties
 
 # IDEs & OS
 .sts4-cache

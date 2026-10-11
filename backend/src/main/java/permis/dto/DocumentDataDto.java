@@ -15,4 +15,5 @@ public class DocumentDataDto {
     private String serialNumber;
     private String backMessage;
     private String avatarUrl;
+    private String santaLetter;
 }

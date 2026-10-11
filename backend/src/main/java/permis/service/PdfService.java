@@ -56,6 +56,19 @@ public class PdfService {
         String serial = escapeXml((data != null && data.getSerialNumber() != null) ? data.getSerialNumber()
                 : "PN-2026-9482-" + name.toUpperCase());
 
+        String rawSantaLetter = (data != null && data.getSantaLetter() != null && !data.getSantaLetter().isEmpty())
+                ? data.getSantaLetter()
+                : "Mon cher " + name + ",\n\nLes lutins m'ont rapporté tes formidables exploits cette année à " + city + " ! "
+                + "Tu as fait de super progrès et je suis très fier de toi. Prépare-toi pour une nuit magique sous le sapin !";
+
+        // Nettoyage des doublons de signature si présents dans le texte brut
+        rawSantaLetter = rawSantaLetter
+                .replaceAll("(?i)Avec toute mon affection,?\\s*Le Père Noël\\s*🎅?", "")
+                .replaceAll("(?i)Le Père Noël\\s*🎅?", "")
+                .trim();
+
+        String santaLetter = escapeXml(rawSantaLetter);
+
         // Récupération et conversion automatique de l'avatar en Base64 pour le PDF
         String rawAvatarUrl = (data != null && data.getAvatarUrl() != null && !data.getAvatarUrl().isEmpty())
                 ? data.getAvatarUrl()
@@ -70,6 +83,13 @@ public class PdfService {
         String avatarContentPassport = avatarUrl.isEmpty() 
             ? "<div style=\"color: #cbd5e1; font-size: 11px; font-weight: bold; text-align: center; font-family: sans-serif;\">📸<br>Photo</div>"
             : "<img src=\"" + avatarUrl + "\" class=\"avatar-img\" />";
+
+        // Récupération optionnelle du Logo et du Favicon en Base64 pour les intégrer proprement dans le PDF Playwright
+        String logoBase64 = resolveLocalAssetToBase64("./public/Logo.png");
+        String stampBase64 = resolveLocalAssetToBase64("./public/favicon-transparent.png");
+
+        String logoImgTag = logoBase64.isEmpty() ? "" : "<img src=\"" + logoBase64 + "\" style=\"max-height: 75px; margin-bottom: 12px;\" />";
+        String stampImgTag = stampBase64.isEmpty() ? "" : "<img src=\"" + stampBase64 + "\" style=\"width: 38px; height: 38px; object-fit: contain;\" />";
 
         String htmlContent = """
                 <!DOCTYPE html>
@@ -88,7 +108,7 @@ public class PdfService {
                         color: #ffffff; 
                     }
 
-                    /* Pages Portrait (Permis & Passeports) */
+                    /* Pages Portrait (Permis, Passeports & Lettre) */
                     .page-portrait {
                         width: 210mm;
                         height: 297mm;
@@ -144,6 +164,31 @@ public class PdfService {
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
+                    }
+
+                    /* --- LETTRE DU PÈRE NOËL (A4 Portrait Crème / Prestige) --- */
+                    .card-letter-portrait {
+                        background: linear-gradient(135deg, #fffbeb 0%%, #fef3c7 50%%, #fde68a 100%%);
+                        color: #451a03;
+                        border: 5px solid #d4af37;
+                        border-radius: 25px;
+                        padding: 40px 50px;
+                        width: 175mm;
+                        height: 255mm;
+                        box-sizing: border-box;
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        font-family: 'Georgia', 'Noto Color Emoji', serif;
+                    }
+                    .letter-content {
+                        font-size: 14px;
+                        line-height: 1.8;
+                        color: #78350f;
+                        white-space: pre-line;
+                        margin: 10px 0;
+                        text-align: left;
                     }
 
                     /* --- DIPLÔME PAYSAGE (Grand format avec dégradé crème/ambre) --- */
@@ -289,7 +334,7 @@ public class PdfService {
                         <div style="display: flex; flex-direction: column; gap: 20px;">
                             <div class="box-desc-blue">« %s »</div>
                             <div style="display: flex; gap: 12px; text-align: center;">
-                                <div style="flex: 1; background-color: #0f172a; border: 1px solid #d4af37; border-radius: 8px; padding: 12px; font-size: 10px; color: #fde047; font-weight: bold;">☁️️ Espace Aérien</div>
+                                <div style="flex: 1; background-color: #0f172a; border: 1px solid #d4af37; border-radius: 8px; padding: 12px; font-size: 10px; color: #fde047; font-weight: bold;">☁ Espace Aérien</div>
                                 <div style="flex: 1; background-color: #0f172a; border: 1px solid #d4af37; border-radius: 8px; padding: 12px; font-size: 10px; color: #fde047; font-weight: bold;">🦌 Escorte Rennes</div>
                                 <div style="flex: 1; background-color: #0f172a; border: 1px solid #d4af37; border-radius: 8px; padding: 12px; font-size: 10px; color: #fde047; font-weight: bold;">🎁 Douane Hotte</div>
                             </div>
@@ -354,6 +399,36 @@ public class PdfService {
                         </div>
                     </div></div>
 
+                    <!-- PAGE 7 : LETTRE DU PÈRE NOËL (Portrait Prestige avec Logo & Sceau) -->
+                    <div class="page-portrait"><div class="card-letter-portrait">
+                        <div style="text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 15px; margin-bottom: 15px;">
+                            %s
+                            <div style="font-size: 10px; font-family: sans-serif; color: #92400e; text-transform: uppercase; letter-spacing: 2px;">Atelier Central du Pôle Nord</div>
+                            <div style="font-size: 20px; font-weight: bold; color: #b91c1c; text-transform: uppercase; margin-top: 4px;">Lettre Officielle du Père Noël</div>
+                        </div>
+
+                        <div class="letter-content">
+                            %s
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px dashed #d4af37; padding-top: 20px; margin-top: 15px;">
+                            <div>
+                                <div style="font-size: 13px; font-weight: bold; color: #78350f;">Avec toute mon affection,</div>
+                                <div style="font-family: 'Brush Script MT', cursive, serif; font-size: 32px; color: #b91c1c; margin-top: 2px;">Santa Claus</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; text-align: right;">
+                                %s
+                                <div style="font-family: sans-serif; font-size: 9px; color: #92400e; font-weight: bold; text-align: left;">
+                                    ✨ Sceau Officiel de l'Atelier<br/>Édition 2026
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 15px; text-align: center; font-family: sans-serif; font-size: 10px; color: #92400e; font-weight: bold; background-color: rgba(212, 175, 55, 0.15); padding: 10px; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.4);">
+                            ✨ Toute l'équipe de <strong>permisduperenoel.fr</strong> vous souhaite de très belles fêtes de fin d'année ! ✨
+                        </div>
+                    </div></div>
+
                 </body>
                 </html>
                 """
@@ -363,7 +438,8 @@ public class PdfService {
                         serial, avatarContentPassport, sage, name, age, city, mention,
                         versoMsg, serial,
                         serial, name, age, city, mention, sage,
-                        versoMsg, serial);
+                        versoMsg, serial,
+                        logoImgTag, santaLetter, stampImgTag);
 
         synchronized (this) {
             try (Page page = browser.newPage()) {
@@ -383,27 +459,20 @@ public class PdfService {
         }
     }
 
-    /**
-     * Gère l'avatar qu'il soit déjà en Base64 (provenant de la base/frontend) ou en URL.
-     */
     private String resolveImageToBase64(String urlStr) {
         if (urlStr == null || urlStr.isEmpty()) {
             return "";
         }
-        // Si l'image est déjà stockée en Base64 dans la base, on la retourne directement !
         if (urlStr.startsWith("data:image")) {
             return urlStr;
         }
         try {
             byte[] imageBytes = null;
-            
-            // Si c'est une URL http(s), on la télécharge
             if (urlStr.startsWith("http://") || urlStr.startsWith("https://")) {
                 try (InputStream in = URI.create(urlStr).toURL().openStream()) {
                     imageBytes = in.readAllBytes();
                 }
             } else {
-                // Sinon on tente un chemin local par sécurité
                 String localPath = urlStr;
                 if (urlStr.contains("/uploads/")) {
                     localPath = "./uploads/" + urlStr.substring(urlStr.indexOf("/uploads/") + 9);
@@ -431,6 +500,20 @@ public class PdfService {
             System.err.println("Erreur conversion image pour le PDF : " + e.getMessage());
             return "";
         }
+    }
+
+    private String resolveLocalAssetToBase64(String fileName) {
+        try {
+            java.io.InputStream is = getClass().getResourceAsStream("/static/" + fileName);
+            if (is != null) {
+                byte[] bytes = is.readAllBytes();
+                String mimeType = fileName.toLowerCase().endsWith(".png") ? "image/png" : "image/jpeg";
+                return "data:" + mimeType + ";base64," + Base64.getEncoder().encodeToString(bytes);
+            }
+        } catch (Exception e) {
+            System.err.println("Impossible de charger l'asset " + fileName + " : " + e.getMessage());
+        }
+        return "";
     }
 
     private String escapeXml(String input) {
