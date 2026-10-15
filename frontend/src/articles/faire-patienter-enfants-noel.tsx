@@ -24,6 +24,23 @@ export default function ArticleContent() {
         à réaliser que le grand jour approche doucement.
       </p>
 
+      {/* --- ENCADRÉ DISCRET ET EFFICACE : LE WISHLISTMAKER --- */}
+      <div className="bg-indigo-950/60 border border-amber-400/30 rounded-2xl p-5 my-8 flex flex-col sm:flex-row items-center justify-between gap-4 backdrop-blur-md shadow-lg">
+        <div className="flex items-center gap-3">
+          <span className="text-3xl">✉️</span>
+          <div>
+            <h4 className="text-sm font-bold text-amber-300">Envie d'écrire la lettre au Père Noël ?</h4>
+            <p className="text-xs text-slate-300">Créez la liste de souhaits interactive et imprimez la lettre magique de votre enfant.</p>
+          </div>
+        </div>
+        <a 
+          href="/liste-noel" 
+          className="shrink-0 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-md"
+        >
+          Rédiger la liste &rarr;
+        </a>
+      </div>
+
       <h2 className="text-2xl font-bold text-slate-100 mt-8 mb-4">2. Maintenez le mystère avec des indices du Pôle Nord</h2>
       <p className="text-slate-300 mb-4 leading-relaxed">
         Pour faire patienter les plus sceptiques ou renforcer la magie chez les plus petits, faites vivre 
@@ -37,7 +54,7 @@ export default function ArticleContent() {
         En se sentant acteurs de la fête, l'attente devient un jeu de construction plutôt qu'une longue souffrance.
       </p>
 
-      {/* Encadré d'appel à l'action (CTA) vers ton app */}
+      {/* Encadré d'appel à l'action (CTA) principal vers ton app (Le Permis) */}
       <div className="bg-indigo-900/40 border border-amber-400/30 rounded-2xl p-6 my-8 text-center backdrop-blur-md">
         <h3 className="text-xl font-bold text-amber-300 mb-2">✨ Envie d'ajouter une surprise magique ?</h3>
         <p className="text-slate-300 text-sm mb-4">
