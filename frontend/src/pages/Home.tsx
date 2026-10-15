@@ -19,6 +19,7 @@ export function Home() {
   const [formData, setFormData] = useState<DocumentData>({
     childName: "Lucas",
     childAge: 7,
+    childGender: "M",
     city: "Bordeaux",
     behaviorNote: "A bien écouté ses parents toute l’année !",
     toyRoomScore: 9,

@@ -8,6 +8,7 @@ import lombok.Setter;
 public class DocumentDataDto {
     private String childName;
     private Integer childAge;
+    private String childGender;
     private String city;
     private String behaviorNote;
     private Integer toyRoomScore;

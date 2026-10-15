@@ -27,6 +27,7 @@ public class OrderMapper {
             
             docData.setChildName(dto.getChildName());
             docData.setChildAge(dto.getChildAge());
+            docData.setChildGender(dto.getChildGender());
             docData.setCity(dto.getCity());
             docData.setBehaviorNote(dto.getBehaviorNote());
             docData.setToyRoomScore(dto.getToyRoomScore());

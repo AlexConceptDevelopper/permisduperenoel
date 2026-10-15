@@ -1,6 +1,7 @@
 export interface DocumentData {
   childName: string;
   childAge: number;
+  childGender?: 'M' | 'F';
   city: string;
   behaviorNote: string;
   avatarUrl?: string;

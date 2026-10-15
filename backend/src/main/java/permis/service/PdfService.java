@@ -44,6 +44,15 @@ public class PdfService {
 
         String name = escapeXml((data != null && data.getChildName() != null) ? data.getChildName() : "Lucas");
         String age = escapeXml((data != null && data.getChildAge() != null) ? String.valueOf(data.getChildAge()) : "7");
+        
+        // --- GESTION DU GENRE ---
+        String gender = (data != null && data.getChildGender() != null) ? data.getChildGender() : "M";
+        boolean isGirl = "F".equalsIgnoreCase(gender) || "FILLE".equalsIgnoreCase(gender) || "FEMININ".equalsIgnoreCase(gender);
+        
+        String cherForm = isGirl ? "Ma chère" : "Mon cher";
+        String inscritForm = isGirl ? "Inscrite" : "Inscrit";
+        // ------------------------
+
         String city = escapeXml((data != null && data.getCity() != null) ? data.getCity() : "Bordeaux");
         String sage = escapeXml(
                 (data != null && data.getToyRoomScore() != null) ? String.valueOf(data.getToyRoomScore()) : "9");
@@ -56,10 +65,10 @@ public class PdfService {
         String serial = escapeXml((data != null && data.getSerialNumber() != null) ? data.getSerialNumber()
                 : "PN-2026-9482-" + name.toUpperCase());
 
-        // Reconstruction de la lettre riche et personnalisée si santaLetter est absente ou courte
+        // Reconstruction de la lettre riche et personnalisée avec le bon accord (cher/chère)
         String rawSantaLetter = (data != null && data.getSantaLetter() != null && data.getSantaLetter().trim().length() > 30)
                 ? data.getSantaLetter()
-                : "Mon cher " + name + ",\n\n"
+                : cherForm + " " + name + ",\n\n"
                 + "Les lutins m'ont rapporté une merveilleuse nouvelle depuis " + city + " ! "
                 + "Cette année, tu as accompli un véritable exploit : \"" + mention + "\". Toute l'équipe du Pôle Nord en reste admirative !\n\n"
                 + "Sache que ton nom est désormais inscrit en lettres d'or sur notre Grand Registre des Enfants Sages.\n\n"
@@ -395,7 +404,7 @@ public class PdfService {
                         <div style="margin: auto 0; padding: 20px 0;">
                             <div class="diploma-box-cream" style="font-size: 18px; padding: 35px;">« %s »</div>
                             <p style="font-size: 13px; font-family: sans-serif, 'Noto Color Emoji'; color: #78350f; font-weight: bold; margin-top: 25px;">
-                                ✨ Inscrit(e) à vie sur le Grand Registre d'Or des Enfants Sages du Pôle Nord. ✨
+                                ✨ %s à vie sur le Grand Registre d'Or des Enfants Sages du Pôle Nord. ✨
                             </p>
                         </div>
 
@@ -444,7 +453,7 @@ public class PdfService {
                         serial, avatarContentPassport, sage, name, age, city, mention,
                         versoMsg, serial,
                         serial, name, age, city, mention, sage,
-                        versoMsg, serial,
+                        versoMsg, inscritForm, serial,
                         logoImgTag, santaLetter, stampImgTag);
 
         synchronized (this) {

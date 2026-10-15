@@ -10,6 +10,7 @@ export const AkinatorQuiz: React.FC<AkinatorQuizProps> = ({ onComplete }) => {
   const [step, setStep] = useState(1);
   const [name, setName] = useState('');
   const [age, setAge] = useState(7);
+  const [gender, setGender] = useState<'M' | 'F'>('M'); // 👈 État pour le genre
   const [city, setCity] = useState('');
   const [adventure, setAdventure] = useState('A survecu aux légumes de la cantine');
   const [talent, setTalent] = useState('Champion du monde de Lego');
@@ -22,8 +23,9 @@ export const AkinatorQuiz: React.FC<AkinatorQuizProps> = ({ onComplete }) => {
     const generatedBehavior = `A brillé cette année en mode : "${adventure}"`;
     const generatedBackMessage = `Le Conseil des Lutins certifie que ${childName}, grâce à son talent secret de "${talent}" à ${childCity}, mérite amplement sa place sur le Grand Registre d'Or !`;
     
-    // Génération automatique de la lettre personnalisée du Père Noël
-    const generatedSantaLetter = `Mon cher ${childName},\n\n`
+    // Génération automatique de la lettre personnalisée du Père Noël avec le bon accord
+    const cherForm = gender === 'F' ? 'Ma chère' : 'Mon cher';
+    const generatedSantaLetter = `${cherForm} ${childName},\n\n`
       + `Les lutins m'ont rapporté une merveilleuse nouvelle depuis ${childCity} ! `
       + `Cette année, tu as accompli un véritable exploit : "${adventure}". Toute l'équipe du Pôle Nord en reste admirative !\n\n`
       + `Sans oublier ton incroyable talent secret de "${talent}" qui fait briller les yeux de tout l'atelier. `
@@ -34,11 +36,12 @@ export const AkinatorQuiz: React.FC<AkinatorQuizProps> = ({ onComplete }) => {
     onComplete({
       childName: childName,
       childAge: childAge,
+      childGender: gender, // 👈 On transmet le genre
       city: childCity,
       behaviorNote: generatedBehavior,
       backMessage: generatedBackMessage,
       santaLetter: generatedSantaLetter,
-      toyRoomScore: 10, // Max pour les super héros de l'enquête !
+      toyRoomScore: 10,
     });
   };
 
@@ -61,6 +64,36 @@ export const AkinatorQuiz: React.FC<AkinatorQuizProps> = ({ onComplete }) => {
                 className="w-full bg-slate-950 border border-amber-400/30 rounded-xl p-2.5 text-xs text-white"
               />
             </div>
+
+            {/* SELECTION DU GENRE */}
+            <div>
+              <label className="block text-[11px] uppercase font-bold text-amber-200 mb-1">Genre</label>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setGender('M')}
+                  className={`py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
+                    gender === 'M' 
+                      ? 'bg-amber-500/20 border-amber-400 text-amber-200' 
+                      : 'bg-slate-950/50 border-amber-400/20 text-slate-400'
+                  }`}
+                >
+                  👦 Garçon
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setGender('F')}
+                  className={`py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
+                    gender === 'F' 
+                      ? 'bg-amber-500/20 border-amber-400 text-amber-200' 
+                      : 'bg-slate-950/50 border-amber-400/20 text-slate-400'
+                  }`}
+                >
+                  👧 Fille
+                </button>
+              </div>
+            </div>
+
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-[11px] uppercase font-bold text-amber-200 mb-1">Âge</label>
@@ -94,6 +127,7 @@ export const AkinatorQuiz: React.FC<AkinatorQuizProps> = ({ onComplete }) => {
         </div>
       )}
 
+      {/* ÉTAPE 2 & 3 (Restent identiques) */}
       {step === 2 && (
         <div className="space-y-4 text-center">
           <span className="text-3xl">🛷🕵️‍♂️</span>

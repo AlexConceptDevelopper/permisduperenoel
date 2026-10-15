@@ -1,14 +1,19 @@
-import { useParams, Navigate, Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { Navbar } from '../components/Navbar';
-import { Footer } from '../components/Footer';
+import { useParams, Navigate, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { Navbar } from "../components/Navbar";
+import { Footer } from "../components/Footer";
 
-const modules = import.meta.glob<{ metadata: any; default: React.ComponentType }>('../articles/*.tsx', { eager: true });
+const modules = import.meta.glob<{
+  metadata: any;
+  default: React.ComponentType;
+}>("../articles/*.tsx", { eager: true });
 
 export default function ArticleView() {
   const { slug } = useParams();
 
-  const matchedModule = Object.values(modules).find((mod) => mod.metadata?.slug === slug);
+  const matchedModule = Object.values(modules).find(
+    (mod) => mod.metadata?.slug === slug,
+  );
 
   if (!matchedModule) {
     return <Navigate to="/blog" replace />;
@@ -27,7 +32,9 @@ export default function ArticleView() {
         <meta name="description" content={metadata.description} />
         <meta property="og:title" content={metadata.title} />
         <meta property="og:description" content={metadata.description} />
-        {metadata.image && <meta property="og:image" content={metadata.image} />}
+        {metadata.image && (
+          <meta property="og:image" content={metadata.image} />
+        )}
       </Helmet>
 
       {/* Navbar en haut */}
@@ -36,8 +43,8 @@ export default function ArticleView() {
       {/* Contenu de l'article */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-12 relative z-10 w-full grow">
         <div className="mb-8">
-          <Link 
-            to="/blog" 
+          <Link
+            to="/blog"
             className="inline-flex items-center text-xs font-semibold text-amber-400 hover:text-amber-300 transition-colors bg-indigo-950/60 border border-amber-400/20 px-3 py-1.5 rounded-xl shadow-md"
           >
             &larr; Retour au Blog Magique
@@ -54,8 +61,12 @@ export default function ArticleView() {
           </h1>
 
           {metadata.image && (
-            <div className="rounded-2xl overflow-hidden mb-8 border border-amber-400/20 shadow-lg h-64 sm:h-96">
-              <img src={metadata.image} alt={metadata.title} className="w-full h-full object-cover" />
+            <div className="rounded-2xl overflow-hidden mb-8 border border-amber-400/20 shadow-lg bg-indigo-950/80 flex items-center justify-center">
+              <img
+                src={metadata.image}
+                alt={metadata.title}
+                className="w-full h-auto max-h-125 object-contain"
+              />
             </div>
           )}
 
