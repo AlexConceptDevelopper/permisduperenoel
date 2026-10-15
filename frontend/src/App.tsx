@@ -14,6 +14,7 @@ import { FAQ } from './pages/FAQ';
 import ArticleView from './pages/ArticleView';
 import BlogIndex from './pages/blog/BlogIndex';
 import ChristmasGame from './components/ChristmasGame';
+import WishlistMaker from './components/WishlistMaker';
 
 export default function App() {
   return (
@@ -44,6 +45,9 @@ export default function App() {
 
           {/* Route pour le jeu de Noël */}
           <Route path="/jeu" element={<ChristmasGame />} />
+
+          {/* Route pour la liste du père Noël */}
+          <Route path="/liste-noel" element={<WishlistMaker />} />
 
         </Routes>
       </BrowserRouter>
