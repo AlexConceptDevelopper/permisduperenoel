@@ -5,6 +5,8 @@ export const Footer: React.FC = () => {
   return (
     <footer className="w-full border-t border-amber-400/20 bg-indigo-950/80 backdrop-blur-md px-6 py-8 mt-16 relative z-20 text-xs text-amber-200/70">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+        
+        {/* LOGO & DÉSIGNATION ÉDITEUR */}
         <div className="flex items-center gap-3 justify-center md:justify-start">
           <img 
             src="/Logo.png" 
@@ -13,9 +15,22 @@ export const Footer: React.FC = () => {
           />
           <div>
             <p className="font-bold text-amber-300">Permis du Père Noël — La Fabrique Magique</p>
-            <p className="text-[10px] mt-0.5 text-amber-200/50">Service officiel certifié par le secrétariat des lutins. Tous droits réservés.</p>
+            <p className="text-[10px] mt-0.5 text-amber-200/50">
+              Service officiel édité par{' '}
+              <a 
+                href="https://www.cubtaik.fr" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-amber-300 hover:underline font-semibold transition-colors"
+              >
+                CubTaik
+              </a>
+              . Tous droits réservés.
+            </p>
           </div>
         </div>
+
+        {/* NAVIGATION D'ACCOMPAGNEMENT */}
         <div className="flex flex-wrap justify-center gap-6 font-medium text-[11px]">
           <Link to="/mentions-legales" className="hover:text-amber-300 transition-colors">
             Mentions Légales
@@ -30,6 +45,7 @@ export const Footer: React.FC = () => {
             Contact
           </Link>
         </div>
+
       </div>
     </footer>
   );
