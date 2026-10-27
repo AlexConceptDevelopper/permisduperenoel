@@ -13,8 +13,8 @@ import Contact from './pages/legal/Contact';
 import { FAQ } from './pages/FAQ';
 import ArticleView from './pages/ArticleView';
 import BlogIndex from './pages/blog/BlogIndex';
-import ChristmasGame from './components/ChristmasGame';
 import WishlistMaker from './components/WishlistMaker';
+import ArcadePage from './pages/ArcadePage';
 
 export default function App() {
   return (
@@ -44,7 +44,7 @@ export default function App() {
           <Route path="/blog/:slug" element={<ArticleView />} />
 
           {/* Route pour le jeu de Noël */}
-          <Route path="/jeu" element={<ChristmasGame />} />
+          <Route path="/jeu" element={<ArcadePage />} />
 
           {/* Route pour la liste du père Noël */}
           <Route path="/liste-noel" element={<WishlistMaker />} />
