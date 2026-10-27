@@ -4,7 +4,9 @@ import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer'; 
 
 const modules = import.meta.glob<{ metadata: any; default: React.ComponentType }>('../../articles/*.tsx', { eager: true });
-const articles = Object.values(modules).map((mod) => mod.metadata);
+const articles = Object.values(modules)
+  .map((mod) => mod.metadata)
+  .filter((meta) => meta && meta.slug); 
 
 export default function BlogIndex() {
   return (
