@@ -1,21 +1,26 @@
-import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { Navbar } from '../../components/Navbar'; 
-import { Footer } from '../../components/Footer'; 
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { Navbar } from "../../components/Navbar";
+import { Footer } from "../../components/Footer";
 
-const modules = import.meta.glob<{ metadata: any; default: React.ComponentType }>('../../articles/*.tsx', { eager: true });
+const modules = import.meta.glob<{
+  metadata: any;
+  default: React.ComponentType;
+}>("../../articles/*.tsx", { eager: true });
 const articles = Object.values(modules)
   .map((mod) => mod.metadata)
-  .filter((meta) => meta && meta.slug); 
+  .filter((meta) => meta && meta.slug);
 
 export default function BlogIndex() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between relative overflow-hidden">
       <Helmet>
-        <title>Le Blog de Noël - Conseils et Astuces | La Fabrique Magique</title>
-        <meta 
-          name="description" 
-          content="Découvrez tous nos articles, conseils et astuces pour faire patienter les enfants, préparer les fêtes et vivre un Noël magique et inoubliable." 
+        <title>
+          Le Blog de Noël - Conseils et Astuces | La Fabrique Magique
+        </title>
+        <meta
+          name="description"
+          content="Découvrez tous nos articles, conseils et astuces pour faire patienter les enfants, préparer les fêtes et vivre un Noël magique et inoubliable."
         />
       </Helmet>
 
@@ -32,22 +37,26 @@ export default function BlogIndex() {
             Le Blog Magique de Noël 🎄
           </h1>
           <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto">
-            Astuces pour faire patienter les enfants, idées de traditions et secrets du Pôle Nord pour préparer des fêtes mémorables.
+            Astuces pour faire patienter les enfants, idées de traditions et
+            secrets du Pôle Nord pour préparer des fêtes mémorables.
           </p>
         </div>
 
         {/* Grille des articles */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {articles.map((art) => (
-            <article 
-              key={art.slug} 
+            <article
+              key={art.slug}
               className="bg-indigo-950/60 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden border border-amber-400/20 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:border-amber-400/50 hover:shadow-2xl group"
             >
-              {art.image && (
-                <Link to={`/blog/${art.slug}`} className="relative h-48 overflow-hidden block">
-                  <img 
-                    src={art.image} 
-                    alt={art.title} 
+              {art?.image && (
+                <Link
+                  to={`/blog/${art.slug}`}
+                  className="relative h-48 overflow-hidden block"
+                >
+                  <img
+                    src={art.image}
+                    alt={art.title || "Article"}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-indigo-950 via-transparent to-transparent opacity-80"></div>
@@ -55,23 +64,26 @@ export default function BlogIndex() {
               )}
 
               <div className="p-6 flex flex-col grow">
-                <span className="text-xs font-semibold text-amber-400 mb-2 block">{art.date}</span>
-                
+                <span className="text-xs font-semibold text-amber-400 mb-2 block">
+                  {art.date}
+                </span>
+
                 <h2 className="text-xl font-bold text-slate-100 mb-3 group-hover:text-amber-300 transition-colors line-clamp-2">
-                  <Link to={`/blog/${art.slug}`}>
-                    {art.title}
-                  </Link>
+                  <Link to={`/blog/${art.slug}`}>{art.title}</Link>
                 </h2>
 
                 <p className="text-slate-300 text-sm mb-6 line-clamp-3 grow leading-relaxed">
                   {art.description}
                 </p>
 
-                <Link 
+                <Link
                   to={`/blog/${art.slug}`}
                   className="inline-flex items-center text-sm font-bold text-amber-400 hover:text-amber-300 transition-colors mt-auto gap-1"
                 >
-                  Lire l'article <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                  Lire l'article{" "}
+                  <span className="group-hover:translate-x-1 transition-transform">
+                    &rarr;
+                  </span>
                 </Link>
               </div>
             </article>
