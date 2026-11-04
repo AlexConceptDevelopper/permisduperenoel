@@ -9,5 +9,4 @@ class PermisApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

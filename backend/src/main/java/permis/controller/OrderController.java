@@ -40,14 +40,15 @@ public class OrderController {
                     .body(pdfBytes);
 
         } catch (SecurityException e) {
-            // Si le paiement n'est pas validé -> 403 Forbidden
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         } catch (RuntimeException e) {
+            e.printStackTrace(); // <--- AJOUTE ÇA ICI pour voir le RuntimeException dans la console
             if ("COMMANDE_INTROUVABLE".equals(e.getMessage())) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
             return ResponseEntity.internalServerError().build();
         } catch (Exception e) {
+            e.printStackTrace(); // <--- ET AJOUTE ÇA ICI aussi pour voir toutes les autres erreurs (Playwright, format, etc.)
             return ResponseEntity.internalServerError().build();
         }
     }

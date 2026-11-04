@@ -10,7 +10,7 @@ export const AkinatorQuiz: React.FC<AkinatorQuizProps> = ({ onComplete }) => {
   const [step, setStep] = useState(1);
   const [name, setName] = useState('');
   const [age, setAge] = useState(7);
-  const [gender, setGender] = useState<'M' | 'F'>('M'); // 👈 État pour le genre
+  const [gender, setGender] = useState<'M' | 'F'>('M');
   const [city, setCity] = useState('');
   const [adventure, setAdventure] = useState('A survecu aux légumes de la cantine');
   const [talent, setTalent] = useState('Champion du monde de Lego');
@@ -19,6 +19,11 @@ export const AkinatorQuiz: React.FC<AkinatorQuizProps> = ({ onComplete }) => {
     const childName = name || 'Lucas';
     const childAge = Number(age) || 7;
     const childCity = city || 'Bordeaux';
+
+    // Génération dynamique du numéro de série unique (ex: PN-2026-9482-ALE pour Alexandre)
+    const cleanPrefix = childName.trim().replaceAll(/[^a-zA-Zà-üÀ-Ü]/g, '').substring(0, 3).toUpperCase();
+    const randomCode = Math.floor(1000 + Math.random() * 9000);
+    const generatedSerialNumber = `PN-2026-${randomCode}-${cleanPrefix || 'LUC'}`;
 
     const generatedBehavior = `A brillé cette année en mode : "${adventure}"`;
     const generatedBackMessage = `Le Conseil des Lutins certifie que ${childName}, grâce à son talent secret de "${talent}" à ${childCity}, mérite amplement sa place sur le Grand Registre d'Or !`;
@@ -36,8 +41,9 @@ export const AkinatorQuiz: React.FC<AkinatorQuizProps> = ({ onComplete }) => {
     onComplete({
       childName: childName,
       childAge: childAge,
-      childGender: gender, // 👈 On transmet le genre
+      childGender: gender,
       city: childCity,
+      serialNumber: generatedSerialNumber, // 👈 Le numéro de série dynamique est bien transmis !
       behaviorNote: generatedBehavior,
       backMessage: generatedBackMessage,
       santaLetter: generatedSantaLetter,
@@ -127,7 +133,6 @@ export const AkinatorQuiz: React.FC<AkinatorQuizProps> = ({ onComplete }) => {
         </div>
       )}
 
-      {/* ÉTAPE 2 & 3 (Restent identiques) */}
       {step === 2 && (
         <div className="space-y-4 text-center">
           <span className="text-3xl">🛷🕵️‍♂️</span>
