@@ -44,7 +44,7 @@ export default function ArticleContent() {
             </p>
           </div>
           <a 
-            href="https://example.com/pull-noel-led" 
+            href="https://pullsdenoel.com/products/pull-de-noel-homme-lumineux-led-marche-noel?variant=49419405853012&currency=EUR&utm_source=google&utm_medium=organic&utm_campaign=Shopping%20Feed%20FR%20y%20BE&utm_content=Pull%20de%20No%C3%ABl%20pour%20Homme%20Lumineux%20LED%20March%C3%A9%20de%20No%C3%ABl&gad_source=1&gad_campaignid=18924388226&gbraid=0AAAAAo_ucF0K2BiCj96rublyJB9flPnEs&gclid=CjwKCAiA2MDXBhBUEiwAD-YB-91t2yUoYRLgHrvhdYQTl-uHo-16J0kCrnNK-cDBidRAQgRBd0NjsRoCDqgQAvD_BwE" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition-all shadow-md text-center"
@@ -65,7 +65,7 @@ export default function ArticleContent() {
             </p>
           </div>
           <a 
-            href="https://example.com/pull-noel-renne" 
+            href="https://www.veloumi.com/products/pull-de-noel-femme-imprime-renne-col-rond?variant=58072619221332&country=FR&currency=EUR&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&tw_source=google&tw_adid=&tw_campaign=24256642468&tw_kwdid=&gad_source=1&gad_campaignid=24256664152&gbraid=0AAAABEtPlchf8RlasOGSBo05tvMVr0HQz&gclid=CjwKCAiA2MDXBhBUEiwAD-YB-2jLuOQQn8qvUo7iF-k2L6Gqgbc4_DDd31rhiyBM7QNXNYpKdS8hRxoCKnEQAvD_BwE" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition-all shadow-md text-center"
