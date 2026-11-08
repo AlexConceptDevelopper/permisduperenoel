@@ -1,9 +1,11 @@
+import tutoImage from "../../public/images/blog/tuto-pull-diy.jpg";
+
 export const metadata = {
   slug: "tuto-pull-moche-diy",
   title: "Tuto DIY : Comment fabriquer son propre pull moche de Noël facilement",
   description: "Guide étape par étape pour créer un pull de Noël kitch et unique à partir de vieux vêtements et d'accessoires de récup'. Zéro déchet, 100% rigolo !",
   date: "14 novembre 2026",
-  image: "/images/blog/tuto-pull-diy.jpg"
+  image: tutoImage
 };
 
 export default function ArticleContent() {

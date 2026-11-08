@@ -1,9 +1,11 @@
+import pullImage from "../../public/images/blog/pull-moche-noel.jpg";
+
 export const metadata = {
   slug: "pull-moche-de-noel",
   title: "Les meilleurs pulls moches de Noël : Conseils, sélection & idées DIY",
   description: "Découvrez notre sélection des pulls moches de Noël les plus kitchs, nos conseils pour bien le choisir et des idées simples pour fabriquer le vôtre en DIY !",
   date: "12 novembre 2026",
-  image: "/images/blog/pull-moche-noel.jpg"
+  image: pullImage
 };
 
 export default function ArticleContent() {
