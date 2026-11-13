@@ -35,6 +35,11 @@ export default function ArticleView() {
         {metadata.image && (
           <meta property="og:image" content={metadata.image} />
         )}
+        {metadata.jsonLd && (
+          <script type="application/ld+json">
+            {JSON.stringify(metadata.jsonLd)}
+          </script>
+        )}
       </Helmet>
 
       {/* Navbar en haut */}

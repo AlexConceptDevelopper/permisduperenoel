@@ -3,7 +3,58 @@ export const metadata = {
   title: "La Légende du Traîneau et des Rennes du Père Noël : Noms, Origines et Secrets du Pôle Nord",
   description: "Découvrez l'histoire complète et détaillée de l'attelage magique du Père Noël. Noms officiels en français et anglais, origines littéraires de 1823, histoire de Rudolphe et secrets de fabrication du traîneau.",
   date: "27 octobre 2026",
-  image: "/images/blog/rennes-pere-noel.jpg"
+  image: "/images/blog/rennes-pere-noel.jpg",
+  jsonLd: {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "La Légende du Traîneau et des Rennes du Père Noël : Noms, Origines et Secrets du Pôle Nord",
+        "description": "Découvrez l'histoire complète et détaillée de l'attelage magique du Père Noël. Noms officiels en français et anglais, origines littéraires de 1823, histoire de Rudolphe et secrets de fabrication du traîneau.",
+        "image": "https://permisduperenoel.fr/images/blog/rennes-pere-noel.jpg",
+        "datePublished": "2026-10-27T08:00:00+01:00",
+        "author": {
+          "@type": "Organization",
+          "name": "La Fabrique Magique",
+          "url": "https://permisduperenoel.fr"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Permis du Père Noël",
+          "url": "https://permisduperenoel.fr"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Quels sont les noms des 9 rennes du Père Noël en français ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Les 9 rennes du Père Noël en français sont : Rudolphe (le guide au nez rouge), Tornade, Danseur, Fringant, Ruse, Comète, Cupidon, Éclair et Tonnerre."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Les rennes du Père Noël sont-ils des mâles ou des femelles ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "D'un point de vue biologique, les rennes mâles perdent leurs bois au début de l'hiver (vers novembre), tandis que les rennes femelles gardent leurs bois tout au long de la saison hivernale jusqu'au printemps. L'attelage du Père Noël est donc composé principalement de femelles très fortes, ou de rennes magiques immortels."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Que faut-il préparer à manger pour les rennes le soir du réveillon ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Les rennes adorent les carottes fraîches, les quartiers de pomme et les flocons d'avoine. Déposez-les dans une petite assiette près de la cheminée ou sur le balcon avec un peu d'eau fraîche."
+            }
+          }
+        ]
+      }
+    ]
+  }
 };
 
 export default function ArticleContent() {
