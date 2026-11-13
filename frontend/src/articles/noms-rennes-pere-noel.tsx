@@ -1,6 +1,6 @@
 export const metadata = {
   slug: "noms-rennes-pere-noel",
-  title: "La Légende du Traîneau et des Rennes du Père Noël : Noms, Origines et Secrets du Pôle Nord",
+  title: "Les 9 Rennes du Père Noël : Noms, Ordre de l'Attelage et Secrets",
   description: "Découvrez l'histoire complète et détaillée de l'attelage magique du Père Noël. Noms officiels en français et anglais, origines littéraires de 1823, histoire de Rudolphe et secrets de fabrication du traîneau.",
   date: "27 octobre 2026",
   image: "/images/blog/rennes-pere-noel.jpg",
@@ -9,7 +9,7 @@ export const metadata = {
     "@graph": [
       {
         "@type": "Article",
-        "headline": "La Légende du Traîneau et des Rennes du Père Noël : Noms, Origines et Secrets du Pôle Nord",
+        "headline": "Noms des Rennes du Père Noël : Tout Savoir sur l'Attelage Magique",
         "description": "Découvrez l'histoire complète et détaillée de l'attelage magique du Père Noël. Noms officiels en français et anglais, origines littéraires de 1823, histoire de Rudolphe et secrets de fabrication du traîneau.",
         "image": "https://permisduperenoel.fr/images/blog/rennes-pere-noel.jpg",
         "datePublished": "2026-10-27T08:00:00+01:00",
