@@ -47,10 +47,6 @@ export const metadata = {
 export default function ArticleContent() {
   return (
     <>
-      <h1 className="text-3xl sm:text-4xl font-black text-slate-100 mb-6">
-        Guide d'achat des jouets de Noël par âge : Le classement infaillible
-      </h1>
-
       <p className="text-lg text-slate-300 mb-6 leading-relaxed">
         Chaque année, c'est le même parcours du combattant : ouvrir des
         catalogues interminables, trier le vrai du faux, et tenter de trouver LE
@@ -101,8 +97,6 @@ export default function ArticleContent() {
           </li>
         </ul>
       </div>
-
-      {/* Le reste du contenu des tranches d'âge (identique au précédent) reste ici... */}
 
       <h2
         id="suspects-0-2"
@@ -196,7 +190,7 @@ export default function ArticleContent() {
           </h4>
           <p className="text-slate-300 text-xs mt-1 leading-relaxed">
             Le Saint Graal de l'architecte en herbe. Châteaux forts, bases
-            lunaires ou ponts suspendus : les aimants s'emilètent à l'infini et
+            lunaires ou ponts suspendus : les aimants s'emboîtent à l'infini et
             garantissent des heures de calme plat pour les parents.
           </p>
         </div>
