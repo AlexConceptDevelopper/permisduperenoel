@@ -1,7 +1,7 @@
 export const metadata = {
   slug: "secretariat-pere-noel-poste",
   title: "Ouverture du Secrétariat du Père Noël à La Poste : Adresse, Dates et Réponse Gratuite",
-  description: "Le secrétariat officiel du Père Noël de La Poste vient d'ouvrir ses portes pour 2026 ! Découvrez l'adresse exacte à Libourne, comment envoyer une lettre gratuite et comment compléter l'expérience avec le Permis officiel.",
+  description: "Le secrétariat officiel du Père Noël de La Poste vient d'ouvrir ses portes pour 2026 ! Découvrez l'adresse exacte à Libourne, comment envoyer une lettre gratuite et comment compléter la surprise avec le Pack Magique du Pôle Nord.",
   date: "17 novembre 2026",
   image: "/images/blog/secretariat-pere-noel-poste.jpg",
   jsonLd: {
@@ -10,7 +10,7 @@ export const metadata = {
       {
         "@type": "Article",
         "headline": "Ouverture du Secrétariat du Père Noël à La Poste : Tout Savoir pour Écrire au Pôle Nord",
-        "description": "Le secrétariat officiel du Père Noël de La Poste vient d'ouvrir ses portes pour 2026 ! Découvrez l'adresse exacte à Libourne, comment envoyer une lettre gratuite et comment compléter l'expérience avec le Permis officiel.",
+        "description": "Le secrétariat officiel du Père Noël de La Poste vient d'ouvrir ses portes pour 2026 ! Découvrez l'adresse exacte à Libourne, comment envoyer une lettre gratuite et comment compléter la surprise avec le Pack Magique du Pôle Nord.",
         "image": "https://permisduperenoel.fr/images/blog/secretariat-pere-noel-poste.jpg",
         "datePublished": "2026-11-17T08:00:00+01:00",
         "author": {
@@ -71,7 +71,7 @@ export default function ArticleContent() {
           <li>• <a href="#ouverture" className="hover:underline">1. L'ouverture du standard postal du Pôle Nord</a></li>
           <li>• <a href="#adresse" className="hover:underline">2. Quelle adresse écrire sur l'enveloppe ? (Sans timbre !)</a></li>
           <li>• <a href="#coulisses" className="hover:underline">3. Les coulisses de Libourne : comment répondent les lutins</a></li>
-          <li>• <a href="#permis-bonus" className="hover:underline">4. L'astuce magique pour le 25 décembre : le Permis perdu</a></li>
+          <li>• <a href="#pack-magique" className="hover:underline">4. Prolonger la magie : Permis, Passeport, Diplôme & Réponse personnalisée</a></li>
           <li>• <a href="#conseils-lettre" className="hover:underline">5. 4 idées pour rendre la lettre de votre enfant inoubliable</a></li>
           <li>• <a href="#faq" className="hover:underline">6. Foire aux questions des parents</a></li>
         </ul>
@@ -108,20 +108,20 @@ export default function ArticleContent() {
         </p>
       </div>
 
-      {/* --- ENCADRÉ INTERACTIF : LE PERMIS DU PÈRE NOËL --- */}
+      {/* --- ENCADRÉ INTERACTIF : LE PACK MAGIQUE --- */}
       <div className="bg-indigo-950/60 border border-amber-400/30 rounded-2xl p-5 my-8 flex flex-col sm:flex-row items-center justify-between gap-4 backdrop-blur-md shadow-lg">
         <div className="flex items-center gap-3">
-          <span className="text-3xl">🪪</span>
+          <span className="text-3xl">✨</span>
           <div>
             <h4 className="text-sm font-bold text-amber-300">Vous préparez la magie de Noël à la maison ?</h4>
-            <p className="text-xs text-slate-300">Après la lettre à La Poste, imprimez la véritable carte de Permis de Conduire de Traîneau du Père Noël à glisser près du sapin le 25 décembre !</p>
+            <p className="text-xs text-slate-300">Créez en quelques clics le dossier officiel de votre enfant : Permis du Père Noël, Passeport du Pôle Nord, Diplôme de l'Enfant Sage et Lettre de réponse personnalisée !</p>
           </div>
         </div>
         <a 
           href="/" 
           className="shrink-0 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-md"
         >
-          Personnaliser le Permis &rarr;
+          Créer le dossier magique &rarr;
         </a>
       </div>
 
@@ -135,15 +135,43 @@ export default function ArticleContent() {
         <li><strong>L'option numérique :</strong> Pour les familles qui préfèrent envoyer un message en ligne, le site officiel de La Poste permet également d'envoyer une lettre digitale avec réponse par e-mail ou courrier.</li>
       </ul>
 
-      <h2 id="permis-bonus" className="text-2xl font-bold text-slate-100 mt-10 mb-4">4. L'idée magique pour le 25 décembre : la preuve du passage du Père Noël !</h2>
+      <h2 id="pack-magique" className="text-2xl font-bold text-slate-100 mt-10 mb-4">4. Prolonger la magie à la maison : des souvenirs 100 % personnalisés pour votre enfant</h2>
       <p className="text-slate-300 mb-4 leading-relaxed">
-        Écrire sa lettre en novembre et recevoir la réponse des lutins en décembre fait déjà rêver les enfants. Mais comment rendre le matin du <strong>25 décembre</strong> encore plus spectaculaire ?
+        La lettre de La Poste est une tradition merveilleuse, mais sa réponse reste identique pour tous les enfants de France. Chez <strong>Permis du Père Noël</strong>, nous avons conçu l'atelier idéal pour aller beaucoup plus loin et offrir à votre enfant des documents officiels <strong>personnalisés à son prénom, son âge et sa ville</strong> :
       </p>
-      <p className="text-slate-300 mb-4 leading-relaxed">
-        Chez <strong>Permis du Père Noël</strong>, nous avons imaginé le prolongement parfait à la lettre de La Poste : le <strong>véritable Permis d'Attelage Magique du Père Noël</strong>, format carte officielle, que le grand barbu laisse tomber par mégarde près de la cheminée ou sous le sapin pendant sa distribution de cadeaux !
-      </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+        <div className="bg-slate-900/60 border border-amber-400/20 rounded-2xl p-4">
+          <h4 className="text-sm font-bold text-amber-300 mb-1">🪪 Le Permis du Père Noël</h4>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            La véritable carte officielle d'attelage que le Père Noël laisse tomber par mégarde près du sapin pendant sa tournée. La preuve irréfutable de son passage !
+          </p>
+        </div>
+
+        <div className="bg-slate-900/60 border border-amber-400/20 rounded-2xl p-4">
+          <h4 className="text-sm font-bold text-amber-300 mb-1">🛂 Le Passeport Officiel du Pôle Nord</h4>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Un document collector nominatif attestant que votre enfant est officiellement enregistré sur le Grand Registre d'Or des lutins.
+          </p>
+        </div>
+
+        <div className="bg-slate-900/60 border border-amber-400/20 rounded-2xl p-4">
+          <h4 className="text-sm font-bold text-amber-300 mb-1">📜 Le Diplôme de l'Enfant Sage</h4>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Au format paysage A4 Grand Luxe prêt à encadrer, avec le contrôle des lutins (rangement, coucher, gentillesse) validé pour un passage prioritaire du traîneau.
+          </p>
+        </div>
+
+        <div className="bg-slate-900/60 border border-amber-400/20 rounded-2xl p-4">
+          <h4 className="text-sm font-bold text-amber-300 mb-1">✉️ La Lettre de Réponse Personnalisée</h4>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Générez instantanément une véritable lettre écrite sur mesure par le Père Noël pour votre enfant (disponible gratuitement via partage ou incluse dans le Pack Magique 4-en-1).
+          </p>
+        </div>
+      </div>
+
       <p className="text-slate-300 mb-6 leading-relaxed">
-        Imaginez la tête de vos enfants lorsqu'ils découvriront sa photo d'identité officielle, son numéro de matricule du Pôle Nord, la mention « Conduite de traîneau à 9 rennes supersoniques » et même le cachet officiel de Laponie au pied des cadeaux. Une preuve irréfutable que le Père Noël est bien passé chez vous pendant la nuit !
+        En glissant ces documents au pied du sapin le 25 décembre au matin — ou en les utilisant pour faire patienter les enfants en décembre — vous créez un souvenir impérissable qu'ils garderont précieusement dans leur chambre toute l'année.
       </p>
 
       <h2 id="conseils-lettre" className="text-2xl font-bold text-slate-100 mt-10 mb-4">5. 4 idées pour rendre la lettre de votre enfant encore plus magique</h2>
@@ -151,7 +179,7 @@ export default function ArticleContent() {
         <li><strong>Fabriquer un faux timbre du Pôle Nord :</strong> Même si l'envoi est gratuit, dessinez un petit carré en haut à droite de l'enveloppe avec un bonhomme de neige ou un sapin et inscrivez « Tarif Magique - Pôle Nord ».</li>
         <li><strong>Glisser un dessin pour les rennes :</strong> Rudolphe, Tornade et leurs camarades adorent recevoir des portraits d'eux-mêmes.</li>
         <li><strong>Saupoudrer un peu de magie :</strong> Ajoutez une toute petite pincée de paillettes dorées (ou de sucre glace) dans l'enveloppe avant de la fermer.</li>
-        <li><strong>Poster avant le 16 décembre :</strong> Même si le secrétariat reste ouvert jusqu'au 20 décembre environ, poster la lettre dès novembre ou début décembre garantit que la réponse arrive bien avant le réveillon.</li>
+        <li><strong>Poster avant le 16 décembre :</strong> Même si le secrétariat reste ouvert jusqu'au 20 décembre environ, poster la lettre dès novembre ou début décembre garantit que la réponse de La Poste arrive bien avant le réveillon.</li>
       </ol>
 
       <h2 id="faq" className="text-2xl font-bold text-slate-100 mt-10 mb-4">6. Foire aux questions sur le courrier au Père Noël</h2>
@@ -167,29 +195,29 @@ export default function ArticleContent() {
         <div>
           <h4 className="text-base font-bold text-amber-300">Combien de temps faut-il pour recevoir la réponse du Père Noël ?</h4>
           <p className="text-slate-300 text-sm leading-relaxed mt-1">
-            En moyenne, il faut compter entre <strong>1 et 2 semaines</strong> entre le dépôt dans la boîte aux lettres et l'arrivée de la réponse des lutins chez vous (un peu plus à l'approche du 15 décembre en raison de l'affluence).
+            En moyenne, il faut compter entre <strong>1 et 2 semaines</strong> entre le dépôt dans la boîte aux lettres et l'arrivée de la réponse des lutins de La Poste chez vous. Et si vous souhaitez une lettre sur mesure immédiate avec le prénom de votre enfant, vous pouvez la générer en quelques secondes sur notre atelier.
           </p>
         </div>
 
         <div>
           <h4 className="text-base font-bold text-amber-300">Que faire si la lettre est postée trop tard ?</h4>
           <p className="text-slate-300 text-sm leading-relaxed mt-1">
-            Si vous avez manqué la date limite de La Poste, vous pouvez toujours imprimer immédiatement chez vous une réponse officielle ou glisser le <strong>Permis du Père Noël</strong> sous le sapin le soir du 24 décembre pour créer la surprise.
+            Si vous avez manqué la date limite de La Poste, pas de panique : notre atelier en ligne vous permet de générer et d'imprimer immédiatement chez vous la <strong>Lettre personnalisée du Père Noël</strong>, ainsi que son <strong>Permis</strong>, son <strong>Passeport</strong> et son <strong>Diplôme de l'Enfant Sage</strong>.
           </p>
         </div>
       </div>
 
       {/* Encadré d'appel à l'action (CTA) principal */}
       <div className="bg-indigo-900/40 border border-amber-400/30 rounded-2xl p-6 my-8 text-center backdrop-blur-md">
-        <h3 className="text-xl font-bold text-amber-300 mb-2">🪪 Complétez la lettre avec le Permis Officiel du Père Noël !</h3>
+        <h3 className="text-xl font-bold text-amber-300 mb-2">🎁 Préparez le Pack Magique 4-en-1 de votre enfant !</h3>
         <p className="text-slate-300 text-sm mb-4">
-          Après avoir posté sa lettre à La Poste, préparez la surprise ultime du 25 décembre : le permis de conduire de traîneau perdu par le Père Noël au pied du sapin.
+          Permis du Père Noël, Passeport du Pôle Nord, Diplôme de l'Enfant Sage A4 et Lettre de réponse personnalisée : concevez tout le dossier officiel en 2 minutes.
         </p>
         <a 
           href="/" 
           className="inline-block bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl shadow-md transition-all"
         >
-          Créer le Permis Magique &rarr;
+          Lancer l'enquête des lutins &rarr;
         </a>
       </div>
     </>
