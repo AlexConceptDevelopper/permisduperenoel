@@ -5,7 +5,17 @@ export const metadata = {
   description:
     "Ils reviennent chaque année dès le mois d'octobre. Entre clichés romantiques, petits villages enneigés et chocolats chauds, décryptage d'un phénomène télévisuel irrésistible.",
   date: "7 octobre 2026",
-  image: "/images/blog/telefilms-noel.jpg", // Pense à ajouter une petite image sympa dans ton dossier public/images/blog/
+  image: "/images/blog/telefilms-noel.jpg",
+  jsonLd: {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "Le grand retour des téléfilms de Noël",
+    description: "Décryptage d'un phénomène télévisuel irrésistible.",
+    image: "https://permisduperenoel.fr/images/blog/telefilms-noel.jpg",
+    datePublished: "2026-10-07T08:00:00+01:00",
+    author: { "@type": "Organization", name: "La Fabrique Magique" },
+    publisher: { "@type": "Organization", name: "Permis du Père Noël" },
+  },
 };
 
 export default function ArticleContent() {

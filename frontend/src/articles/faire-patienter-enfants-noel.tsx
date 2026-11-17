@@ -3,7 +3,42 @@ export const metadata = {
   title: "Comment faire patienter les enfants avant Noël ? Nos astuces magiques",
   description: "Le mois de décembre est long pour les petits. Découvrez nos conseils pour canaliser l'impatience et faire monter la magie jusqu'au 25 décembre.",
   date: "7 octobre 2026",
-  image: "/images/blog/impatiente-noel.jpg"
+  image: "/images/blog/impatiente-noel.jpg",
+  jsonLd: {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Comment faire patienter les enfants avant Noël ? Nos astuces magiques",
+        "description": "Le mois de décembre est long pour les petits. Découvrez nos conseils pour canaliser l'impatience et faire monter la magie jusqu'au 25 décembre.",
+        "image": "https://permisduperenoel.fr/images/blog/impatiente-noel.jpg",
+        "datePublished": "2026-10-07T08:00:00+01:00",
+        "author": {
+          "@type": "Organization",
+          "name": "La Fabrique Magique",
+          "url": "https://permisduperenoel.fr"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Permis du Père Noël",
+          "url": "https://permisduperenoel.fr"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Comment aider un enfant à patienter jusqu'à Noël ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mettez en place un rituel quotidien du soir (calendrier de l'Avent, lecture d'histoires), faites vivre les préparatifs du Pôle Nord avec des indices et impliquez-les dans la décoration de la maison."
+            }
+          }
+        ]
+      }
+    ]
+  }
 };
 
 export default function ArticleContent() {

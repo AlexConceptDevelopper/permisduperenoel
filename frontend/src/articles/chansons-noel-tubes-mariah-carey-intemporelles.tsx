@@ -8,6 +8,18 @@ export const metadata = {
     "Dès que novembre pointe le bout de son nez, elles reviennent squatter nos radios et nos têtes. Décryptage de ces mélodies de Noël qu'on adore chanter à tue-tête... ou fuir en courant.",
   date: "15 octobre 2026",
   image: "/images/blog/chansons-noel.jpg",
+  jsonLd: {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline:
+      "Chansons de Noël : entre tubes cultes et surdose de Mariah Carey",
+    description:
+      "Décryptage de ces mélodies de Noël qu'on adore chanter à tue-tête.",
+    image: "https://permisduperenoel.fr/images/blog/chansons-noel.jpg",
+    datePublished: "2026-10-15T08:00:00+01:00",
+    author: { "@type": "Organization", name: "La Fabrique Magique" },
+    publisher: { "@type": "Organization", name: "Permis du Père Noël" },
+  },
 };
 
 const playlist = [

@@ -3,7 +3,42 @@ export const metadata = {
   title: "Comment Prouver que le Père Noël est Passé ? Le Guide Ultime des Preuves Magiques",
   description: "Fausses empreintes de bottes enneigées, carotte croquée, permis de traîneau 'perdu', clochettes et poussière d'étoiles : découvrez le guide complet des meilleures astuces pour transformer votre salon en scène féerique le matin du 25 décembre !",
   date: "27 octobre 2026",
-  image: "/images/blog/preuves-passage-pere-noel.jpg"
+  image: "/images/blog/preuves-passage-pere-noel.jpg",
+  jsonLd: {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Comment Prouver que le Père Noël est Passé ? Le Guide Ultime des Preuves Magiques",
+        "description": "Fausses empreintes de bottes enneigées, carotte croquée, permis de traîneau 'perdu', clochettes et poussière d'étoiles : découvrez le guide complet des meilleures astuces pour transformer votre salon en scène féerique le matin du 25 décembre !",
+        "image": "https://permisduperenoel.fr/images/blog/preuves-passage-pere-noel.jpg",
+        "datePublished": "2026-10-27T08:00:00+01:00",
+        "author": {
+          "@type": "Organization",
+          "name": "La Fabrique Magique",
+          "url": "https://permisduperenoel.fr"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Permis du Père Noël",
+          "url": "https://permisduperenoel.fr"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Comment fabriquer de fausses empreintes de pas du Père Noël ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Utilisez un pochoir en carton découpé en forme de botte et saupoudrez un mélange de farine, de bicarbonate de soude et de paillettes argentées au pied du sapin."
+            }
+          }
+        ]
+      }
+    ]
+  }
 };
 
 export default function ArticleContent() {
@@ -72,20 +107,15 @@ export default function ArticleContent() {
 
       <h2 id="permis" className="text-2xl font-bold text-slate-100 mt-10 mb-4">3. Le Permis de Conduire du Père Noël tombé du manteau</h2>
       <p className="text-slate-300 mb-4 leading-relaxed">
-        C'est l'astuce la plus originale, la plus moderne et la plus percutante pour émerveiller un enfant ! Imaginez son visage quand, en ramassant son premier cadeau, il découvre une <a href="/" className="text-amber-400 font-semibold hover:underline">véritable carte rigide de permis de conduire officielle du Père Noël</a> glissée sous le sapin !
+        C'est l'astuce la plus originale, la plus moderne et la plus percutante pour émerveiller un enfant ! Imaginez son visage quand, en ramassant son premier cadeau, il découvre une <a href="/" className="text-amber-400 font-semibold hover:underline">véritable carte rigide de permis de conduire officielle du Père Noël</a> glissée sous le sapin[cite: 17] !
       </p>
       <p className="text-slate-300 mb-4 leading-relaxed">
         En se baissant à la hâte pour poser les jouets, le Père Noël a laissé tomber son attestation d'attelage rigide (avec sa photo d'identité, son numéro d'enregistrement officiel au Pôle Nord, la catégorie de traîneau et le tampon d'homologation des lutins). C'est un objet physique, tactile et réaliste que l'enfant pourra conserver précieusement dans sa chambre comme un trésor absolu.
       </p>
 
-      {/* PLACE ILLUSTRATION */}
-      <div className="my-8 rounded-2xl overflow-hidden border border-amber-400/20 shadow-lg bg-indigo-950/80 p-2 text-center">
-        <p className="text-xs text-amber-300 font-semibold py-1">🎨 Emplacement Illustration : Mise en scène du permis perdu, des empreintes et du verre de lait au pied du sapin</p>
-      </div>
-
       <h2 id="lutins" className="text-2xl font-bold text-slate-100 mt-10 mb-4">4. Le mot de remerciement personnalisé et la poussière d'étoiles</h2>
       <p className="text-slate-300 mb-4 leading-relaxed">
-        Rien ne touche plus un enfant qu'un message écrit spécialement pour lui par les habitants du Pôle Nord. Préparez un petit mot manuscrit sur une feuille légèrement jaunie au four ou sur un papier parchemin à bordures dorées.
+        Rien ne touche plus un enfant qu'un mot écrit spécialement pour lui par les habitants du Pôle Nord. Préparez un petit mot manuscrit sur une feuille légèrement jaunie au four ou sur un papier parchemin à bordures dorées.
       </p>
       <div className="bg-slate-900/60 p-5 rounded-2xl border border-slate-800 my-4 text-slate-200 text-sm italic leading-relaxed">
         « Cher [Prénom de l'enfant], merci infiniment pour les délicieux sablés et la carotte pour Rudolphe ! Tu as été particulièrement sage cette année, notamment à l'école. Continue de faire briller la magie autour de toi. — Le Père Noël & Barnabé le lutin. »
