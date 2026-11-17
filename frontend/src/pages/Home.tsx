@@ -304,7 +304,13 @@ export function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-indigo-950 via-slate-900 to-blue-950 text-amber-50 flex flex-col justify-between relative overflow-x-hidden font-sans">
+    <div className="min-h-screen bg-slate-950 text-amber-50 flex flex-col justify-between relative overflow-x-hidden font-sans">
+      {/* BACKGROUND MAGIQUE FIXE (bg-noel.jpg) */}
+      <div
+        className="fixed inset-0 -z-10 bg-cover bg-top bg-no-repeat opacity-50 pointer-events-none"
+        style={{ backgroundImage: "url('/images/bg-noel.jpg')" }}
+      />
+
       <Helmet>
         <title>Le Permis du Père Noël 2026 - Pack Magique 4-en-1</title>
       </Helmet>
@@ -313,7 +319,7 @@ export function Home() {
 
       <main className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center px-4 py-8 relative z-10 my-auto">
         {/* BANNIÈRE NOUVEAUTÉ : Format Paysage A4 */}
-        <div className="w-full max-w-3xl mb-6 bg-linear-to-r from-amber-500/20 via-yellow-500/30 to-amber-500/20 border border-amber-400/50 rounded-2xl p-3 text-center shadow-lg backdrop-blur-md animate-pulse">
+        <div className="w-full max-w-3xl mb-6 bg-indigo-950/80 border border-amber-400/50 rounded-2xl p-3 text-center shadow-lg backdrop-blur-md animate-pulse">
           <p className="text-xs md:text-sm font-bold text-amber-200 flex items-center justify-center gap-2">
             <span>📜✨</span> NOUVEAU : Votre Diplôme de l'Enfant Sage est
             désormais disponible en{" "}
@@ -325,13 +331,13 @@ export function Home() {
         </div>
 
         <header className="text-center space-y-2 max-w-2xl mb-6">
-          <span className="inline-block px-4 py-1.5 bg-amber-500/20 border border-amber-400/40 text-amber-200 rounded-full text-xs font-bold tracking-widest uppercase shadow-md">
+          <span className="inline-block px-4 py-1.5 bg-indigo-950/80 border border-amber-400/40 text-amber-200 rounded-full text-xs font-bold tracking-widest uppercase shadow-md">
             ✨ Atelier Officiel du Père Noël ✨
           </span>
           <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-400">
             Le Pack Magique 4-en-1
           </h1>
-          <p className="text-amber-100/80 text-xs md:text-sm font-medium max-w-lg mx-auto">
+          <p className="text-amber-100/90 text-xs md:text-sm font-medium max-w-lg mx-auto bg-slate-950/40 p-2 rounded-xl backdrop-blur-xs">
             {!isQuizCompleted
               ? "Laissez l'enquête des lutins concevoir le dossier secret de votre enfant en quelques clics !"
               : `Voici le dossier magique généré pour ${formData.childName} ! Vérifiez et commandez votre pack.`}
@@ -340,43 +346,43 @@ export function Home() {
 
         {/* SECTION DES 4 CARTES D'INFORMATIONS (Incluant la Lettre du Père Noël) */}
         <div className="w-full max-w-6xl mb-8 grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-indigo-900/40 border border-amber-400/30 rounded-2xl p-4 shadow-md">
+          <div className="bg-indigo-950/70 border border-amber-400/30 rounded-2xl p-4 shadow-md backdrop-blur-xs">
             <div className="text-xl mb-1">🎅</div>
             <h3 className="text-xs font-bold text-amber-300 uppercase">
               La tradition du Pôle Nord
             </h3>
-            <p className="text-[11px] text-amber-100/70 mt-1">
+            <p className="text-[11px] text-amber-100/80 mt-1">
               Glissez le diplôme sous le sapin le 25 au matin pour émerveiller
               votre enfant en lui prouvant qu'il est inscrit sur le Grand
               Registre d'Or !
             </p>
           </div>
-          <div className="bg-indigo-900/40 border border-amber-400/30 rounded-2xl p-4 shadow-md">
+          <div className="bg-indigo-950/70 border border-amber-400/30 rounded-2xl p-4 shadow-md backdrop-blur-xs">
             <div className="text-xl mb-1">🎁</div>
             <h3 className="text-xs font-bold text-amber-300 uppercase">
               Prêt à afficher
             </h3>
-            <p className="text-[11px] text-amber-100/70 mt-1">
+            <p className="text-[11px] text-amber-100/80 mt-1">
               Le nouveau format paysage A4 est idéal à encadrer dans la chambre
               pour garder un souvenir impérissable de cette année magique.
             </p>
           </div>
-          <div className="bg-indigo-900/40 border border-amber-400/30 rounded-2xl p-4 shadow-md">
+          <div className="bg-indigo-950/70 border border-amber-400/30 rounded-2xl p-4 shadow-md backdrop-blur-xs">
             <div className="text-xl mb-1">⭐</div>
             <h3 className="text-xs font-bold text-amber-300 uppercase">
               Contrôle des Lutins
             </h3>
-            <p className="text-[11px] text-amber-100/70 mt-1">
+            <p className="text-[11px] text-amber-100/80 mt-1">
               Rangement des jouets, vitesse de coucher... Les scores validés par
               les lutins garantissent un passage prioritaire du traîneau !
             </p>
           </div>
-          <div className="bg-indigo-900/60 border border-amber-400/60 rounded-2xl p-4 shadow-md">
+          <div className="bg-indigo-950/80 border border-amber-400/60 rounded-2xl p-4 shadow-md backdrop-blur-xs">
             <div className="text-xl mb-1">✉️</div>
             <h3 className="text-xs font-bold text-amber-300 uppercase">
               Lettre du Père Noël
             </h3>
-            <p className="text-[11px] text-amber-100/80 mt-1">
+            <p className="text-[11px] text-amber-100/90 mt-1">
               Générez une réponse personnalisée ! À débloquer <strong>gratuitement</strong> via partage, ou directement <strong>comprise</strong> dans le Pack Magique 4-en-1.
             </p>
           </div>
@@ -390,13 +396,13 @@ export function Home() {
         ) : (
           <div className="w-full space-y-6">
             {/* BLOC CADEAU GRATUIT : PARTAGE POUR DÉBLOQUER LA LETTRE */}
-            <div className="w-full max-w-4xl mx-auto bg-linear-to-r from-amber-500/20 via-yellow-500/20 to-amber-500/20 border-2 border-amber-400/60 p-4 rounded-2xl text-center shadow-lg backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="w-full max-w-4xl mx-auto bg-indigo-950/80 border-2 border-amber-400/60 p-4 rounded-2xl text-center shadow-lg backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-left">
                 <p className="text-xs font-extrabold text-amber-300 uppercase flex items-center gap-1.5">
                   <span>✉️🎁</span> Option Gratuite : Lettre de Réponse du Père
                   Noël
                 </p>
-                <p className="text-[11px] text-amber-100/80">
+                <p className="text-[11px] text-amber-100/90">
                   {isLetterUnlocked
                     ? "✨ Lettre débloquée et téléchargée avec succès !"
                     : "Partagez sur WhatsApp, Facebook ou Instagram pour débloquer et télécharger gratuitement la lettre !"}
@@ -430,7 +436,7 @@ export function Home() {
                   <h3 className="text-sm font-black text-amber-300 uppercase">
                     Débloque ta lettre magique
                   </h3>
-                  <p className="text-xs text-amber-100/80">
+                  <p className="text-xs text-amber-100/90">
                     Choisis ton réseau pour partager la magie et lancer
                     instantanément le téléchargement :
                   </p>
@@ -475,7 +481,7 @@ export function Home() {
               className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch"
             >
               {/* Colonne de validation / Email */}
-              <div className="lg:col-span-6 bg-indigo-950/80 border-2 border-amber-400/40 p-5 rounded-3xl shadow-2xl backdrop-blur-xl flex flex-col justify-between space-y-4">
+              <div className="lg:col-span-6 bg-indigo-950/90 border-2 border-amber-400/40 p-5 rounded-3xl shadow-2xl backdrop-blur-xl flex flex-col justify-between space-y-4">
                 <div>
                   <div className="flex items-center justify-between border-b border-amber-400/20 pb-2 mb-4">
                     <h2 className="text-xs font-bold text-amber-300 flex items-center gap-2 uppercase tracking-wider">
@@ -492,7 +498,7 @@ export function Home() {
 
                   <div className="space-y-3">
                     <div>
-                      <label className="block text-[11px] uppercase font-bold text-amber-200/80 mb-1">
+                      <label className="block text-[11px] uppercase font-bold text-amber-200/90 mb-1">
                         E-mail du parent (pour recevoir les PDF)
                       </label>
                       <input
@@ -501,29 +507,29 @@ export function Home() {
                         placeholder="parent@example.com"
                         value={customerEmail}
                         onChange={(e) => setCustomerEmail(e.target.value)}
-                        className="w-full bg-slate-950/70 border-2 border-amber-400/30 rounded-xl p-2.5 text-xs text-white focus:border-amber-400 focus:outline-none"
+                        className="w-full bg-slate-950/80 border-2 border-amber-400/30 rounded-xl p-2.5 text-xs text-white focus:border-amber-400 focus:outline-none"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[11px] uppercase font-bold text-amber-200/80 mb-1">
+                      <label className="block text-[11px] uppercase font-bold text-amber-200/90 mb-1">
                         📸 Ajouter une photo de l'enfant (optionnel)
                       </label>
                       <input
                         type="file"
                         accept="image/*"
                         onChange={handleImageUpload}
-                        className="w-full bg-slate-950/70 border-2 border-amber-400/30 rounded-xl p-2 text-xs text-amber-200 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-400 file:text-slate-950 hover:file:bg-amber-300 cursor-pointer"
+                        className="w-full bg-slate-950/80 border-2 border-amber-400/30 rounded-xl p-2 text-xs text-amber-200 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-400 file:text-slate-950 hover:file:bg-amber-300 cursor-pointer"
                       />
                     </div>
 
                     {/* ENCART RAPPORT / CE QUE CONTIENT LE PACK MAGIQUE */}
-                    <div className="bg-slate-950/50 border border-amber-400/30 rounded-2xl p-3.5 text-xs space-y-2 text-amber-100/90 shadow-inner">
+                    <div className="bg-slate-950/70 border border-amber-400/30 rounded-2xl p-3.5 text-xs space-y-2 text-amber-100 shadow-inner">
                       <p className="font-bold text-amber-300 border-b border-amber-400/20 pb-1.5 flex items-center justify-between">
                         <span>🎁 Le Pack Magique 4-en-1 Contient :</span>
                         <span className="text-emerald-400 text-[10px] uppercase bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/30">4 Documents</span>
                       </p>
-                      <ul className="space-y-1 text-[11px] text-amber-100/80 pt-1">
+                      <ul className="space-y-1 text-[11px] text-amber-100/90 pt-1">
                         <li>🛷 <strong>Permis de Traîneau</strong> officiel de l'enfant</li>
                         <li>🛂 <strong>Passeport du Pôle Nord</strong> personnalisé</li>
                         <li>📜 <strong>Diplôme de l'Enfant Sage</strong> (Format A4 Paysage)</li>
@@ -531,7 +537,7 @@ export function Home() {
                       </ul>
                     </div>
 
-                    <div className="bg-slate-950/50 border border-amber-400/20 rounded-2xl p-3 text-xs space-y-1 text-amber-100/90">
+                    <div className="bg-slate-950/70 border border-amber-400/20 rounded-2xl p-3 text-xs space-y-1 text-amber-100/90">
                       <p>
                         👶 <strong>Enfant :</strong> {formData.childName} (
                         {formData.childAge} ans)
@@ -564,7 +570,7 @@ export function Home() {
               </div>
 
               {/* Aperçu en direct */}
-              <div className="lg:col-span-6 flex flex-col items-center justify-between space-y-4 bg-linear-to-br from-indigo-950 via-slate-900 to-indigo-950 border-2 border-amber-400/60 p-6 rounded-3xl shadow-[0_0_30px_rgba(251,191,36,0.15)] backdrop-blur-xl relative overflow-hidden">
+              <div className="lg:col-span-6 flex flex-col items-center justify-between space-y-4 bg-indigo-950/90 border-2 border-amber-400/60 p-6 rounded-3xl shadow-[0_0_30px_rgba(251,191,36,0.15)] backdrop-blur-xl relative overflow-hidden">
                 <div className="w-full flex flex-col items-center space-y-4 relative z-10">
                   <div className="flex items-center justify-between w-full px-2">
                     <div className="flex items-center gap-2 text-xs uppercase font-extrabold tracking-widest text-amber-300 bg-amber-500/10 px-4 py-1.5 rounded-full border border-amber-400/30 shadow-inner">
@@ -609,7 +615,7 @@ export function Home() {
                     </button>
                   </div>
 
-                  <div className="w-full relative flex flex-col justify-center items-center p-4 sm:p-6 bg-linear-to-b from-slate-950/80 to-indigo-950/90 border-2 border-amber-400/50 rounded-2xl shadow-inner overflow-hidden min-h-80 sm:min-h-90">
+                  <div className="w-full relative flex flex-col justify-center items-center p-4 sm:p-6 bg-slate-950/80 border-2 border-amber-400/50 rounded-2xl shadow-inner overflow-hidden min-h-80 sm:min-h-90">
                     <div className="relative z-10 w-full flex justify-center transform scale-90 sm:scale-100 md:scale-110 transition-transform duration-300 my-2">
                       {activePreview === "permit" && (
                         <PermitPreview data={formData} />
