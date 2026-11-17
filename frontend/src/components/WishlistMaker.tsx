@@ -64,7 +64,15 @@ export default function WishlistMaker() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between relative overflow-hidden">
+    <div className="min-h-screen text-slate-100 flex flex-col justify-between relative overflow-hidden font-sans">
+      {/* BACKGROUND MAGIQUE FIXE : 100% net, sans opacité */}
+      <div
+        className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat pointer-events-none"
+        style={{ 
+          backgroundImage: "url('/images/bg-noel.png')"
+        }}
+      />
+
       <Helmet>
         <title>La Lettre au Père Noël Officielle - La Fabrique Magique</title>
         <meta name="description" content="Rédige et génère la vraie lettre manuscrite au Père Noël pour ton enfant !" />
@@ -75,49 +83,49 @@ export default function WishlistMaker() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-12 relative z-10 w-full grow">
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-400/30 px-4 py-1.5 rounded-full text-xs font-semibold text-amber-300 mb-4 shadow-inner">
+          <div className="inline-flex items-center gap-2 bg-indigo-950/80 border border-amber-400/30 px-4 py-1.5 rounded-full text-xs font-semibold text-amber-300 mb-4 shadow-inner backdrop-blur-md">
             <span>✉️✨</span> Secrétariat Officiel du Pôle Nord
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-400 mb-4 tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-400 mb-4 tracking-tight drop-shadow-md">
             La Lettre au Père Noël 🎄
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
+          <p className="text-slate-200 text-sm sm:text-base max-w-xl mx-auto bg-slate-950/40 p-2 rounded-xl backdrop-blur-xs">
             Remplis la liste de cadeaux, puis découvre et imprime la lettre magique manuscrite de ton enfant !
           </p>
         </div>
 
         {/* Formulaire principal */}
         <form onSubmit={handleOpenPreview} className="space-y-8">
-          <div className="bg-indigo-950/60 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-amber-400/20 shadow-xl">
+          <div className="bg-indigo-950/90 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-amber-400/20 shadow-xl">
             <h2 className="text-lg font-bold text-amber-300 mb-4 flex items-center gap-2">
               <span>👶</span> 1. Prénom et âge de l'enfant
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase mb-1">Prénom</label>
+                <label className="block text-xs font-bold text-slate-200 uppercase mb-1">Prénom</label>
                 <input 
                   type="text" 
                   required
                   placeholder="ex: Théo" 
                   value={childName}
                   onChange={(e) => setChildName(e.target.value)}
-                  className="w-full bg-slate-900 border border-amber-400/30 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-amber-400"
+                  className="w-full bg-slate-950 border border-amber-400/30 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-amber-400"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase mb-1">Âge (optionnel)</label>
+                <label className="block text-xs font-bold text-slate-200 uppercase mb-1">Âge (optionnel)</label>
                 <input 
                   type="text" 
                   placeholder="ex: 4 ans" 
                   value={childAge}
                   onChange={(e) => setChildAge(e.target.value)}
-                  className="w-full bg-slate-900 border border-amber-400/30 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-amber-400"
+                  className="w-full bg-slate-950 border border-amber-400/30 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-amber-400"
                 />
               </div>
             </div>
           </div>
 
-          <div className="bg-indigo-950/60 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-amber-400/20 shadow-xl">
+          <div className="bg-indigo-950/90 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-amber-400/20 shadow-xl">
             <h2 className="text-lg font-bold text-amber-300 mb-4 flex items-center gap-2">
               <span>🎁</span> 2. Choix des cadeaux
             </h2>
@@ -128,7 +136,7 @@ export default function WishlistMaker() {
                   key={cat.id}
                   type="button"
                   onClick={() => handleAddWish(cat.name, cat.icon)}
-                  className={`p-3 rounded-xl border text-xs font-bold flex items-center gap-2 transition-all cursor-pointer hover:scale-102 ${cat.color}`}
+                  className={`p-3 rounded-xl border text-xs font-bold flex items-center gap-2 transition-all cursor-pointer hover:scale-102 backdrop-blur-xs ${cat.color}`}
                 >
                   <span className="text-lg">{cat.icon}</span>
                   <span className="text-left leading-tight">{cat.name}</span>
@@ -142,7 +150,7 @@ export default function WishlistMaker() {
                 placeholder="Ou tape un souhait précis (ex: Un vélo rouge, une console...)" 
                 value={customWish}
                 onChange={(e) => setCustomWish(e.target.value)}
-                className="grow bg-slate-900 border border-amber-400/30 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-amber-400"
+                className="grow bg-slate-950 border border-amber-400/30 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:border-amber-400"
               />
               <button
                 type="button"
@@ -158,7 +166,7 @@ export default function WishlistMaker() {
                 {wishlist.map((item) => (
                   <span 
                     key={item.id} 
-                    className="bg-slate-900 border border-amber-400/30 rounded-lg px-3 py-1.5 text-xs flex items-center gap-2 text-slate-200"
+                    className="bg-slate-950 border border-amber-400/30 rounded-lg px-3 py-1.5 text-xs flex items-center gap-2 text-slate-200"
                   >
                     <span>{item.categoryIcon}</span> {item.text}
                     <button 
@@ -178,7 +186,7 @@ export default function WishlistMaker() {
             <button
               type="submit"
               disabled={!childName.trim() || wishlist.length === 0}
-              className="bg-linear-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 disabled:opacity-50 text-slate-950 font-black px-8 py-4 rounded-2xl shadow-xl transition-all text-base sm:text-lg cursor-pointer inline-flex items-center gap-2"
+              className="bg-linear-to-r from-amber-300 via-yellow-200 to-amber-400 hover:from-amber-200 hover:to-yellow-300 disabled:opacity-50 text-slate-950 font-black px-8 py-4 rounded-2xl shadow-[0_0_25px_rgba(251,191,36,0.4)] transition-all text-base sm:text-lg cursor-pointer inline-flex items-center gap-2 border border-amber-100"
             >
               <span>📜✨</span> Voir la lettre manuscrite magique &rarr;
             </button>

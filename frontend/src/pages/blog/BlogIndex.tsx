@@ -13,7 +13,15 @@ const articles = Object.values(modules)
 
 export default function BlogIndex() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between relative overflow-hidden">
+    <div className="min-h-screen text-slate-100 flex flex-col justify-between relative overflow-hidden font-sans">
+      {/* BACKGROUND MAGIQUE FIXE : 100% net, sans opacité */}
+      <div
+        className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat pointer-events-none"
+        style={{
+          backgroundImage: "url('/images/bg-noel.png')",
+        }}
+      />
+
       <Helmet>
         <title>
           Le Blog de Noël - Conseils et Astuces | La Fabrique Magique
@@ -30,13 +38,13 @@ export default function BlogIndex() {
       {/* Contenu de la page Blog */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 relative z-10 w-full grow">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-400/30 px-4 py-1.5 rounded-full text-xs font-semibold text-amber-300 mb-4 shadow-inner">
+          <div className="inline-flex items-center gap-2 bg-indigo-950/80 border border-amber-400/30 px-4 py-1.5 rounded-full text-xs font-semibold text-amber-300 mb-4 shadow-inner backdrop-blur-md">
             <span>✨</span> Le coin des lutins & des parents
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-400 mb-4 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-amber-300 mb-4 tracking-tight drop-shadow-md">
             Le Blog Magique de Noël 🎄
           </h1>
-          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto">
+          <p className="text-slate-200 text-base sm:text-lg max-w-2xl mx-auto bg-slate-950/40 p-2 rounded-xl backdrop-blur-xs">
             Astuces pour faire patienter les enfants, idées de traditions et
             secrets du Pôle Nord pour préparer des fêtes mémorables.
           </p>
@@ -47,7 +55,7 @@ export default function BlogIndex() {
           {articles.map((art) => (
             <article
               key={art.slug}
-              className="bg-indigo-950/60 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden border border-amber-400/20 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:border-amber-400/50 hover:shadow-2xl group"
+              className="bg-indigo-950/90 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden border border-amber-400/20 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:border-amber-400/50 hover:shadow-2xl group"
             >
               {art?.image && (
                 <Link

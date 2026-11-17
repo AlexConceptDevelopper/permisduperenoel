@@ -304,11 +304,13 @@ export function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-amber-50 flex flex-col justify-between relative overflow-x-hidden font-sans">
-      {/* BACKGROUND MAGIQUE FIXE (bg-noel.jpg) */}
+    <div className="min-h-screen text-amber-50 flex flex-col justify-between relative overflow-x-hidden font-sans">
+      {/* BACKGROUND MAGIQUE FIXE : 100% net, sans opacité */}
       <div
-        className="fixed inset-0 -z-10 bg-cover bg-top bg-no-repeat opacity-50 pointer-events-none"
-        style={{ backgroundImage: "url('/images/bg-noel.jpg')" }}
+        className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat pointer-events-none"
+        style={{ 
+          backgroundImage: "url('/images/bg-noel.png')"
+        }}
       />
 
       <Helmet>
@@ -331,7 +333,7 @@ export function Home() {
         </div>
 
         <header className="text-center space-y-2 max-w-2xl mb-6">
-          <span className="inline-block px-4 py-1.5 bg-indigo-950/80 border border-amber-400/40 text-amber-200 rounded-full text-xs font-bold tracking-widest uppercase shadow-md">
+          <span className="inline-block px-4 py-1.5 bg-indigo-950/40 border border-amber-400/40 text-amber-200 rounded-full text-xs font-bold tracking-widest uppercase shadow-md">
             ✨ Atelier Officiel du Père Noël ✨
           </span>
           <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-400">

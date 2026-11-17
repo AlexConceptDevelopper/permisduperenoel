@@ -1,11 +1,9 @@
-import pullImage from "../../public/images/blog/pull-moche-noel.jpg";
-
 export const metadata = {
   slug: "pull-moche-de-noel",
   title: "Les meilleurs pulls moches de Noël : Conseils, sélection & idées DIY",
   description: "Découvrez notre sélection des pulls moches de Noël les plus kitchs, nos conseils pour bien le choisir et des idées simples pour fabriquer le vôtre en DIY !",
   date: "12 novembre 2026",
-  image: pullImage
+  image: "/images/blog/pull-moche-noel.jpg"
 };
 
 export default function ArticleContent() {
@@ -112,9 +110,9 @@ export default function ArticleContent() {
 
         <h3 className="text-lg font-bold text-amber-300 pt-2">Pas à pas express :</h3>
         <ol className="list-decimal list-inside text-sm text-slate-300 space-y-2 pl-2">
-          <td><strong className="text-slate-100">Délimitez la zone :</strong> Enfilez le pull pour repérer le torse et éviter de coller des éléments gênants sous les bras.</td>
-          <td><strong className="text-slate-100">Fixez la structure :</strong> Enroulez une guirlande fine en zigzag sur le devant et cousez quelques points ou collez aux extrémités.</td>
-          <td><strong className="text-slate-100">Ajoutez le kitch :</strong> Collez des yeux mobiles géants, un pompon rouge pour le nez du renne, et suspendez 2 ou 3 boules en plastique légères.</td>
+          <li><strong className="text-slate-100">Délimitez la zone :</strong> Enfilez le pull pour repérer le torse et éviter de coller des éléments gênants sous les bras.</li>
+          <li><strong className="text-slate-100">Fixez la structure :</strong> Enroulez une guirlande fine en zigzag sur le devant et cousez quelques points ou collez aux extrémités.</li>
+          <li><strong className="text-slate-100">Ajoutez le kitch :</strong> Collez des yeux mobiles géants, un pompon rouge pour le nez du renne, et suspendez 2 ou 3 boules en plastique légères.</li>
         </ol>
       </div>
 

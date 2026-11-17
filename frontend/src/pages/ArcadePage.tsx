@@ -62,7 +62,7 @@ const MemoryGame: React.FC = () => {
     <div className="flex flex-col items-center w-full max-w-lg mx-auto">
       <div className="flex justify-between items-center w-full mb-4 px-2 text-sm font-bold text-amber-300">
         <span>🧠 Coups : {moves}</span>
-        <button onClick={initGame} className="px-3 py-1 bg-amber-500/20 border border-amber-400/40 rounded-xl hover:bg-amber-500/30 text-xs">
+        <button onClick={initGame} className="px-3 py-1 bg-amber-500/20 border border-amber-400/40 rounded-xl hover:bg-amber-500/30 text-xs cursor-pointer">
           🔄 Recommencer
         </button>
       </div>
@@ -72,7 +72,7 @@ const MemoryGame: React.FC = () => {
           <div className="text-5xl">🏆</div>
           <h3 className="text-2xl font-black text-amber-300">Bravo, tu as gagné !</h3>
           <p className="text-slate-200 text-sm">Tu as retrouvé toutes les paires en {moves} coups !</p>
-          <button onClick={initGame} className="px-6 py-3 bg-amber-500 text-slate-950 font-black rounded-xl shadow-lg hover:bg-amber-400">
+          <button onClick={initGame} className="px-6 py-3 bg-amber-500 text-slate-950 font-black rounded-xl shadow-lg hover:bg-amber-400 cursor-pointer">
             Rejouer 🔄
           </button>
         </div>
@@ -85,7 +85,7 @@ const MemoryGame: React.FC = () => {
               className={`aspect-square rounded-2xl text-3xl flex items-center justify-center transition-all duration-300 border cursor-pointer ${
                 card.isFlipped || card.isMatched
                   ? 'bg-amber-400/20 border-amber-400 text-white rotate-0'
-                  : 'bg-indigo-950 border-slate-700 text-transparent hover:border-amber-400/50'
+                  : 'bg-indigo-950/80 border-slate-700 text-transparent hover:border-amber-400/50'
               }`}
             >
               {(card.isFlipped || card.isMatched) ? card.emoji : '❓'}
@@ -194,12 +194,12 @@ const SleighRunnerGame: React.FC = () => {
     <div className="flex flex-col items-center w-full">
       <div className="flex justify-between items-center w-full max-w-md mb-3 text-sm font-bold text-amber-300">
         <span>⭐ Score : {score}</span>
-        <span className="text-xs text-slate-400">Clique ou touche l'écran pour voler !</span>
+        <span className="text-xs text-slate-300">Clique ou touche l'écran pour voler !</span>
       </div>
 
       <div 
         onClick={jump}
-        className="relative w-full max-w-md h-64 bg-slate-900 border border-amber-400/30 rounded-2xl overflow-hidden cursor-pointer flex items-center justify-center select-none"
+        className="relative w-full max-w-md h-64 bg-slate-950/80 border border-amber-400/30 rounded-2xl overflow-hidden cursor-pointer flex items-center justify-center select-none shadow-inner"
       >
         <canvas ref={canvasRef} width={400} height={256} className="w-full h-full" />
 
@@ -209,14 +209,14 @@ const SleighRunnerGame: React.FC = () => {
               <div className="space-y-3">
                 <p className="text-xl font-bold text-rose-400">Oups ! Nuage d'orage touché 🌩️</p>
                 <p className="text-sm text-slate-200">Score final : {score} points</p>
-                <button onClick={startGame} className="px-6 py-2.5 bg-amber-500 text-slate-950 font-extrabold rounded-xl shadow-md">
+                <button onClick={startGame} className="px-6 py-2.5 bg-amber-500 text-slate-950 font-extrabold rounded-xl shadow-md cursor-pointer">
                   Recommencer 🛷
                 </button>
               </div>
             ) : (
               <div className="space-y-3">
                 <p className="text-sm text-slate-300">Guide le traîneau du Père Noël ! Attrape les ⭐ et évite les 🌩️.</p>
-                <button onClick={startGame} className="px-6 py-3 bg-amber-500 text-slate-950 font-black rounded-xl shadow-lg">
+                <button onClick={startGame} className="px-6 py-3 bg-amber-500 text-slate-950 font-black rounded-xl shadow-lg cursor-pointer">
                   Décoller 🚀
                 </button>
               </div>
@@ -244,7 +244,7 @@ const ColoringGame: React.FC = () => {
   return (
     <div className="flex flex-col items-center w-full max-w-md mx-auto space-y-4">
       {/* Palette de couleurs */}
-      <div className="flex items-center gap-2 p-2 bg-slate-900 border border-slate-800 rounded-2xl">
+      <div className="flex items-center gap-2 p-2 bg-slate-950/80 border border-slate-800 rounded-2xl shadow-inner">
         {COLOR_PALETTE.map((c) => (
           <button
             key={c}
@@ -258,7 +258,7 @@ const ColoringGame: React.FC = () => {
       </div>
 
       {/* Zone SVG de Coloriage (Exemple Sapin de Noël) */}
-      <div className="w-full h-64 bg-slate-900 border border-amber-400/30 rounded-2xl p-4 flex items-center justify-center">
+      <div className="w-full h-64 bg-slate-950/80 border border-amber-400/30 rounded-2xl p-4 flex items-center justify-center shadow-inner">
         <svg viewBox="0 0 200 200" className="w-48 h-48 cursor-pointer drop-shadow-md">
           {/* Étoile haut */}
           <polygon
@@ -306,7 +306,7 @@ const ColoringGame: React.FC = () => {
         </svg>
       </div>
 
-      <p className="text-xs text-slate-400">Choisis une couleur puis clique sur une partie du sapin !</p>
+      <p className="text-xs text-slate-300">Choisis une couleur puis clique sur une partie du sapin !</p>
     </div>
   );
 };
@@ -318,7 +318,15 @@ export default function ArcadePage() {
   const [activeTab, setActiveTab] = useState<'memory' | 'runner' | 'coloring'>('memory');
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between relative overflow-hidden">
+    <div className="min-h-screen text-slate-100 flex flex-col justify-between relative overflow-hidden font-sans">
+      {/* BACKGROUND MAGIQUE FIXE : 100% net, sans opacité */}
+      <div
+        className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat pointer-events-none"
+        style={{ 
+          backgroundImage: "url('/images/bg-noel.png')"
+        }}
+      />
+
       <Helmet>
         <title>L'Arcade des Lutins – Jeux de Noël Gratuits</title>
         <meta name="description" content="Jouez aux mini-jeux officiels du Père Noël : Mémory, Course de traîneau et Coloriage féerique !" />
@@ -329,22 +337,22 @@ export default function ArcadePage() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10 relative z-10 w-full grow flex flex-col items-center">
         {/* En-tête */}
         <div className="text-center mb-8">
-          <span className="text-xs font-mono px-3 py-1 bg-amber-500/10 border border-amber-400/30 text-amber-300 rounded-full uppercase tracking-wider">
+          <span className="text-xs font-mono px-4 py-1.5 bg-indigo-950/80 border border-amber-400/30 text-amber-300 rounded-full uppercase tracking-wider backdrop-blur-md">
             🎮 Espace Récréatif des Lutins
           </span>
-          <h1 className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-400 mt-3">
+          <h1 className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-400 mt-3 drop-shadow-md">
             L'Arcade de Noël
           </h1>
-          <p className="mt-2 text-slate-300 text-sm max-w-md mx-auto">
+          <p className="mt-2 text-slate-200 text-sm max-w-md mx-auto bg-slate-950/40 p-2 rounded-xl backdrop-blur-xs">
             Des mini-jeux gratuits pour attendre la venue du Père Noël en s'amusant !
           </p>
         </div>
 
         {/* Sélecteur d'onglets de jeux */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8 bg-indigo-950/80 p-1.5 rounded-2xl border border-amber-400/20 shadow-lg">
+        <div className="flex flex-wrap justify-center gap-2 mb-8 bg-indigo-950/90 p-1.5 rounded-2xl border border-amber-400/20 shadow-lg backdrop-blur-md">
           <button
             onClick={() => setActiveTab('memory')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'memory' ? 'bg-amber-500 text-slate-950 shadow-md' : 'text-slate-300 hover:text-white'
             }`}
           >
@@ -352,7 +360,7 @@ export default function ArcadePage() {
           </button>
           <button
             onClick={() => setActiveTab('runner')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'runner' ? 'bg-amber-500 text-slate-950 shadow-md' : 'text-slate-300 hover:text-white'
             }`}
           >
@@ -360,7 +368,7 @@ export default function ArcadePage() {
           </button>
           <button
             onClick={() => setActiveTab('coloring')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'coloring' ? 'bg-amber-500 text-slate-950 shadow-md' : 'text-slate-300 hover:text-white'
             }`}
           >
@@ -369,7 +377,7 @@ export default function ArcadePage() {
         </div>
 
         {/* Zone d'affichage du jeu actif */}
-        <div className="w-full max-w-xl bg-indigo-950/40 border border-amber-400/30 rounded-3xl p-6 shadow-2xl backdrop-blur-md">
+        <div className="w-full max-w-xl bg-indigo-950/90 border border-amber-400/30 rounded-3xl p-6 shadow-2xl backdrop-blur-md">
           {activeTab === 'memory' && <MemoryGame />}
           {activeTab === 'runner' && <SleighRunnerGame />}
           {activeTab === 'coloring' && <ColoringGame />}
