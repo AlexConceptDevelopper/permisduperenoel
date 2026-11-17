@@ -87,7 +87,7 @@ export default function ArticleContent() {
 
       <h2 id="adresse" className="text-2xl font-bold text-slate-100 mt-10 mb-4">2. Quelle adresse écrire sur l'enveloppe ? (Et faut-il un timbre ?)</h2>
       <p className="text-slate-300 mb-4 leading-relaxed">
-        Bonne nouvelle pour les parents : l'envoi d'une lettre au Père Noël est <strong>100 % gratuit</strong> en France. Inutile de coller un timbre ! La magie postale prend le relais dès que l'enveloppe est glissée dans une boîte jaune de La Poste.
+        Bonne nouvelle pour les parents : l'envoi d'une lettre au Père Noël est <strong>100 % gratuit</strong> en France. Inutile de coller un timbre ! La magie postale prend le relais dès que l'enveloppe est glissée dans une boîte jaune de La Poste. Vous pouvez également retrouver toutes les informations officielles et envoyer une lettre numérique directement sur le site <a href="https://pere-noel.laposte.fr" target="_blank" rel="noopener noreferrer" className="text-amber-400 underline hover:text-amber-300 font-medium">pere-noel.laposte.fr</a>.
       </p>
 
       <div className="bg-slate-900/70 border border-amber-400/30 rounded-2xl p-6 my-6 text-center shadow-inner">
@@ -160,7 +160,7 @@ export default function ArticleContent() {
         <div>
           <h4 className="text-base font-bold text-amber-300">Faut-il mettre un timbre sur la lettre au Père Noël ?</h4>
           <p className="text-slate-300 text-sm leading-relaxed mt-1">
-            Non, l'envoi est entièrement pris en charge par La Poste. Aucun timbre n'est nécessaire pour que la lettre parte au secrétariat de Libourne.
+            Non, l'envoi est entièrement pris en charge par La Poste. Aucun timbre n'est nécessaire pour que la lettre parte au secrétariat de Libourne. Vous pouvez également utiliser leur plateforme officielle sur <a href="https://pere-noel.laposte.fr" target="_blank" rel="noopener noreferrer" className="text-amber-400 underline">pere-noel.laposte.fr</a>.
           </p>
         </div>
 
