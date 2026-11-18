@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navbar } from "../components/Navbar";
-import { Footer } from "../components/Footer"; // Adapte le chemin si ton Footer est ailleurs
+import { Footer } from "../components/Footer";
 import { Helmet } from "react-helmet-async";
 
 interface FaqItem {
@@ -33,6 +33,26 @@ const faqData: FaqItem[] = [
     question: "Puis-je commander le permis un 24 décembre au soir ?",
     answer:
       "Oui ! C'est l'avantage du format numérique instantané. Même à la dernière minute, les lutins de la Fabrique Magique travaillent d'arrache-pied 24h/24 pour que les retardataires trouvent leur permis à temps sous le sapin.",
+  },
+  {
+    question: "Est-ce que le numéro du Père Noël 3630 est payant ?",
+    answer:
+      "En France, le service du secrétariat du Père Noël de La Poste (via le numéro court 3630) est totalement gratuit (service et appel). De plus, l'envoi d'une lettre papier au Père Noël ne nécessite aucun timbre depuis la France métropolitaine !",
+  },
+  {
+    question: "Quelle est l'adresse officielle pour écrire au Père Noël ?",
+    answer:
+      "L'adresse officielle historique en France est : Père Noël, 56000 Libourne, France. Pour les lettres internationales, de nombreux enfants écrivent aussi au Pôle Nord via l'adresse canadienne officielle : Santa Claus, North Pole, H0H 0H0, Canada.",
+  },
+  {
+    question: "Existe-t-il des lignes téléphoniques ou des serveurs vocaux payants ?",
+    answer:
+      "Oui, il existe parfois des lignes téléphoniques surtaxées privées ou des services de répondeurs automatisés gérés par des tiers qui facturent l'appel à la minute. C'est pourquoi il est toujours conseillé de privilégier le service gratuit de La Poste (3630) ou d'utiliser des alternatives magiques textuelles et numériques (comme nos kits et lettres personnalisées) pour éviter les mauvaises surprises sur la facture de téléphone.",
+  },
+  {
+    question: "Quel est le salaire du Père Noël ?",
+    answer:
+      "Le Père Noël est bénévole ! Sa seule vraie rémunération consiste en la joie dans les yeux des enfants le matin de Noël, un verre de lait bien frais et quelques biscuits laissés au pied du sapin.",
   },
 ];
 
