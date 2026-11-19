@@ -11,7 +11,7 @@ export const metadata = {
     "@type": "Article",
     headline: "Le grand retour des téléfilms de Noël",
     description: "Décryptage d'un phénomène télévisuel irrésistible.",
-    image: "https://permisduperenoel.fr/images/blog/telefilms-noel.jpg",
+    image: "https://www.permisduperenoel.fr/images/blog/telefilms-noel.jpg",
     datePublished: "2026-10-07T08:00:00+01:00",
     author: { "@type": "Organization", name: "La Fabrique Magique" },
     publisher: { "@type": "Organization", name: "Permis du Père Noël" },

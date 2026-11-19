@@ -11,7 +11,7 @@ export const metadata = {
     headline: "Les meilleurs pulls moches de Noël : Conseils et sélection",
     description:
       "Découvrez notre sélection des pulls moches de Noël les plus kitchs.",
-    image: "https://permisduperenoel.fr/images/blog/pull-moche-noel.jpg",
+    image: "https://www.permisduperenoel.fr/images/blog/pull-moche-noel.jpg",
     datePublished: "2026-11-12T08:00:00+01:00",
     author: { "@type": "Organization", name: "La Fabrique Magique" },
     publisher: { "@type": "Organization", name: "Permis du Père Noël" },

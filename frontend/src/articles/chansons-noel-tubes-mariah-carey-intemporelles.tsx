@@ -15,7 +15,7 @@ export const metadata = {
       "Chansons de Noël : entre tubes cultes et surdose de Mariah Carey",
     description:
       "Décryptage de ces mélodies de Noël qu'on adore chanter à tue-tête.",
-    image: "https://permisduperenoel.fr/images/blog/chansons-noel.jpg",
+    image: "https://www.permisduperenoel.fr/images/blog/chansons-noel.jpg",
     datePublished: "2026-10-15T08:00:00+01:00",
     author: { "@type": "Organization", name: "La Fabrique Magique" },
     publisher: { "@type": "Organization", name: "Permis du Père Noël" },

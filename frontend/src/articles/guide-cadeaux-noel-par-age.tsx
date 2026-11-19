@@ -14,7 +14,7 @@ export const metadata = {
           "Guide d'achat des jouets de Noël par âge : Le classement infaillible",
         description:
           "Panique devant la liste de Noël ? Découvrez notre guide d'achat complet et infaillible, classé par tranche d'âge de 0 à 10 ans, pour trouver le cadeau parfait à coup sûr.",
-        image: "https://permisduperenoel.fr/images/blog/guide-cadeaux.jpg",
+        image: "https://www.permisduperenoel.fr/images/blog/guide-cadeaux.jpg",
         datePublished: "2026-11-18T08:00:00+01:00",
         author: {
           "@type": "Organization",

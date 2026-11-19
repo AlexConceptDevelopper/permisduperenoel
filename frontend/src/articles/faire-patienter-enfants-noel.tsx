@@ -11,7 +11,7 @@ export const metadata = {
         "@type": "Article",
         "headline": "Comment faire patienter les enfants avant Noël ? Nos astuces magiques",
         "description": "Le mois de décembre est long pour les petits. Découvrez nos conseils pour canaliser l'impatience et faire monter la magie jusqu'au 25 décembre.",
-        "image": "https://permisduperenoel.fr/images/blog/impatiente-noel.jpg",
+        "image": "https://www.permisduperenoel.fr/images/blog/impatiente-noel.jpg",
         "datePublished": "2026-10-07T08:00:00+01:00",
         "author": {
           "@type": "Organization",

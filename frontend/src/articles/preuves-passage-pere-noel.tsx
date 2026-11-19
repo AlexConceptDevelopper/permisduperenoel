@@ -11,7 +11,7 @@ export const metadata = {
         "@type": "Article",
         "headline": "Comment Prouver que le Père Noël est Passé ? Le Guide Ultime des Preuves Magiques",
         "description": "Fausses empreintes de bottes enneigées, carotte croquée, permis de traîneau 'perdu', clochettes et poussière d'étoiles : découvrez le guide complet des meilleures astuces pour transformer votre salon en scène féerique le matin du 25 décembre !",
-        "image": "https://permisduperenoel.fr/images/blog/preuves-passage-pere-noel.jpg",
+        "image": "https://www.permisduperenoel.fr/images/blog/preuves-passage-pere-noel.jpg",
         "datePublished": "2026-10-27T08:00:00+01:00",
         "author": {
           "@type": "Organization",

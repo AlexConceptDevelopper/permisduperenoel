@@ -9,7 +9,7 @@ export const metadata = {
     "@type": "Article",
     "headline": "Tuto DIY : Comment fabriquer son propre pull moche de Noël",
     "description": "Guide étape par étape pour créer un pull de Noël kitch et unique.",
-    "image": "https://permisduperenoel.fr/images/blog/tuto-pull-diy.jpg",
+    "image": "https://www.permisduperenoel.fr/images/blog/tuto-pull-diy.jpg",
     "datePublished": "2026-11-14T08:00:00+01:00",
     "author": { "@type": "Organization", "name": "La Fabrique Magique" },
     "publisher": { "@type": "Organization", "name": "Permis du Père Noël" }

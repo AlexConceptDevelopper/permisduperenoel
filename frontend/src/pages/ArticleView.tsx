@@ -40,7 +40,7 @@ export default function ArticleView() {
             {JSON.stringify(metadata.jsonLd)}
           </script>
         )}
-        <link rel="canonical" href={`https://permisduperenoel.fr/blog/${metadata.slug}`} />
+        <link rel="canonical" href={`https://www.permisduperenoel.fr/blog/${metadata.slug}`} />
       </Helmet>
 
       {/* Navbar en haut */}

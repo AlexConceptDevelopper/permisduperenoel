@@ -11,7 +11,7 @@ export const metadata = {
         "@type": "Article",
         "headline": "Ouverture du Secrétariat du Père Noël à La Poste : Tout Savoir pour Écrire au Pôle Nord",
         "description": "Le secrétariat officiel du Père Noël de La Poste vient d'ouvrir ses portes pour 2026 ! Découvrez l'adresse exacte à Libourne, comment envoyer une lettre gratuite et comment compléter la surprise avec le Pack Magique du Pôle Nord.",
-        "image": "https://permisduperenoel.fr/images/blog/secretariat-pere-noel-poste.jpg",
+        "image": "https:/www./permisduperenoel.fr/images/blog/secretariat-pere-noel-poste.jpg",
         "datePublished": "2026-11-17T08:00:00+01:00",
         "author": {
           "@type": "Organization",

@@ -14,7 +14,7 @@ export const metadata = {
           "Les secrets des lutins du Père Noël : Rôles, missions et mystères du Pôle Nord",
         description:
           "Qui sont vraiment les lutins du Père Noël ? Découvrez leurs missions secrètes au Pôle Nord, leur rôle dans l'atelier des jouets et comment ils veillent sur les enfants.",
-        image: "https://permisduperenoel.fr/images/blog/lutins-noel.jpg",
+        image: "https://www.permisduperenoel.fr/images/blog/lutins-noel.jpg",
         datePublished: "2026-11-18T08:00:00+01:00",
         author: {
           "@type": "Organization",

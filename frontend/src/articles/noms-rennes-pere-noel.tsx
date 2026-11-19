@@ -11,7 +11,7 @@ export const metadata = {
         "@type": "Article",
         "headline": "Noms des Rennes du Père Noël : Tout Savoir sur l'Attelage Magique",
         "description": "Découvrez l'histoire complète et détaillée de l'attelage magique du Père Noël. Noms officiels en français et anglais, origines littéraires de 1823, histoire de Rudolphe et secrets de fabrication du traîneau.",
-        "image": "https://permisduperenoel.fr/images/blog/rennes-pere-noel.jpg",
+        "image": "https://www.permisduperenoel.fr/images/blog/rennes-pere-noel.jpg",
         "datePublished": "2026-10-27T08:00:00+01:00",
         "author": {
           "@type": "Organization",
