@@ -315,6 +315,7 @@ export function Home() {
 
       <Helmet>
         <title>Le Permis du Père Noël 2026 - Pack Magique 4-en-1</title>
+        <link rel="canonical" href="https://www.permisduperenoel.fr/" />
       </Helmet>
 
       <Navbar />

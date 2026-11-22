@@ -30,6 +30,7 @@ export default function BlogIndex() {
           name="description"
           content="Découvrez tous nos articles, conseils et astuces pour faire patienter les enfants, préparer les fêtes et vivre un Noël magique et inoubliable."
         />
+        <link rel="canonical" href="https://www.permisduperenoel.fr/blog" />
       </Helmet>
 
       {/* Navbar intégrée en haut */}
