@@ -1,5 +1,5 @@
 export const metadata = {
-  slug: "retour-telefilms-noel-guimauve",
+  slug: "retour-telefilms-noel",
   title:
     "Le grand retour des téléfilms de Noël : pourquoi on les adore (autant qu'on les critique)",
   description:
