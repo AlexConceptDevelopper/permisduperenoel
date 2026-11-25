@@ -10,11 +10,21 @@ import { DiplomaPreview } from "../components/DiplomaPreview";
 import { AkinatorQuiz } from "../components/AkinatorQuiz";
 import { Helmet } from "react-helmet-async";
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export function Home() {
   const [customerEmail, setCustomerEmail] = useState("");
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [isLetterUnlocked, setIsLetterUnlocked] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [shareFeedback, setShareFeedback] = useState("");
 
   const [formData, setFormData] = useState<DocumentData>({
     childName: "Lucas",
@@ -45,191 +55,201 @@ export function Home() {
     setIsQuizCompleted(true);
   };
 
-  // Action de partage et téléchargement direct avec logo officiel et signature nettoyée
-  const handleSocialShareAndDownload = (
-    platform: "whatsapp" | "facebook" | "instagram",
-  ) => {
-    const siteUrl = encodeURIComponent("https://permisduperenoel.fr");
-    const shareText = encodeURIComponent(
-      `🎅 Découvre la lettre officielle et le permis du Père Noël pour les enfants sur https://permisduperenoel.fr !`,
-    );
+  const triggerLetterDownload = () => {
+    const rawName = formData.childName?.trim() || "enfant";
+    const rawLetter =
+      formData.santaLetter?.trim() ||
+      `Mon cher ${rawName},\n\nLes lutins m'ont rapporté tes formidables exploits cette année ! Tu as fait de super progrès et je suis très fier de toi. Prépare-toi pour une nuit magique sous le sapin !`;
 
-    // 1. Redirection vers le réseau social
-    if (platform === "whatsapp") {
-      window.open(`https://api.whatsapp.com/send?text=${shareText}`, "_blank");
-    } else if (platform === "facebook") {
-      window.open(
-        `https://www.facebook.com/sharer/sharer.php?u=${siteUrl}`,
-        "_blank",
-      );
-    } else if (platform === "instagram") {
-      navigator.clipboard.writeText("https://permisduperenoel.fr");
-    }
-
-    // 2. Validation du déblocage et fermeture de la modale
-    setIsLetterUnlocked(true);
-    setShowShareModal(false);
-
-    // Nettoyage du texte brut de la lettre
-    let cleanedLetter =
-      formData.santaLetter ||
-      `Mon cher ${formData.childName},\n\nLes lutins m'ont rapporté tes formidables exploits cette année ! Tu as fait de super progrès et je suis très fier de toi. Prépare-toi pour une nuit magique sous le sapin !`;
-
-    cleanedLetter = cleanedLetter
+    const cleanedLetter = rawLetter
       .replace(/Avec toute mon affection,?\s*Le Père Noël\s*🎅?/gi, "")
       .replace(/Le Père Noël\s*🎅?/gi, "")
       .trim();
 
-    // 3. Génération du template HTML avec Logo.png et favicon-transparent.png
-    const letterHtmlContent = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="UTF-8"/>
-          <title>Lettre Officielle du Père Noël - ${formData.childName}</title>
-          <style>
-            body {
-              font-family: 'Georgia', serif;
-              background: #0f172a;
-              color: #451a03;
-              padding: 40px 20px;
-              margin: 0;
-            }
-            .card {
-              max-width: 650px;
-              margin: 0 auto;
-              border: 5px solid #d4af37;
-              border-radius: 24px;
-              background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-              padding: 40px 50px;
-              box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-              position: relative;
-            }
-            .header {
-              text-align: center;
-              border-bottom: 2px solid #d4af37;
-              padding-bottom: 20px;
-              margin-bottom: 25px;
-            }
-            .logo-img {
-              max-height: 75px;
-              margin-bottom: 12px;
-              filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));
-            }
-            .title {
-              color: #b91c1c;
-              font-size: 20px;
-              font-weight: bold;
-              text-transform: uppercase;
-              letter-spacing: 1px;
-              margin: 5px 0;
-            }
-            .subtitle {
-              font-size: 11px;
-              color: #92400e;
-              text-transform: uppercase;
-              letter-spacing: 2px;
-              font-family: sans-serif;
-            }
-            .content {
-              font-size: 15px;
-              line-height: 1.8;
-              color: #78350f;
-              white-space: pre-line;
-              text-align: left;
-              margin: 25px 0;
-            }
-            .signature-block {
-              margin-top: 30px;
-              display: flex;
-              justify-content: space-between;
-              align-items: flex-end;
-              border-top: 1px dashed #d4af37;
-              padding-top: 20px;
-            }
-            .signature-text {
-              font-size: 14px;
-              font-weight: bold;
-              color: #78350f;
-            }
-            .santa-sig {
-              font-family: 'Brush Script MT', cursive, serif;
-              font-size: 32px;
-              color: #b91c1c;
-              margin-top: 5px;
-            }
-            .stamp-box {
-              text-align: right;
-              display: flex;
-              align-items: center;
-              gap: 8px;
-            }
-            .stamp-icon {
-              width: 38px;
-              height: 38px;
-            }
-            .footer {
-              margin-top: 30px;
-              text-align: center;
-              font-family: sans-serif;
-              font-size: 11px;
-              color: #92400e;
-              font-weight: bold;
-              background-color: rgba(212, 175, 55, 0.15);
-              padding: 12px;
-              border-radius: 12px;
-              border: 1px solid rgba(212, 175, 55, 0.4);
-            }
-          </style>
-        </head>
-        <body>
-          <div class="card">
-            <div class="header">
-              <img src="${window.location.origin}/Logo.png" alt="Permis du Père Noël" class="logo-img" onerror="this.style.display='none'"/>
-              <div class="subtitle">Atelier Central du Pôle Nord</div>
-              <div class="title">Lettre Officielle du Père Noël</div>
-            </div>
+    const safeName = escapeHtml(rawName);
+    const safeLetter = escapeHtml(cleanedLetter);
+    const safeOrigin = escapeHtml(window.location.origin);
 
-            <div class="content">${cleanedLetter}</div>
+    const letterHtmlContent = `<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Lettre Officielle du Père Noël - ${safeName}</title>
+    <style>
+      body {
+        font-family: 'Georgia', serif;
+        background: #0f172a;
+        color: #451a03;
+        padding: 40px 20px;
+        margin: 0;
+      }
+      .card {
+        max-width: 650px;
+        margin: 0 auto;
+        border: 5px solid #d4af37;
+        border-radius: 24px;
+        background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        padding: 40px 50px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        position: relative;
+      }
+      .header {
+        text-align: center;
+        border-bottom: 2px solid #d4af37;
+        padding-bottom: 20px;
+        margin-bottom: 25px;
+      }
+      .logo-img {
+        max-height: 75px;
+        margin-bottom: 12px;
+        filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));
+      }
+      .title {
+        color: #b91c1c;
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 5px 0;
+      }
+      .subtitle {
+        font-size: 11px;
+        color: #92400e;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-family: sans-serif;
+      }
+      .content {
+        font-size: 15px;
+        line-height: 1.8;
+        color: #78350f;
+        white-space: pre-line;
+        text-align: left;
+        margin: 25px 0;
+      }
+      .signature-block {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        border-top: 1px dashed #d4af37;
+        padding-top: 20px;
+      }
+      .signature-text {
+        font-size: 14px;
+        font-weight: bold;
+        color: #78350f;
+      }
+      .santa-sig {
+        font-family: 'Brush Script MT', cursive, serif;
+        font-size: 32px;
+        color: #b91c1c;
+        margin-top: 5px;
+      }
+      .stamp-box {
+        text-align: right;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .stamp-icon {
+        width: 38px;
+        height: 38px;
+      }
+      .footer {
+        margin-top: 30px;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 11px;
+        color: #92400e;
+        font-weight: bold;
+        background-color: rgba(212, 175, 55, 0.15);
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(212, 175, 55, 0.4);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <img src="${safeOrigin}/Logo.png" alt="Permis du Père Noël" class="logo-img" onerror="this.style.display='none'"/>
+        <div class="subtitle">Atelier Central du Pôle Nord</div>
+        <div class="title">Lettre Officielle du Père Noël</div>
+      </div>
 
-            <div class="signature-block">
-              <div>
-                <div class="signature-text">Avec toute mon affection,</div>
-                <div class="santa-sig">Santa Claus</div>
-              </div>
-              <div class="stamp-box">
-                <img src="${window.location.origin}/favicon-transparent.png" alt="Sceau" class="stamp-icon" onerror="this.style.display='none'"/>
-                <div style="font-family: sans-serif; font-size: 10px; color: #92400e; font-weight: bold; text-align: left;">
-                  ✨ Sceau Officiel de l'Atelier<br/>Édition 2026
-                </div>
-              </div>
-            </div>
+      <div class="content">${safeLetter}</div>
 
-            <div class="footer">
-              ✨ Toute l'équipe de <strong>permisduperenoel.fr</strong> vous souhaite de très belles fêtes de fin d'année ! ✨
-            </div>
+      <div class="signature-block">
+        <div>
+          <div class="signature-text">Avec toute mon affection,</div>
+          <div class="santa-sig">Santa Claus</div>
+        </div>
+        <div class="stamp-box">
+          <img src="${safeOrigin}/favicon-transparent.png" alt="Sceau" class="stamp-icon" onerror="this.style.display='none'"/>
+          <div style="font-family: sans-serif; font-size: 10px; color: #92400e; font-weight: bold; text-align: left;">
+            ✨ Sceau Officiel de l'Atelier<br/>Édition 2026
           </div>
-        </body>
-      </html>
-    `;
+        </div>
+      </div>
 
-    // 4. Téléchargement direct du fichier HTML prêt à imprimer
+      <div class="footer">
+        ✨ Toute l'équipe de <strong>permisduperenoel.fr</strong> vous souhaite de très belles fêtes de fin d'année ! ✨
+      </div>
+    </div>
+  </body>
+</html>`;
+
     const blob = new Blob([letterHtmlContent], {
       type: "text/html;charset=utf-8",
     });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `Lettre_Pere_Noel_${formData.childName || "enfant"}.html`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `Lettre_Pere_Noel_${rawName.replace(/[^a-zA-Z0-9_-]/g, "_")}.html`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     URL.revokeObjectURL(url);
+  };
+
+  const handleSocialShareAndDownload = async (
+    platform: "whatsapp" | "facebook" | "instagram",
+  ) => {
+    const targetUrl = "https://www.permisduperenoel.fr";
+    const encodedUrl = encodeURIComponent(targetUrl);
+    const shareText = encodeURIComponent(
+      `🎅 Découvre la lettre officielle et le permis du Père Noël pour les enfants sur ${targetUrl} !`,
+    );
+
+    setShareFeedback("");
+
+    if (platform === "whatsapp") {
+      window.open(`https://api.whatsapp.com/send?text=${shareText}`, "_blank", "noopener,noreferrer");
+    } else if (platform === "facebook") {
+      window.open(
+        `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+        "_blank",
+        "noopener,noreferrer",
+      );
+    } else if (platform === "instagram") {
+      try {
+        await navigator.clipboard.writeText(targetUrl);
+        setShareFeedback("Lien copié ! Colle-le dans ta Story Instagram.");
+      } catch {
+        setShareFeedback(`Partage ce lien dans ta Story Instagram : ${targetUrl}`);
+      }
+    }
+
+    setIsLetterUnlocked(true);
+    setShowShareModal(false);
+    triggerLetterDownload();
   };
 
   const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!customerEmail) {
+    const trimmedEmail = customerEmail.trim();
+    if (!trimmedEmail) {
       setErrorMessage(
         "Veuillez entrer une adresse e-mail valide pour recevoir vos documents.",
       );
@@ -241,7 +261,7 @@ export function Home() {
 
     try {
       const orderRequest: CreateOrderRequest = {
-        customerEmail,
+        customerEmail: trimmedEmail,
         documentData: formData,
       };
 
@@ -263,53 +283,50 @@ export function Home() {
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const img = new Image();
-        img.src = event.target?.result as string;
-        img.onload = () => {
-          const MAX_SIZE = 600;
-          let width = img.width;
-          let height = img.height;
+    if (!file) return;
 
-          if (width > height) {
-            if (width > MAX_SIZE) {
-              height *= MAX_SIZE / width;
-              width = MAX_SIZE;
-            }
-          } else {
-            if (height > MAX_SIZE) {
-              width *= MAX_SIZE / height;
-              height = MAX_SIZE;
-            }
-          }
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const result = event.target?.result;
+      if (typeof result !== "string") return;
 
-          const canvas = document.createElement("canvas");
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext("2d");
-          ctx?.drawImage(img, 0, 0, width, height);
+      const img = new Image();
+      img.src = result;
+      img.onload = () => {
+        const MAX_SIZE = 600;
+        let width = img.width;
+        let height = img.height;
 
-          const compressedBase64 = canvas.toDataURL("image/jpeg", 0.8);
+        if (width > height && width > MAX_SIZE) {
+          height = (height * MAX_SIZE) / width;
+          width = MAX_SIZE;
+        } else if (height >= width && height > MAX_SIZE) {
+          width = (width * MAX_SIZE) / height;
+          height = MAX_SIZE;
+        }
 
-          setFormData((prev) => ({
-            ...prev,
-            avatarUrl: compressedBase64,
-          }));
-        };
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(width);
+        canvas.height = Math.round(height);
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        const compressedBase64 = canvas.toDataURL("image/jpeg", 0.8);
+        setFormData((prev) => ({
+          ...prev,
+          avatarUrl: compressedBase64,
+        }));
       };
-      reader.readAsDataURL(file);
-    }
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
     <div className="min-h-screen text-amber-50 flex flex-col justify-between relative overflow-x-hidden font-sans">
-      {/* BACKGROUND MAGIQUE FIXE : 100% net, sans opacité */}
       <div
         className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat pointer-events-none"
-        style={{ 
-          backgroundImage: "url('/images/bg-noel.png')"
+        style={{
+          backgroundImage: "url('/images/bg-noel.png')",
         }}
       />
 
@@ -322,7 +339,7 @@ export function Home() {
 
       <main className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center px-4 py-8 relative z-10 my-auto">
         {/* BANNIÈRE NOUVEAUTÉ : Format Paysage A4 */}
-        <div className="w-full max-w-3xl mb-6 bg-indigo-950/80 border border-amber-400/50 rounded-2xl p-3 text-center shadow-lg backdrop-blur-md animate-pulse">
+        <div className="w-full max-w-3xl mb-6 bg-indigo-950/80 border border-amber-400/50 rounded-2xl p-3 text-center shadow-lg backdrop-blur-md">
           <p className="text-xs md:text-sm font-bold text-amber-200 flex items-center justify-center gap-2">
             <span>📜✨</span> NOUVEAU : Votre Diplôme de l'Enfant Sage est
             désormais disponible en{" "}
@@ -340,14 +357,14 @@ export function Home() {
           <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-400">
             Le Pack Magique 4-en-1
           </h1>
-          <p className="text-amber-100/90 text-xs md:text-sm font-medium max-w-lg mx-auto bg-slate-950/40 p-2 rounded-xl backdrop-blur-xs">
+          <p className="text-amber-100/90 text-xs md:text-sm font-medium max-w-xl mx-auto bg-slate-950/45 px-3 py-2 rounded-xl backdrop-blur-xs">
             {!isQuizCompleted
-              ? "Laissez l'enquête des lutins concevoir le dossier secret de votre enfant en quelques clics !"
+              ? "Laissez l'enquête des lutins concevoir le dossier de votre enfant en quelques clics — avec une lettre du Père Noël à débloquer gratuitement à la fin."
               : `Voici le dossier magique généré pour ${formData.childName} ! Vérifiez et commandez votre pack.`}
           </p>
         </header>
 
-        {/* SECTION DES 4 CARTES D'INFORMATIONS (Incluant la Lettre du Père Noël) */}
+        {/* SECTION DES 4 CARTES D'INFORMATIONS */}
         <div className="w-full max-w-6xl mb-8 grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="bg-indigo-950/70 border border-amber-400/30 rounded-2xl p-4 shadow-md backdrop-blur-xs">
             <div className="text-xl mb-1">🎅</div>
@@ -386,12 +403,19 @@ export function Home() {
               Lettre du Père Noël
             </h3>
             <p className="text-[11px] text-amber-100/90 mt-1">
-              Générez une réponse personnalisée ! À débloquer <strong>gratuitement</strong> via partage, ou directement <strong>comprise</strong> dans le Pack Magique 4-en-1.
+              Générez une réponse personnalisée ! À débloquer{" "}
+              <strong>gratuitement</strong> via partage, ou directement{" "}
+              <strong>comprise</strong> dans le Pack Magique 4-en-1.
             </p>
           </div>
         </div>
 
-        {/* CONDITION : Si le quiz n'est pas fait, on affiche l'Enquête Magique */}
+        {shareFeedback && (
+          <div className="w-full max-w-3xl mb-4 bg-emerald-950/85 border border-emerald-400/50 text-emerald-200 text-xs font-semibold px-4 py-2.5 rounded-xl text-center">
+            {shareFeedback}
+          </div>
+        )}
+
         {!isQuizCompleted ? (
           <div className="w-full max-w-xl mx-auto my-4">
             <AkinatorQuiz onComplete={handleQuizComplete} />
@@ -416,14 +440,14 @@ export function Home() {
                 <button
                   type="button"
                   onClick={() => setShowShareModal(true)}
-                  className="py-2.5 px-5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl uppercase shadow-md flex items-center gap-2 whitespace-nowrap cursor-pointer transition-all animate-pulse"
+                  className="py-2.5 px-5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl uppercase shadow-md flex items-center gap-2 whitespace-nowrap cursor-pointer transition-all"
                 >
                   <span>🔗</span> Partager pour débloquer (Gratuit)
                 </button>
               ) : (
                 <button
                   type="button"
-                  onClick={() => setShowShareModal(true)}
+                  onClick={triggerLetterDownload}
                   className="py-2 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl uppercase shadow-lg flex items-center gap-2 whitespace-nowrap cursor-pointer"
                 >
                   <span>📥</span> Re-télécharger ma Lettre Gratuite
@@ -464,7 +488,7 @@ export function Home() {
                       onClick={() => handleSocialShareAndDownload("instagram")}
                       className="w-full py-3 bg-pink-600 hover:bg-pink-500 text-white font-bold text-xs rounded-xl uppercase cursor-pointer flex items-center justify-center gap-2 shadow-md"
                     >
-                      <span>📸</span> Partager en Story Insta & Télécharger
+                      <span>📸</span> Copier le lien Story Insta & Télécharger
                     </button>
                   </div>
 
@@ -526,17 +550,29 @@ export function Home() {
                       />
                     </div>
 
-                    {/* ENCART RAPPORT / CE QUE CONTIENT LE PACK MAGIQUE */}
                     <div className="bg-slate-950/70 border border-amber-400/30 rounded-2xl p-3.5 text-xs space-y-2 text-amber-100 shadow-inner">
                       <p className="font-bold text-amber-300 border-b border-amber-400/20 pb-1.5 flex items-center justify-between">
                         <span>🎁 Le Pack Magique 4-en-1 Contient :</span>
-                        <span className="text-emerald-400 text-[10px] uppercase bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/30">4 Documents</span>
+                        <span className="text-emerald-400 text-[10px] uppercase bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                          4 Documents
+                        </span>
                       </p>
                       <ul className="space-y-1 text-[11px] text-amber-100/90 pt-1">
-                        <li>🛷 <strong>Permis de Traîneau</strong> officiel de l'enfant</li>
-                        <li>🛂 <strong>Passeport du Pôle Nord</strong> personnalisé</li>
-                        <li>📜 <strong>Diplôme de l'Enfant Sage</strong> (Format A4 Paysage)</li>
-                        <li>✉️ <strong>La Lettre de Réponse du Père Noël</strong> (Inscrite au pack !)</li>
+                        <li>
+                          🛷 <strong>Permis de Traîneau</strong> officiel de
+                          l'enfant
+                        </li>
+                        <li>
+                          🛂 <strong>Passeport du Pôle Nord</strong> personnalisé
+                        </li>
+                        <li>
+                          📜 <strong>Diplôme de l'Enfant Sage</strong> (Format A4
+                          Paysage)
+                        </li>
+                        <li>
+                          ✉️ <strong>La Lettre de Réponse du Père Noël</strong>{" "}
+                          (Inscrite au pack !)
+                        </li>
                       </ul>
                     </div>
 
