@@ -1,16 +1,20 @@
 package permis.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.MediaType;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
+import java.time.Duration;
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class EmailService {
+
+    private static final String BREVO_SEND_EMAIL_URL = "https://api.brevo.com/v3/smtp/email";
 
     @Value("${app.frontend.url}")
     private String frontendUrl;
@@ -21,7 +25,17 @@ public class EmailService {
     @Value("${brevo.api.key:}")
     private String brevoApiKey;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestClient restClient;
+
+    public EmailService() {
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(Duration.ofSeconds(5));
+        requestFactory.setReadTimeout(Duration.ofSeconds(15));
+
+        this.restClient = RestClient.builder()
+                .requestFactory(requestFactory)
+                .build();
+    }
 
     /**
      * Envoie l'e-mail avec le permis PDF en pièce jointe via l'API HTTP de Brevo
@@ -31,7 +45,7 @@ public class EmailService {
         try {
             String subject = "🎅 Ho ho ho ! Le permis officiel de " + childName + " est arrivé !";
 
-            // Construction du HTML avec le logo hébergé sur le frontend (Logo.png)
+            // Construction du HTML avec le logo hébergé sur le frontend
             String htmlContent = """
                     <!DOCTYPE html>
                     <html>
@@ -61,11 +75,6 @@ public class EmailService {
                     </html>
                     """
                     .formatted(frontendUrl, childName, frontendUrl);
-            String url = "https://api.brevo.com/v3/smtp/email";
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set("api-key", brevoApiKey);
 
             // Encodage du PDF en Base64 exigé par l'API Brevo pour les pièces jointes
             String base64Pdf = Base64.getEncoder().encodeToString(pdfBytes);
@@ -80,9 +89,13 @@ public class EmailService {
                             "content", base64Pdf,
                             "name", attachmentName)));
 
-            HttpEntity<Map<String, Object>> entity = new HttpEntity<>(emailPayload, headers);
-
-            restTemplate.postForEntity(url, entity, String.class);
+            restClient.post()
+                    .uri(BREVO_SEND_EMAIL_URL)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .header("api-key", brevoApiKey)
+                    .body(emailPayload)
+                    .retrieve()
+                    .toBodilessEntity();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Échec de l'envoi de l'e-mail du permis pour " + childName, e);
