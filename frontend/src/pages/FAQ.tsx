@@ -42,7 +42,7 @@ const faqData: FaqItem[] = [
   {
     question: "Quelle est l'adresse officielle pour écrire au Père Noël ?",
     answer:
-      "L'adresse officielle historique en France est : Père Noël, 56000 Libourne, France. Pour les lettres internationales, de nombreux enfants écrivent aussi au Pôle Nord via l'adresse canadienne officielle : Santa Claus, North Pole, H0H 0H0, Canada.",
+      "L'adresse officielle historique en France est : Père Noël, 33500 Libourne, France. Pour les lettres internationales, de nombreux enfants écrivent aussi au Pôle Nord via l'adresse canadienne officielle : Santa Claus, North Pole, H0H 0H0, Canada.",
   },
   {
     question: "Existe-t-il des lignes téléphoniques ou des serveurs vocaux payants ?",
