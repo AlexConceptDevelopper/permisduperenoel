@@ -37,7 +37,7 @@ const faqData: FaqItem[] = [
   {
     question: "Est-ce que le numéro du Père Noël 3630 est payant ?",
     answer:
-      "En France, le service du secrétariat du Père Noël de La Poste (via le numéro court 3630) est totalement gratuit (service et appel). De plus, l'envoi d'une lettre papier au Père Noël ne nécessite aucun timbre depuis la France métropolitaine !",
+      "Le 3630 est un numéro court qui peut être payant ou surtaxé selon le service et les conditions tarifaires en vigueur, et ne correspond pas à un service d'appel officiel gratuit de La Poste. En revanche, l'envoi d'une lettre papier au secrétariat du Père Noël (à Libourne) ne nécessite aucun timbre depuis la France métropolitaine.",
   },
   {
     question: "Quelle est l'adresse officielle pour écrire au Père Noël ?",
@@ -47,7 +47,7 @@ const faqData: FaqItem[] = [
   {
     question: "Existe-t-il des lignes téléphoniques ou des serveurs vocaux payants ?",
     answer:
-      "Oui, il existe parfois des lignes téléphoniques surtaxées privées ou des services de répondeurs automatisés gérés par des tiers qui facturent l'appel à la minute. C'est pourquoi il est toujours conseillé de privilégier le service gratuit de La Poste (3630) ou d'utiliser des alternatives magiques textuelles et numériques (comme nos kits et lettres personnalisées) pour éviter les mauvaises surprises sur la facture de téléphone.",
+      "Oui, il existe parfois des lignes téléphoniques ou des répondeurs automatisés gérés par des tiers qui peuvent être payants ou surtaxés (à l'acte ou à la durée). Il est conseillé de toujours vérifier les tarifs affichés avant d'appeler et de privilégier l'envoi postal gratuit de la lettre ou des alternatives numériques comme nos kits et lettres personnalisées.",
   },
   {
     question: "Quel est le salaire du Père Noël ?",
