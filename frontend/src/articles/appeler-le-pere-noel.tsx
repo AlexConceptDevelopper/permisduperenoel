@@ -6,7 +6,7 @@ export const metadata = {
   description:
     "Envie d'appeler le Père Noël en décembre ? Découvrez la différence entre répondeur fixe non surtaxé, numéros payants à tarif affiché, vigilance sur les 3630/089 et alternatives gratuites.",
   date: "26 novembre 2026",
-  image: "/images/blog/appeler-le-pere-noel.jpg",
+  image: "/images/blog/appeler-le-pere-noel.png",
   jsonLd: {
     "@context": "https://schema.org",
     "@graph": [
