@@ -15,5 +15,5 @@ export async function checkoutOrder(request: CreateOrderRequest): Promise<Stripe
 }
 
 export function getPdfDownloadUrl(sessionId: string): string {
-  return getApiUrl(`/orders/download-pdf?sessionId=${sessionId}`);
+  return getApiUrl(`/orders/download-pdf?sessionId=${encodeURIComponent(sessionId)}`);
 }
