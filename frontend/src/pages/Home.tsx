@@ -346,21 +346,21 @@ export function Home() {
             <span className="text-white underline">
               Format Paysage A4 Grand Luxe
             </span>{" "}
-            !
+            — idéal dès le 1er décembre ou sous le sapin !
           </p>
         </div>
 
         <header className="text-center space-y-2 max-w-2xl mb-6">
           <span className="inline-block px-4 py-1.5 bg-indigo-950/40 border border-amber-400/40 text-amber-200 rounded-full text-xs font-bold tracking-widest uppercase shadow-md">
-            ✨ Atelier Officiel du Père Noël ✨
+            ✨ Atelier Officiel du Père Noël • Édition 2026 ✨
           </span>
           <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-400">
             Le Pack Magique 4-en-1
           </h1>
           <p className="text-amber-100/90 text-xs md:text-sm font-medium max-w-xl mx-auto bg-slate-950/45 px-3 py-2 rounded-xl backdrop-blur-xs">
             {!isQuizCompleted
-              ? "Laissez l'enquête des lutins concevoir le dossier de votre enfant en quelques clics — avec une lettre du Père Noël à débloquer gratuitement à la fin."
-              : `Voici le dossier magique généré pour ${formData.childName} ! Vérifiez et commandez votre pack.`}
+              ? "Préparez la magie dès le début de décembre (calendrier de l'Avent ou nuit de Noël) en quelques clics — avec une lettre du Père Noël à débloquer gratuitement à la fin."
+              : `Voici le dossier magique généré pour ${formData.childName} ! Vérifiez et recevez vos PDF immédiatement.`}
           </p>
         </header>
 
@@ -369,12 +369,11 @@ export function Home() {
           <div className="bg-indigo-950/70 border border-amber-400/30 rounded-2xl p-4 shadow-md backdrop-blur-xs">
             <div className="text-xl mb-1">🎅</div>
             <h3 className="text-xs font-bold text-amber-300 uppercase">
-              La tradition du Pôle Nord
+              Dès décembre ou sous le sapin
             </h3>
             <p className="text-[11px] text-amber-100/80 mt-1">
-              Glissez le diplôme sous le sapin le 25 au matin pour émerveiller
-              votre enfant en lui prouvant qu'il est inscrit sur le Grand
-              Registre d'Or !
+              Glissez la lettre ou le diplôme dès le 1er décembre pour lancer
+              la magie, puis gardez le permis pour le matin du 25 !
             </p>
           </div>
           <div className="bg-indigo-950/70 border border-amber-400/30 rounded-2xl p-4 shadow-md backdrop-blur-xs">
@@ -512,7 +511,7 @@ export function Home() {
                 <div>
                   <div className="flex items-center justify-between border-b border-amber-400/20 pb-2 mb-4">
                     <h2 className="text-xs font-bold text-amber-300 flex items-center gap-2 uppercase tracking-wider">
-                      <span>✨</span> Dossier validé par les Lutins
+                      <span>✨</span> Dossier 2026 validé par les Lutins
                     </h2>
                     <button
                       type="button"
@@ -526,7 +525,7 @@ export function Home() {
                   <div className="space-y-3">
                     <div>
                       <label className="block text-[11px] uppercase font-bold text-amber-200/90 mb-1">
-                        E-mail du parent (pour recevoir les PDF)
+                        E-mail du parent (envoi immédiat des PDF)
                       </label>
                       <input
                         type="email"
@@ -554,7 +553,7 @@ export function Home() {
                       <p className="font-bold text-amber-300 border-b border-amber-400/20 pb-1.5 flex items-center justify-between">
                         <span>🎁 Le Pack Magique 4-en-1 Contient :</span>
                         <span className="text-emerald-400 text-[10px] uppercase bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                          4 Documents
+                          4 PDF Prêts
                         </span>
                       </p>
                       <ul className="space-y-1 text-[11px] text-amber-100/90 pt-1">
@@ -597,25 +596,35 @@ export function Home() {
                   </p>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full py-3.5 bg-linear-to-r from-amber-400 via-yellow-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black rounded-xl shadow-xl uppercase tracking-wider text-xs border border-amber-200 transition-transform transform hover:scale-[1.01] disabled:opacity-50 cursor-pointer"
-                >
-                  {isLoading
-                    ? "Préparation du traîneau..."
-                    : "🎁 Commander le Pack 4-en-1 (1,99€)"}
-                </button>
+                <div className="space-y-2">
+                  <p className="text-[11px] text-center text-amber-200/85">
+                    ⚡ Reçu dans votre boîte mail dans la minute • Imprimable
+                    chez vous ou en impression express sans attendre le dernier
+                    jour.
+                  </p>
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full py-3.5 bg-linear-to-r from-amber-400 via-yellow-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black rounded-xl shadow-xl uppercase tracking-wider text-xs border border-amber-200 transition-transform transform hover:scale-[1.01] disabled:opacity-50 cursor-pointer"
+                  >
+                    {isLoading
+                      ? "Préparation du traîneau..."
+                      : "🎁 Commander le Pack 4-en-1 (1,99€)"}
+                  </button>
+                </div>
               </div>
 
               {/* Aperçu en direct */}
               <div className="lg:col-span-6 flex flex-col items-center justify-between space-y-4 bg-indigo-950/90 border-2 border-amber-400/60 p-6 rounded-3xl shadow-[0_0_30px_rgba(251,191,36,0.15)] backdrop-blur-xl relative overflow-hidden">
                 <div className="w-full flex flex-col items-center space-y-4 relative z-10">
-                  <div className="flex items-center justify-between w-full px-2">
+                  <div className="flex items-center justify-between w-full px-2 gap-2 flex-wrap">
                     <div className="flex items-center gap-2 text-xs uppercase font-extrabold tracking-widest text-amber-300 bg-amber-500/10 px-4 py-1.5 rounded-full border border-amber-400/30 shadow-inner">
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
                       Aperçu Magique en Direct
                     </div>
+                    <span className="text-[11px] font-semibold text-amber-200/80">
+                      N° {formData.serialNumber}
+                    </span>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2 w-full">
