@@ -14,6 +14,7 @@ import { FAQ } from './pages/FAQ';
 import ArticleView from './pages/ArticleView';
 import BlogIndex from './pages/blog/BlogIndex';
 import WishlistMaker from './components/WishlistMaker';
+import AdventTicketsPage from "./pages/AdventTicketsPage";
 import ArcadePage from './pages/ArcadePage';
 
 export default function App() {
@@ -48,6 +49,9 @@ export default function App() {
 
           {/* Route pour la liste du père Noël */}
           <Route path="/liste-noel" element={<WishlistMaker />} />
+
+          {/* Route pour les 24 tickets à imprimer du calendrier de l'Avent */}
+          <Route path="/tickets-avent" element={<AdventTicketsPage />} />
 
         </Routes>
       </BrowserRouter>

@@ -1,3 +1,4 @@
+// src/components/Navbar.tsx
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -87,7 +88,7 @@ export const Navbar: React.FC = () => {
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-indigo-950 border border-amber-400/40 rounded-2xl shadow-2xl backdrop-blur-xl p-2 z-50 animate-fade-in">
+              <div className="absolute right-0 mt-2 w-60 bg-indigo-950 border border-amber-400/40 rounded-2xl shadow-2xl backdrop-blur-xl p-2 z-50 animate-fade-in">
                 <Link
                   to="/liste-noel"
                   onClick={() => setIsDropdownOpen(false)}
@@ -97,6 +98,18 @@ export const Navbar: React.FC = () => {
                   <div>
                     <div className="font-bold">Liste de Noël</div>
                     <div className="text-[10px] text-slate-400 font-normal">Lettre au Père Noël</div>
+                  </div>
+                </Link>
+
+                <Link
+                  to="/tickets-avent"
+                  onClick={() => setIsDropdownOpen(false)}
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-200 hover:text-amber-300 hover:bg-amber-400/10 transition-colors"
+                >
+                  <span className="text-base">✂️</span>
+                  <div>
+                    <div className="font-bold">24 Tickets Avent</div>
+                    <div className="text-[10px] text-slate-400 font-normal">24 petits mots à imprimer</div>
                   </div>
                 </Link>
 
