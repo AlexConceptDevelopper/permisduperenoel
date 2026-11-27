@@ -1,7 +1,7 @@
 export const metadata = {
   slug: "secretariat-pere-noel-poste",
-  title: "Ouverture du Secrétariat du Père Noël à La Poste : Adresse, Dates et Réponse Gratuite",
-  description: "Le secrétariat officiel du Père Noël de La Poste vient d'ouvrir ses portes pour 2026 ! Découvrez l'adresse exacte à Libourne, comment envoyer une lettre gratuite et comment compléter la surprise avec le Pack Magique du Pôle Nord.",
+  title: "Adresse du Père Noël (La Poste) : Sans Timbre & Réponse Gratuite",
+  description: "Adresse officielle à Libourne, dates 2026 et astuces pour recevoir une réponse des lutins gratuitement + créer votre lettre personnalisée en ligne.",
   date: "17 novembre 2026",
   image: "/images/blog/secretariat-pere-noel-poste.jpg",
   jsonLd: {
@@ -11,17 +11,17 @@ export const metadata = {
         "@type": "Article",
         "headline": "Ouverture du Secrétariat du Père Noël à La Poste : Tout Savoir pour Écrire au Pôle Nord",
         "description": "Le secrétariat officiel du Père Noël de La Poste vient d'ouvrir ses portes pour 2026 ! Découvrez l'adresse exacte à Libourne, comment envoyer une lettre gratuite et comment compléter la surprise avec le Pack Magique du Pôle Nord.",
-        "image": "https:/www./permisduperenoel.fr/images/blog/secretariat-pere-noel-poste.jpg",
+        "image": "https://www.permisduperenoel.fr/images/blog/secretariat-pere-noel-poste.jpg",
         "datePublished": "2026-11-17T08:00:00+01:00",
         "author": {
           "@type": "Organization",
           "name": "La Fabrique Magique",
-          "url": "https://permisduperenoel.fr"
+          "url": "https://www.permisduperenoel.fr"
         },
         "publisher": {
           "@type": "Organization",
           "name": "Permis du Père Noël",
-          "url": "https://permisduperenoel.fr"
+          "url": "https://www.permisduperenoel.fr"
         }
       },
       {
@@ -60,9 +60,30 @@ export const metadata = {
 export default function ArticleContent() {
   return (
     <>
-      <p className="text-lg text-slate-300 mb-6 leading-relaxed">
-        C'est le signal officiel que la magie des fêtes est lancée ! Comme chaque année au mois de novembre, le <strong>secrétariat officiel du Père Noël de La Poste</strong> vient tout juste d'ouvrir ses portes. Les lutins secrétaires ont sorti leurs plus belles plumes et commencent dès aujourd'hui à réceptionner les milliers de lettres, dessins et listes de souhaits des enfants. Découvrez comment envoyer votre courrier gratuitement et comment prolonger l'émerveillement jusqu'au matin du 25 décembre.
+      <p className="text-lg text-slate-300 mb-4 leading-relaxed">
+        Oui, écrire au Père Noël via La Poste est <strong>100 % gratuit et sans timbre</strong> : le secrétariat officiel est ouvert dès novembre 2026 et il suffit d&apos;indiquer <strong>« Père Noël — 1 Rue du Ciel Étoilé, 33500 Libourne »</strong> (avec votre adresse au dos pour recevoir une réponse avant le 25 décembre).
       </p>
+
+      {/* --- ENCADRÉ EXPRESS : LETTRE GRATUITE & PACK 4-EN-1 --- */}
+      <div className="bg-indigo-950/75 border border-amber-400/40 rounded-2xl p-5 my-6 flex flex-col sm:flex-row items-center justify-between gap-4 backdrop-blur-md shadow-lg">
+        <div className="flex items-center gap-3">
+          <span className="text-3xl">✉️</span>
+          <div>
+            <h4 className="text-sm font-bold text-amber-300">
+              Besoin d&apos;une Lettre du Père Noël prête à imprimer aujourd&apos;hui ?
+            </h4>
+            <p className="text-xs text-slate-300">
+              Téléchargez la version classique <strong>100 % gratuite</strong>, personnalisez-la gratuitement sur simple partage, ou débloquez le <strong>Pack Magique 4-en-1 à 1,99 €</strong> (aperçu gratuit).
+            </p>
+          </div>
+        </div>
+        <a
+          href="/"
+          className="shrink-0 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-md"
+        >
+          Créer ma lettre &rarr;
+        </a>
+      </div>
 
       {/* SOMMAIRE RAPIDE POUR LE SEO */}
       <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 my-8">

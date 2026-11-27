@@ -3,18 +3,18 @@ import { useState } from "react";
 export const metadata = {
   slug: "chansons-noel-tubes-mariah-carey-intemporelles",
   title:
-    "Chansons de Noël : entre tubes cultes et surdose de Mariah Carey, pourquoi on les aime (ou les redoute)",
+    "Top 20 des Chansons de Noël Cultes : Mariah Carey, Tino Rossi, Wham!",
   description:
-    "Dès que novembre pointe le bout de son nez, elles reviennent squatter nos radios et nos têtes. Décryptage de ces mélodies de Noël qu'on adore chanter à tue-tête... ou fuir en courant.",
+    "Écoutez les 20 chansons de Noël incontournables de Mariah Carey à Tino Rossi et découvrez pourquoi ces tubes reviennent chaque année dans nos playlists.",
   date: "15 octobre 2026",
   image: "/images/blog/chansons-noel.jpg",
   jsonLd: {
     "@context": "https://schema.org",
     "@type": "Article",
     headline:
-      "Chansons de Noël : entre tubes cultes et surdose de Mariah Carey",
+      "Top 20 des Chansons de Noël Cultes : Mariah Carey, Tino Rossi, Wham!",
     description:
-      "Décryptage de ces mélodies de Noël qu'on adore chanter à tue-tête.",
+      "Écoutez les 20 chansons de Noël incontournables de Mariah Carey à Tino Rossi et découvrez pourquoi ces tubes reviennent chaque année dans nos playlists.",
     image: "https://www.permisduperenoel.fr/images/blog/chansons-noel.jpg",
     datePublished: "2026-10-15T08:00:00+01:00",
     author: { "@type": "Organization", name: "La Fabrique Magique" },
@@ -171,48 +171,13 @@ export default function ArticleContent() {
   return (
     <>
       <p className="text-lg text-slate-300 mb-6 leading-relaxed">
-        C'est le grand marronnier musical de fin d'année. À peine le dernier
-        bonbon d'Halloween avalé, le couperet tombe : les playlists de Noël
-        envahissent les supermarchés, les radios et les open spaces. Entre
-        nostalgie régressive et saturation auditive totale, impossible d'y
-        échapper. Mais comment ces mélodies hivernales ont-elles réussi à
-        s'incruster durablement dans nos cerveaux ?
+        De <em>All I Want for Christmas Is You</em> de Mariah Carey à{" "}
+        <em>Petit Papa Noël</em> ou <em>Last Christmas</em>, voici les{" "}
+        <strong>20 chansons de Noël les plus cultes</strong> à lancer
+        immédiatement pour mettre toute la famille dans l&apos;ambiance des
+        fêtes, suivies d&apos;un rapide décryptage de ce qui les rend si
+        irrésistibles (ou parfois redoutées en boucle).
       </p>
-
-      <h2 className="text-2xl font-bold text-slate-100 mt-8 mb-4">
-        1. Le réveil de Mariah Carey : l'éternel recommencement
-      </h2>
-      <p className="text-slate-300 mb-4 leading-relaxed">
-        C'est le meme ultime du web, mais c'est surtout une réalité implacable.
-        Dès le 1er novembre, les aiguilles de la décongélation s'activent pour
-        libérer la reine incontestée de la saison :{" "}
-        <em>All I Want for Christmas Is You</em>. Qu'on l'écoute en boucle avec
-        un bonnet à pompon ou qu'on frôle l'urticaire dès les premières notes du
-        xylophone d'intro, ce tube intergalactique reste le signal sonore
-        officiel que la magie (ou la folie) de Noël est bel et bien lancée.
-      </p>
-
-      {/* --- ENCADRÉ DISCRET : LE WISHLISTMAKER --- */}
-      <div className="bg-indigo-950/60 border border-amber-400/30 rounded-2xl p-5 my-8 flex flex-col sm:flex-row items-center justify-between gap-4 backdrop-blur-md shadow-lg">
-        <div className="flex items-center gap-3">
-          <span className="text-3xl">✉️</span>
-          <div>
-            <h4 className="text-sm font-bold text-amber-300">
-              Envie d'écrire la lettre au Père Noël ?
-            </h4>
-            <p className="text-xs text-slate-300">
-              Créez la liste de souhaits interactive et imprimez la lettre
-              magique de votre enfant.
-            </p>
-          </div>
-        </div>
-        <a
-          href="/liste-noel"
-          className="shrink-0 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-md"
-        >
-          Rédiger la liste &rarr;
-        </a>
-      </div>
 
       {/* --- JUKE-BOX INTERACTIF YOUTUBE (20 TITRES) --- */}
       <div className="bg-indigo-950/80 border-2 border-amber-400/50 rounded-2xl p-5 my-8 shadow-xl backdrop-blur-md">
@@ -224,7 +189,7 @@ export default function ArticleContent() {
                 La Juke-Box Géante des Lutins (Top 20)
               </h3>
               <p className="text-[11px] text-amber-100/70">
-                Cliquez sur un titre pour l'écouter directement sur YouTube
+                Cliquez sur un titre pour l&apos;écouter directement sur YouTube
               </p>
             </div>
           </div>
@@ -289,6 +254,65 @@ export default function ArticleContent() {
         </div>
       </div>
 
+      {/* --- ENCADRÉ DISCRET : TICKETS AVENT GRATUITS --- */}
+      <div className="bg-indigo-950/60 border border-amber-400/30 rounded-2xl p-5 my-8 flex flex-col sm:flex-row items-center justify-between gap-4 backdrop-blur-md shadow-lg">
+        <div className="flex items-center gap-3">
+          <span className="text-3xl">🎟️</span>
+          <div>
+            <h4 className="text-sm font-bold text-amber-300">
+              Vous préparez le calendrier de l&apos;Avent ?
+            </h4>
+            <p className="text-xs text-slate-300">
+              Imprimez gratuitement nos <strong>24 Tickets de l&apos;Avent</strong>{" "}
+              (petits mots &amp; défis des lutins) sur 3 feuilles prêtes à
+              découper.
+            </p>
+          </div>
+        </div>
+        <a
+          href="/tickets-avent"
+          className="shrink-0 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-md"
+        >
+          Imprimer les 24 tickets &rarr;
+        </a>
+      </div>
+
+      <h2 className="text-2xl font-bold text-slate-100 mt-8 mb-4">
+        1. Le réveil de Mariah Carey : l&apos;éternel recommencement
+      </h2>
+      <p className="text-slate-300 mb-4 leading-relaxed">
+        C&apos;est le meme ultime du web, mais c&apos;est surtout une réalité
+        implacable. Dès le 1er novembre, les aiguilles de la décongélation
+        s&apos;activent pour libérer la reine incontestée de la saison :{" "}
+        <em>All I Want for Christmas Is You</em>. Qu&apos;on l&apos;écoute en
+        boucle avec un bonnet à pompon ou qu&apos;on frôle l&apos;urticaire
+        dès les premières notes du xylophone d&apos;intro, ce tube
+        intergalactique reste le signal sonore officiel que la magie (ou la
+        folie) de Noël est bel et bien lancée.
+      </p>
+
+      {/* --- ENCADRÉ DISCRET : LE WISHLISTMAKER --- */}
+      <div className="bg-indigo-950/60 border border-amber-400/30 rounded-2xl p-5 my-8 flex flex-col sm:flex-row items-center justify-between gap-4 backdrop-blur-md shadow-lg">
+        <div className="flex items-center gap-3">
+          <span className="text-3xl">✉️</span>
+          <div>
+            <h4 className="text-sm font-bold text-amber-300">
+              Envie d&apos;écrire la lettre au Père Noël ?
+            </h4>
+            <p className="text-xs text-slate-300">
+              Créez la liste de souhaits interactive et imprimez la lettre
+              magique de votre enfant.
+            </p>
+          </div>
+        </div>
+        <a
+          href="/liste-noel"
+          className="shrink-0 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-md"
+        >
+          Rédiger la liste &rarr;
+        </a>
+      </div>
+
       <h2 className="text-2xl font-bold text-slate-100 mt-8 mb-4">
         2. Les madeleines de Proust et les classiques intergénérationnels
       </h2>
@@ -298,25 +322,27 @@ export default function ArticleContent() {
         dans les intemporelles : de la gouaille de Tino Rossi avec{" "}
         <em>Petit Papa Noël</em> aux arrangements cuivrés de Wham! avec{" "}
         <em>Last Christmas</em>. Ces chansons fonctionnent comme des capsules
-        temporelles magiques : dès qu'on les entend, on a instantanément 8 ans,
-        les yeux rivés sur le sapin, à attendre impatiemment le matin du 25.
+        temporelles magiques : dès qu&apos;on les entend, on a instantanément 8
+        ans, les yeux rivés sur le sapin, à attendre impatiemment le matin du
+        25.
       </p>
 
       <h2 className="text-2xl font-bold text-slate-100 mt-8 mb-4">
         3. Chanter en famille pour oublier le froid
       </h2>
       <p className="text-slate-300 mb-4 leading-relaxed">
-        C'est scientifiquement prouvé (ou presque) : chanter faux à tue-tête sur
-        des chants de Noël en préparant des sablés les mains pleines de farine
-        est l'un des meilleurs remèdes contre la morosité automnale. C'est le
-        moment de partager ses goûts musicaux kitsch avec les enfants et de
-        lancer le compte à rebours officiel dans la maison.
+        C&apos;est scientifiquement prouvé (ou presque) : chanter faux à tue-tête
+        sur des chants de Noël en préparant des sablés les mains pleines de
+        farine est l&apos;un des meilleurs remèdes contre la morosité
+        automnale. C&apos;est le moment de partager ses goûts musicaux kitsch
+        avec les enfants et de lancer le compte à rebours officiel dans la
+        maison.
       </p>
 
       {/* Encadré d'appel à l'action (CTA) vers ton app */}
       <div className="bg-indigo-900/40 border border-amber-400/30 rounded-2xl p-6 my-8 text-center backdrop-blur-md">
         <h3 className="text-xl font-bold text-amber-300 mb-2">
-          ✨ Envie d'une vraie touche de magie à la maison ?
+          ✨ Envie d&apos;une vraie touche de magie à la maison ?
         </h3>
         <p className="text-slate-300 text-sm mb-4">
           Faites vivre un scénario digne des plus beaux contes de Noël à vos

@@ -19,12 +19,12 @@ export const metadata = {
         author: {
           "@type": "Organization",
           name: "La Fabrique Magique",
-          url: "https://permisduperenoel.fr",
+          url: "https://www.permisduperenoel.fr",
         },
         publisher: {
           "@type": "Organization",
           name: "Permis du Père Noël",
-          url: "https://permisduperenoel.fr",
+          url: "https://www.permisduperenoel.fr",
         },
       },
       {
