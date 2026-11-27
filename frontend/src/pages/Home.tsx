@@ -331,7 +331,7 @@ export function Home() {
       />
 
       <Helmet>
-        <title>Le Permis du Père Noël 2026 - Pack Magique 4-en-1</title>
+        <title>Le Permis du Père Noël 2026 - Pack Magique 4-en-1 (1,99 €)</title>
         <link rel="canonical" href="https://www.permisduperenoel.fr/" />
       </Helmet>
 
@@ -340,7 +340,7 @@ export function Home() {
       <main className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center px-4 py-8 relative z-10 my-auto">
         {/* BANNIÈRE NOUVEAUTÉ : Format Paysage A4 */}
         <div className="w-full max-w-3xl mb-6 bg-indigo-950/80 border border-amber-400/50 rounded-2xl p-3 text-center shadow-lg backdrop-blur-md">
-          <p className="text-xs md:text-sm font-bold text-amber-200 flex items-center justify-center gap-2">
+          <p className="text-xs md:text-sm font-bold text-amber-200 flex items-center justify-center gap-2 flex-wrap">
             <span>📜✨</span> NOUVEAU : Votre Diplôme de l'Enfant Sage est
             désormais disponible en{" "}
             <span className="text-white underline">
@@ -351,16 +351,21 @@ export function Home() {
         </div>
 
         <header className="text-center space-y-2 max-w-2xl mb-6">
-          <span className="inline-block px-4 py-1.5 bg-indigo-950/40 border border-amber-400/40 text-amber-200 rounded-full text-xs font-bold tracking-widest uppercase shadow-md">
-            ✨ Atelier Officiel du Père Noël • Édition 2026 ✨
-          </span>
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            <span className="inline-block px-4 py-1.5 bg-indigo-950/40 border border-amber-400/40 text-amber-200 rounded-full text-xs font-bold tracking-widest uppercase shadow-md">
+              ✨ Atelier Officiel du Père Noël • Édition 2026 ✨
+            </span>
+            <span className="inline-block px-3.5 py-1.5 bg-amber-400 text-slate-950 rounded-full text-xs font-black tracking-wide uppercase shadow-md">
+              1,99 € • Aperçu gratuit
+            </span>
+          </div>
           <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-400">
             Le Pack Magique 4-en-1
           </h1>
           <p className="text-amber-100/90 text-xs md:text-sm font-medium max-w-xl mx-auto bg-slate-950/45 px-3 py-2 rounded-xl backdrop-blur-xs">
             {!isQuizCompleted
-              ? "Préparez la magie dès le début de décembre (calendrier de l'Avent ou nuit de Noël) en quelques clics — avec une lettre du Père Noël à débloquer gratuitement à la fin."
-              : `Voici le dossier magique généré pour ${formData.childName} ! Vérifiez et recevez vos PDF immédiatement.`}
+              ? "Créez en 2 minutes le pack complet à 1,99 € (aperçu gratuit avant paiement) — avec une lettre du Père Noël aussi déblocable gratuitement via partage à la fin."
+              : `Voici le dossier magique généré pour ${formData.childName} ! Vérifiez et recevez vos PDF immédiatement (1,99 €).`}
           </p>
         </header>
 
@@ -404,7 +409,8 @@ export function Home() {
             <p className="text-[11px] text-amber-100/90 mt-1">
               Générez une réponse personnalisée ! À débloquer{" "}
               <strong>gratuitement</strong> via partage, ou directement{" "}
-              <strong>comprise</strong> dans le Pack Magique 4-en-1.
+              <strong>comprise</strong> dans le Pack 4-en-1 à{" "}
+              <strong>1,99 €</strong>.
             </p>
           </div>
         </div>
@@ -551,7 +557,7 @@ export function Home() {
 
                     <div className="bg-slate-950/70 border border-amber-400/30 rounded-2xl p-3.5 text-xs space-y-2 text-amber-100 shadow-inner">
                       <p className="font-bold text-amber-300 border-b border-amber-400/20 pb-1.5 flex items-center justify-between">
-                        <span>🎁 Le Pack Magique 4-en-1 Contient :</span>
+                        <span>🎁 Le Pack Magique 4-en-1 (1,99 €) Contient :</span>
                         <span className="text-emerald-400 text-[10px] uppercase bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/30">
                           4 PDF Prêts
                         </span>
