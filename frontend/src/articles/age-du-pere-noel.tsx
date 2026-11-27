@@ -205,12 +205,15 @@ export default function ArticleContent() {
           <span className="text-3xl">🪪</span>
           <div>
             <h4 className="text-sm font-bold text-amber-300">
-              Votre enfant commence à poser plein de questions ?
+              Votre enfant pose déjà plein de questions pour décembre ?
             </h4>
             <p className="text-xs text-slate-300">
-              Rien ne vaut une preuve officielle venue du Pôle Nord : créez son
-              Permis du Père Noël 2026, son Passeport, son Diplôme de
-              l&apos;Enfant Sage et sa Lettre personnalisée en 2 minutes !
+              Glissez dès le 1er décembre (ou sous le sapin) son{" "}
+              <strong className="text-amber-200">
+                Pack Magique 4-en-1 à 1,99 €
+              </strong>{" "}
+              (Permis, Passeport, Diplôme A4 et Lettre personnalisés en 2 min —
+              aperçu gratuit avant paiement).
             </p>
           </div>
         </div>
@@ -218,7 +221,7 @@ export default function ArticleContent() {
           href="/?utm_source=blog&utm_medium=article&utm_campaign=age-pere-noel"
           className="shrink-0 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-md"
         >
-          Créer son dossier 2026 &rarr;
+          Aperçu gratuit (1,99 €) &rarr;
         </a>
       </div>
 
@@ -248,15 +251,17 @@ export default function ArticleContent() {
         id="preuves-magiques"
         className="text-2xl font-bold text-slate-100 mt-10 mb-4"
       >
-        4. Comment répondre aux petits curieux (et prolonger la magie à la
-        maison) ?
+        4. Comment répondre aux petits curieux (et prolonger la magie dès le 1er
+        décembre) ?
       </h2>
       <p className="text-slate-300 mb-4 leading-relaxed">
         Entre 5 et 9 ans, les enfants passent souvent par une phase d’enquête :
         ils comparent les histoires dans la cour de récréation, vérifient les
         détails et cherchent des indices concrets. À cet âge-là, les grands
         discours ne suffisent plus toujours — ce sont les{" "}
-        <strong>petites preuves tangibles</strong> qui font briller leurs yeux.
+        <strong>petites preuves tangibles</strong> qui font briller leurs yeux,
+        que ce soit pour lancer le calendrier de l&apos;Avent début décembre ou
+        le matin du réveillon.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
@@ -279,7 +284,7 @@ export default function ArticleContent() {
             Quand le Père Noël cite le prénom de votre enfant, sa ville et son
             vrai exploit de l&apos;année, la magie prend tout de suite plus de
             relief (à débloquer gratuitement via partage social ou incluse dans
-            le pack).
+            le pack à 1,99 €).
           </p>
         </div>
 
@@ -289,8 +294,8 @@ export default function ArticleContent() {
           </h4>
           <p className="text-xs text-slate-300 leading-relaxed">
             Validé par le contrôle des lutins (rangement, coucher, gentillesse) :
-            un souvenir grand format prêt à afficher dans la chambre qui
-            valorise les efforts de l&apos;année.
+            un souvenir grand format prêt à afficher dans la chambre dès
+            décembre pour valoriser les efforts de l&apos;année.
           </p>
         </div>
 
@@ -376,7 +381,7 @@ export default function ArticleContent() {
               href="/?utm_source=blog&utm_medium=article&utm_campaign=age-pere-noel"
               className="text-amber-400 underline hover:text-amber-300 font-medium"
             >
-              dossier officiel personnalisé du Pôle Nord
+              dossier officiel personnalisé du Pôle Nord (1,99 €)
             </a>{" "}
             avec son prénom, son exploit de l’année et le sceau de l’édition
             2026.
@@ -387,18 +392,20 @@ export default function ArticleContent() {
       {/* Encadré d'appel à l'action (CTA) principal */}
       <div className="bg-indigo-900/40 border border-amber-400/30 rounded-2xl p-6 my-8 text-center backdrop-blur-md">
         <h3 className="text-xl font-bold text-amber-300 mb-2">
-          🎁 Faites briller les yeux de votre enfant pour Noël 2026 !
+          🎁 Faites briller les yeux de votre enfant pour Noël 2026 — 1,99 € !
         </h3>
         <p className="text-slate-300 text-sm mb-4">
-          Concevez en 2 minutes son Pack Magique 4-en-1 : Permis officiel du
-          Père Noël, Passeport du Pôle Nord, Diplôme de l&apos;Enfant Sage A4
-          et Lettre de réponse personnalisée.
+          Concevez en 2 minutes son Pack Magique 4-en-1 à{" "}
+          <strong className="text-amber-200">1,99 €</strong> (aperçu gratuit
+          avant paiement) : Permis officiel du Père Noël, Passeport du Pôle
+          Nord, Diplôme de l&apos;Enfant Sage A4 et Lettre de réponse
+          personnalisée.
         </p>
         <a
           href="/?utm_source=blog&utm_medium=article&utm_campaign=age-pere-noel"
           className="inline-block bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl shadow-md transition-all"
         >
-          Lancer l&apos;enquête des lutins &rarr;
+          Tester l&apos;aperçu gratuit (1,99 €) &rarr;
         </a>
       </div>
     </>
